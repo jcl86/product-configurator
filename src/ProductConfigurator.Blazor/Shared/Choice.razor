@@ -1,0 +1,35 @@
+﻿@if (Step == CurrentStep)
+{
+    <h3>Choose @Step.ToString()</h3>
+
+    <div class="row">
+        @foreach (var item in Items)
+        {
+            <div class="col-sm-6">
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">@item.Description</p>
+                        <a @onclick="() => OnChoiceMade.InvokeAsync(item)" class="btn btn-primary">Take it!</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+@code {
+
+    [Parameter]
+    public IEnumerable<Item> Items { get; set; }
+
+    [Parameter]
+    public Step Step { get; set; }
+
+    [CascadingParameter]
+    public Step CurrentStep { get; set; }
+
+    [Parameter]
+    public EventCallback<Item> OnChoiceMade { get; set; }
+}
