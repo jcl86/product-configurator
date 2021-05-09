@@ -7,34 +7,21 @@
     <div class="col-sm-9">
         <CascadingValue Value="currentStep">
 
-            <Choice Items="CelloFactory.CelloMaterials"
+            <Choice Items="CelloFactory.Materials"
                     OnChoiceMade="MaterialChoosen"
                     Step="Step.Material" />
 
 
-            <Choice Items="CelloFactory.CelloColors"
+            <Choice Items="CelloFactory.Colors"
                     OnChoiceMade="ColorChoosen"
                     Step="Step.ExtraColor" />
 
         </CascadingValue>
     </div>
     <div class="col-sm-3">
-
-        <div class="list-group">
-            @foreach (var group in itemCollection.Grouped)
-            {
-                <div class="list-group-item list-group-item-action">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">@group.Step</h5>
-                        <small>@group.Price</small>
-                    </div>
-                    @foreach (var item in group.Items)
-                    {
-                        <small>@item.Name</small>
-                    }
-                </div>
-            }
-        </div>
+        <CascadingValue Value="itemCollection">
+            <Basket />
+        </CascadingValue>
     </div>
 </div>
 

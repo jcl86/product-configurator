@@ -2,6 +2,56 @@
 
 <h3>Violin</h3>
 
-@code {
+<div class="row">
 
+    <div class="col-sm-9">
+        <CascadingValue Value="currentStep">
+
+            <Choice Items="ViolinFactory.Materials"
+                    OnChoiceMade="MaterialChoosen"
+                    Step="Step.Material" />
+
+            <Choice Items="ViolinFactory.Design"
+                    OnChoiceMade="ColorChoosen"
+                    Step="Step.ExtraColor" />
+
+        </CascadingValue>
+    </div>
+    <div class="col-sm-3">
+        <CascadingValue Value="itemCollection">
+            <Basket />
+        </CascadingValue>
+    </div>
+</div>
+
+
+@code {
+    private Step currentStep = Step.Material;
+
+    private ItemCollection itemCollection;
+
+    protected override void OnInitialized()
+    {
+        itemCollection = new ItemCollection();
+    }
+
+    private void MaterialChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+
+        if (item is Carbo)
+        currentStep = Step.Design;
+    }
+
+    private void DesignChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+        currentStep = Step.End;
+    }
+
+    private void ColorChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+        currentStep = Step.End;
+    }
 }
