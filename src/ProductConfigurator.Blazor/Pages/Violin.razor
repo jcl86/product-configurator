@@ -1,10 +1,17 @@
 ﻿@page "/violin"
 
-<h3>Violin</h3>
+<Title>
+    <TitleText>
+        Violin
+    </TitleText>
+    <SubtitleText>
+        Product configurator
+    </SubtitleText>
+</Title>
 
-<div class="row">
+<div class="px-6">
 
-    <div class="col-sm-9">
+    <div class="w-full md:w-2/3">
         <CascadingValue Value="currentStep">
 
             <Choice Items="ViolinFactory.Materials"
@@ -12,17 +19,33 @@
                     Step="Step.Material" />
 
             <Choice Items="ViolinFactory.Design"
+                    OnChoiceMade="DesignChoosen"
+                    Step="Step.Design" />
+
+            <Choice Items="ViolinFactory.Colors"
                     OnChoiceMade="ColorChoosen"
+                    Step="Step.Color" />
+
+            <Choice Items="ViolinFactory.ExtraColors"
+                    OnChoiceMade="ExtraColorChoosen"
                     Step="Step.ExtraColor" />
 
         </CascadingValue>
     </div>
-    <div class="col-sm-3">
+    <div class="w-full md:w-1/3">
         <CascadingValue Value="itemCollection">
             <Basket />
         </CascadingValue>
     </div>
 </div>
+
+@if (currentStep == Step.End)
+{
+    <p>
+        Congratulations! You succeded to configure your case @($"{itemCollection.Total():C}")
+    </p>
+    <a @onclick="OnEnd" class="btn btn-primary">Go for it!</a>
+}
 
 
 @code {
@@ -39,19 +62,33 @@
     {
         itemCollection.Add(item, currentStep);
 
-        if (item is Carbo)
-        currentStep = Step.Design;
+        if (item.IsCarbon)
+        {
+            currentStep = Step.Design;
+        }
+        else currentStep = Step.Color;
     }
 
     private void DesignChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
-        currentStep = Step.End;
+        currentStep = Step.Color;
     }
 
     private void ColorChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
+        currentStep = Step.ExtraColor;
+    }
+
+    private void ExtraColorChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
         currentStep = Step.End;
+    }
+
+    private void OnEnd()
+    {
+        
     }
 }

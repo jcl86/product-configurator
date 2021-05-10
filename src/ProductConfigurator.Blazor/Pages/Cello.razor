@@ -1,10 +1,17 @@
 ﻿@page "/cello"
 
-<h3>Cello</h3>
+<Title>
+    <TitleText>
+        Cello case
+    </TitleText>
+    <SubtitleText>
+        Product configurator
+    </SubtitleText>
+</Title>
 
-<div class="row">
+<div class="px-6">
 
-    <div class="col-sm-9">
+    <div class="w-full md:w-2/3">
         <CascadingValue Value="currentStep">
 
             <Choice Items="CelloFactory.Materials"
@@ -18,13 +25,20 @@
 
         </CascadingValue>
     </div>
-    <div class="col-sm-3">
+    <div class="w-full md:w-1/3">
         <CascadingValue Value="itemCollection">
             <Basket />
         </CascadingValue>
     </div>
 </div>
 
+@if (currentStep == Step.End)
+{
+    <p>
+        Congratulations! You succeded to configure your case @($"{itemCollection.Total():C}")
+    </p>
+    <a @onclick="OnEnd" class="btn btn-primary">Go for it!</a>
+}
 
 @code {
     private Step currentStep = Step.Material;
@@ -46,5 +60,11 @@
     {
         itemCollection.Add(item, currentStep);
         currentStep = Step.End;
+    }
+
+
+    private void OnEnd()
+    {
+
     }
 }

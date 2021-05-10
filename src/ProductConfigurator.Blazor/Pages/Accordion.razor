@@ -1,7 +1,145 @@
 ﻿@page "/accordion"
 
-<h3>Accordion</h3>
+<Title>
+    <TitleText>
+        Accordion
+    </TitleText>
+    <SubtitleText>
+        Product configurator
+    </SubtitleText>
+</Title>
+
+<div class="px-6">
+
+    <div class="w-full md:w-2/3">
+        <CascadingValue Value="currentStep">
+
+            <Choice Items="AccordionFactory.AccordionType"
+                    OnChoiceMade="AccordionTypeChoosen"
+                    Step="Step.accordionType" />
+
+            <Choice Items="AccordionFactory.CaseType"
+                    OnChoiceMade="CaseTypeChoosen"
+                    Step="Step.CaseType" />
+
+            <Choice Items="AccordionFactory.Caps"
+                    OnChoiceMade="CapsChoosen"
+                    Step="Step.Caps" />
+
+            <Choice Items="AccordionFactory.Materials"
+                    OnChoiceMade="MaterialChoosen"
+                    Step="Step.Material" />
+
+            <Choice Items="AccordionFactory.Design"
+                    OnChoiceMade="DesignChoosen"
+                    Step="Step.Design" />
+
+            <Choice Items="AccordionFactory.Colors"
+                    OnChoiceMade="ColorChoosen"
+                    Step="Step.Color" />
+
+            <Choice Items="AccordionFactory.ExtraColors"
+                    OnChoiceMade="ExtraColorChoosen"
+                    Step="Step.ExtraColor" />
+
+            <Choice Items="AccordionFactory.Accesories"
+                    OnChoiceMade="ExtraColorChoosen"
+                    Step="Step.ExtraColor" />
+
+        </CascadingValue>
+    </div>
+    <div class="w-full md:w-1/3">
+        <CascadingValue Value="itemCollection">
+            <Basket />
+        </CascadingValue>
+    </div>
+</div>
+
+@if (currentStep == Step.End)
+{
+    <p>
+        Congratulations! You succeded to configure your case @($"{itemCollection.Total():C}")
+    </p>
+    <a @onclick="OnEnd" class="btn btn-primary">Go for it!</a>
+}
+
 
 @code {
+    private Step currentStep = Step.Material;
 
+    private ItemCollection itemCollection;
+
+    protected override void OnInitialized()
+    {
+        itemCollection = new ItemCollection();
+    }
+
+    private void AccordionTypeChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+
+        if (item.IsPiano)
+        {
+            itemCollection.Add(AccordionFactory.NewEdition, Step.CaseType);
+            currentStep = Step.Material;
+        }
+        else currentStep = Step.CaseType;
+    }
+
+    private void CaseTypeChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+
+        if (item.IsNewEdition)
+        {
+            currentStep = Step.Design;
+        }
+        else currentStep = Step.Color;
+    }
+
+    private void CapsChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+
+        if (item.IsCarbon)
+        {
+            currentStep = Step.Design;
+        }
+        else currentStep = Step.Color;
+    }
+
+
+    private void MaterialChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+
+        if (item.IsCarbon)
+        {
+            currentStep = Step.Design;
+        }
+        else currentStep = Step.Color;
+    }
+
+    private void DesignChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+        currentStep = Step.Color;
+    }
+
+    private void ColorChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+        currentStep = Step.ExtraColor;
+    }
+
+    private void ExtraColorChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+        currentStep = Step.End;
+    }
+
+    private void OnEnd()
+    {
+
+    }
 }

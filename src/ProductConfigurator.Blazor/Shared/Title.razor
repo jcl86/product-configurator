@@ -1,0 +1,18 @@
+﻿<div class="flex flex-col-reverse md:flex-row md:items-center md:justify-between md:border-b-2 border-gray-300 my-4">
+
+    <h3 class="font-semibold text-xl leading-tight sm:leading-normal mb-1">
+        @TitleText
+    </h3>
+    <span class="text-gray-500 font-semibold text-sm leading-none uppercase">
+        @SubtitleText
+    </span>
+
+</div>
+
+@code {
+    [Parameter]
+    public RenderFragment TitleText { get; set; }
+
+    [Parameter]
+    public RenderFragment SubtitleText { get; set; }
+}

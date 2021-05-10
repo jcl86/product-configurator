@@ -1,24 +1,27 @@
 ﻿@page "/"
 
-<h1>Prouct configurator</h1>
+<Title>
+    <TitleText>
+        Choose your instrument
+    </TitleText>
+    <SubtitleText>
+        Product configurator
+    </SubtitleText>
+</Title>
 
-Choose your instrument
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 ">
 
-<ul class="nav flex-column">
-    <li class="nav-item px-3">
-        <NavLink class="nav-link" href="violin">
-            <span class="oi oi-home" aria-hidden="true"></span> Violin
-        </NavLink>
-    </li>
-    <li class="nav-item px-3">
-        <NavLink class="nav-link" href="accordion">
-            <span class="oi oi-plus" aria-hidden="true"></span> Accordion
-        </NavLink>
-    </li>
-    <li class="nav-item px-3">
-        <NavLink class="nav-link" href="cello">
-            <span class="oi oi-list-rich" aria-hidden="true"></span> Cello
-        </NavLink>
-    </li>
-</ul>
+    <InstrumentCard Name="Accordion"
+                    Link="accordion"
+                    ImageUrl="img/test-image.jpg" />
+
+    <InstrumentCard Name="Violin"
+                    Link="violin"
+                    ImageUrl="img/test-image.jpg" />
+
+    <InstrumentCard Name="Cello"
+                    Link="cello"
+                    ImageUrl="img/test-image.jpg" />
+
+</div>
 

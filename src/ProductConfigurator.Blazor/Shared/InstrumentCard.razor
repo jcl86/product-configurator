@@ -1,0 +1,20 @@
+﻿<div class="">
+    <a href="@Link" class="flex flex-col justify-between w-64 md:w-96 h-64 md:h-96 bg-center shadow-md overflow-hidden 
+       cursor-pointer rounded-lg"
+       style="background-image:url('@ImageUrl')">
+
+        <span class="bg-white bg-opacity-75 shadow-md p-3 my-auto text-center">
+            <span class="text-2xl font-semibold tracking-wider uppercase">@Name</span>
+        </span>
+    </a>
+</div>
+@code {
+    [Parameter]
+    public string ImageUrl { get; set; }
+
+    [Parameter]
+    public string Name { get; set; }
+
+    [Parameter]
+    public string Link { get; set; }
+}
