@@ -1,20 +1,36 @@
-﻿<div class="list-group">
-    @foreach (var group in ItemCollection.Basket)
-    {
-        <div class="list-group-item list-group-item-action">
-            <div class="d-flex w-100 justify-content-between">
-                <h5 class="mb-1">@group.Step</h5>
-                <small>@group.Price</small>
-            </div>
-            @foreach (var item in group.Items)
+﻿<div class="bg-blue-100 min-h-full rounded-lg flex justify-center">
+    <div class="max-w-4xl bg-white w-full rounded-lg shadow">
+        <div class="p-4 border-b">
+            <h2 class="text-2xl">
+                This is your selection for
+            </h2>
+            <p class="text-sm text-gray-500">
+                @Title
+            </p>
+        </div>
+        <div>
+            @foreach (var group in ItemCollection.Basket)
             {
-                <small>@item.Name</small>
+                <a class="md:grid md:grid-cols-3 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+                    <span class="text-gray-600 cursor-pointer">
+                        @group.Step
+                    </span>
+                    <span>
+                        @string.Join(", ", group.Items.Select(x => x.Name))
+                    </span>
+                    <span>
+                        @group.Price
+                    </span>
+                </a>
             }
         </div>
-    }
+    </div>
 </div>
 
 @code {
+    [Parameter]
+    public RenderFragment Title { get; set; }
+
     [CascadingParameter]
     public ItemCollection ItemCollection { get; set; }
 }

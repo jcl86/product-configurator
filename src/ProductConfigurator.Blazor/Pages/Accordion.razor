@@ -9,7 +9,7 @@
     </SubtitleText>
 </Title>
 
-<div class="px-6">
+<div class="flex flex-col md:flex-row">
 
     <div class="w-full md:w-2/3">
         <CascadingValue Value="currentStep">
@@ -43,14 +43,18 @@
                     Step="Step.ExtraColor" />
 
             <Choice Items="AccordionFactory.Accesories"
-                    OnChoiceMade="ExtraColorChoosen"
-                    Step="Step.ExtraColor" />
+                    OnChoiceMade="OnEnd"
+                    Step="Step.Accesories" />
 
         </CascadingValue>
     </div>
     <div class="w-full md:w-1/3">
         <CascadingValue Value="itemCollection">
-            <Basket />
+            <Basket>
+                <Title>
+                    Accordion
+                </Title>
+            </Basket>
         </CascadingValue>
     </div>
 </div>
@@ -135,7 +139,7 @@
     private void ExtraColorChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
-        currentStep = Step.End;
+        currentStep = Step.Accesories;
     }
 
     private void OnEnd()
