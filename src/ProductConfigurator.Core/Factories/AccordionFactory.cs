@@ -4,7 +4,7 @@ namespace ProductConfigurator.Core
 {
     public static class AccordionFactory
     {              
-        public static Item Buttons => Item.Create("Buttons accordion", "I have a button accordion.", 0m, ItemType.Buttons);
+        public static Item Buttons => Item.Create("Button accordion", "I have a button accordion.", 0m, ItemType.Buttons);
         public static Item Piano => Item.Create("Keyboard accordion", "I have a keyboard accordion.", 0m, ItemType.Piano);
 
         public static Item ClassicEdition => Item.Create("Classic edition case", "Handmade fresh minimal design for everlasting accordion and back protection.", 990m, ItemType.ClassicEdition);
