@@ -13,11 +13,25 @@ namespace ProductConfigurator.Core
         }
 
         public void Add(Item item, Step step) => items.Add(new BasketItem(item, step));
-        public decimal Total() => items.Sum(x => x.Item.Price);
+        public decimal TotalWithoutVat() => items.Sum(x => x.Item.Price);
+        public decimal Vat() => TotalWithoutVat() * 0.21m;
+        public decimal Total() => TotalWithoutVat() + Vat();
 
         public IEnumerable<BasketGroupItem> Basket => items
             .GroupBy(x => x.Step)
             .Select(x => new BasketGroupItem(x.Key, x.Select(i => i.Item)))
             .ToList();
+
+        public bool WasClasicEditionChoosen()
+        {
+            return items.Any(x => x.Item.IsClassicEdition);
+        }
+
+        public Step RemoveLast()
+        {
+            var item = items.Last();
+            items.Remove(item);
+            return item.Step;
+        }
     }
 }

@@ -2,13 +2,13 @@
 {
     public enum Step
     {
-        accordionType,
+        AccordionType,
         CaseType,
         Caps,
         Material,
-        Design,
+        Finish,
         Color,
-        ExtraColor,
+        Design,
         Accesories,
         End
     }

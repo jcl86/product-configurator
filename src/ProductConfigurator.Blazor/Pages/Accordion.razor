@@ -9,6 +9,10 @@
     </SubtitleText>
 </Title>
 
+<button @onclick="RemoveLast">
+     UPS
+    </button>
+
 <div class="flex flex-col md:flex-row">
 
     <div class="w-full md:w-2/3">
@@ -16,31 +20,35 @@
 
             <Choice Items="AccordionFactory.AccordionType"
                     OnChoiceMade="AccordionTypeChoosen"
-                    Step="Step.accordionType" />
+                    Step="Step.AccordionType" />
 
             <Choice Items="AccordionFactory.CaseType"
                     OnChoiceMade="CaseTypeChoosen"
                     Step="Step.CaseType" />
 
-            <Choice Items="AccordionFactory.Caps"
-                    OnChoiceMade="CapsChoosen"
-                    Step="Step.Caps" />
-
             <Choice Items="AccordionFactory.Materials"
                     OnChoiceMade="MaterialChoosen"
                     Step="Step.Material" />
 
-            <Choice Items="AccordionFactory.Design"
-                    OnChoiceMade="DesignChoosen"
-                    Step="Step.Design" />
+            <Choice Items="AccordionFactory.Finish"
+                    OnChoiceMade="FinishChoosen"
+                    Step="Step.Finish" />
+
+            <Choice Items="AccordionFactory.Finish"
+                    OnChoiceMade="FinishChoosen"
+                    Step="Step.Finish" />
+
+            <Choice Items="AccordionFactory.Caps"
+                    OnChoiceMade="CapsChoosen"
+                    Step="Step.Caps" />
 
             <Choice Items="AccordionFactory.Colors"
                     OnChoiceMade="ColorChoosen"
                     Step="Step.Color" />
 
-            <Choice Items="AccordionFactory.ExtraColors"
-                    OnChoiceMade="ExtraColorChoosen"
-                    Step="Step.ExtraColor" />
+            <Choice Items="AccordionFactory.Designs"
+                    OnChoiceMade="DesignChoosen"
+                    Step="Step.Design" />
 
             <Choice Items="AccordionFactory.Accesories"
                     OnChoiceMade="OnEnd"
@@ -62,14 +70,14 @@
 @if (currentStep == Step.End)
 {
     <p>
-        Congratulations! You succeded to configure your case @($"{itemCollection.Total():C}")
+        Congratulations! You succeded to configure your case @($"{itemCollection.TotalWithoutVat():C}")
     </p>
-    <a @onclick="OnEnd" class="btn btn-primary">Go for it!</a>
+    <a class="btn btn-primary">Go for it!</a>
 }
 
 
 @code {
-    private Step currentStep = Step.Material;
+    private Step currentStep = Step.AccordionType;
 
     private ItemCollection itemCollection;
 
@@ -93,25 +101,8 @@
     private void CaseTypeChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
-
-        if (item.IsNewEdition)
-        {
-            currentStep = Step.Design;
-        }
-        else currentStep = Step.Color;
+        currentStep = Step.Material;
     }
-
-    private void CapsChoosen(Item item)
-    {
-        itemCollection.Add(item, currentStep);
-
-        if (item.IsCarbon)
-        {
-            currentStep = Step.Design;
-        }
-        else currentStep = Step.Color;
-    }
-
 
     private void MaterialChoosen(Item item)
     {
@@ -119,31 +110,48 @@
 
         if (item.IsCarbon)
         {
-            currentStep = Step.Design;
+            currentStep = Step.Finish;
         }
         else currentStep = Step.Color;
     }
 
-    private void DesignChoosen(Item item)
+    private void FinishChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
-        currentStep = Step.Color;
+        currentStep = Step.Design;
     }
 
     private void ColorChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
-        currentStep = Step.ExtraColor;
+        currentStep = Step.Design;
     }
 
-    private void ExtraColorChoosen(Item item)
+    private void DesignChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+
+        if (itemCollection.WasClasicEditionChoosen())
+        {
+            currentStep = Step.Caps;
+        }
+        else currentStep = Step.Accesories;
+    }
+
+    private void CapsChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
         currentStep = Step.Accesories;
     }
 
-    private void OnEnd()
+    private void OnEnd(Item item)
     {
+        itemCollection.Add(item, currentStep);
+    }
 
+    private void RemoveLast()
+    {
+        var lastStep = itemCollection.RemoveLast();
+        currentStep = lastStep;
     }
 }

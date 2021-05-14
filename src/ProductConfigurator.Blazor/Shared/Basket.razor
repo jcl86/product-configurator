@@ -18,11 +18,31 @@
                     <span>
                         @string.Join(", ", group.Items.Select(x => x.Name))
                     </span>
-                    <span>
-                        @group.Price
+                    <span class="flex justify-end">
+                        @if (group.Price > 0)
+                        {
+                            <span>@group.Price €</span>
+                        }
                     </span>
                 </a>
             }
+        </div>
+        <div class="md:grid md:grid-cols-3 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+            <span class="text-gray-600 cursor-pointer"></span>
+            <span class="font-semibold"></span>
+            <span class="flex justify-end">@ItemCollection.TotalWithoutVat() €</span>
+        </div>
+
+        <div class="md:grid md:grid-cols-3 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+            <span class="text-gray-600 cursor-pointer"></span>
+            <span class="font-semibold">VAT:</span>
+            <span class="flex justify-end">@ItemCollection.Vat() €</span>
+        </div>
+
+        <div class="md:grid md:grid-cols-3 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
+            <span class="text-gray-600 cursor-pointer"></span>
+            <span class="font-semibold">TOTAL:</span>
+            <span class="flex justify-end">@ItemCollection.Total() €</span>
         </div>
     </div>
 </div>

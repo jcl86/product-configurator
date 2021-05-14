@@ -18,17 +18,17 @@
                     OnChoiceMade="MaterialChoosen"
                     Step="Step.Material" />
 
-            <Choice Items="ViolinFactory.Design"
+            <Choice Items="ViolinFactory.Finish"
                     OnChoiceMade="DesignChoosen"
-                    Step="Step.Design" />
+                    Step="Step.Finish" />
 
             <Choice Items="ViolinFactory.Colors"
                     OnChoiceMade="ColorChoosen"
                     Step="Step.Color" />
 
-            <Choice Items="ViolinFactory.ExtraColors"
+            <Choice Items="ViolinFactory.Designs"
                     OnChoiceMade="ExtraColorChoosen"
-                    Step="Step.ExtraColor" />
+                    Step="Step.Design" />
 
         </CascadingValue>
     </div>
@@ -48,7 +48,7 @@
 @if (currentStep == Step.End)
 {
     <p>
-        Congratulations! You succeded to configure your case @($"{itemCollection.Total():C}")
+        Congratulations! You succeded to configure your case @($"{itemCollection.TotalWithoutVat():C}")
     </p>
     <a @onclick="OnEnd" class="btn btn-primary">Go for it!</a>
 }
@@ -84,7 +84,7 @@
     private void ColorChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
-        currentStep = Step.ExtraColor;
+        currentStep = Step.Design;
     }
 
     private void ExtraColorChoosen(Item item)
