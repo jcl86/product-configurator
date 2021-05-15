@@ -3,56 +3,48 @@
 
 @if (Step == CurrentStep)
 {
-    <div class="bg-blue-100 min-h-full rounded-lg shadow mb-8 md:mr-8 md:mb-0">
-        <h3 class="font-semibold px-6 pt-4 uppercase tracking-widest">Choose @Step.ToString()</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="bg-white min-h-full rounded-sm shadow mb-8 md:mr-8 md:mb-0">
+        <div class="grid grid-cols-1 gap-4">
             @foreach (var item in Items)
             {
-                <div class="flex p-1">
-                    <div class="flex-none w-44 relative">
-                        <img src="img/test-image.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" />
+                <div class="flex flex-col md:flex-row p-1">
+                    <div class="md:flex-none md:w-52 md:relative">
+                        <img src="@item.Images.First()" alt="@item.Name"
+                             class="md:absolute md:inset-0 w-full h-full object-cover" />
                     </div>
-                    <form class="flex-auto py-7 px-8">
+                    <div class="flex-auto p-2 md:py-4 md:px-8">
                         <div class="flex flex-wrap items-baseline">
-                            <h1 class="w-full flex-none text-3xl text-black mb-1.5">
+                            <h1 class="w-full flex-none text-lg md:text-3xl text-black md:mb-1.5">
                                 @item.Name
                             </h1>
-                            <div class="text-lg leading-6 text-black">
-                                @item.PriceText
-                            </div>
-                            <div class="text-sm text-gray-500 ml-3">
-                                In stock
-                            </div>
+                            @if (item.Price > 0)
+                            {
+                                <div class="text-xs font-semibold md:text-lg leading-6 text-black">
+                                    @item.PriceText
+                                </div>
+                            }
+                            @*<div class="text-sm text-gray-500 ml-3">
+                                    In stock
+                                </div>*@
                         </div>
-                        <div class="flex items-baseline mt-9 py-4 border-t border-gray-100">
-                          
-
-                            <div class="ml-auto text-sm font-light text-gray-500"> 
-                            @item.Description
+                        <div class="flex items-baseline mt-2 py-4 border-t border-gray-200">
+                            <div class="text-sm font-light text-gray-500">
+                                @item.Description
                             </div>
                         </div>
                         <div class="flex space-x-3 mb-3 text-sm font-semibold uppercase">
                             <div class="flex-auto flex space-x-3">
                                 <button @onclick="() => OnChoiceMade.InvokeAsync(item)"
-                                        class="w-1/2 flex items-center justify-center bg-black text-white"
-                                        type="submit">
-                                    Buy now
-                                </button>
-                                <button class="w-1/2 flex items-center justify-center border border-gray-200"
+                                        class="tracking-widest uppercase px-4 py-2 bg-lumasuite text-white cursor-pointer rounded outline-none focus:outline-none"
                                         type="button">
-                                    Add to bag
+                                    Add
                                 </button>
                             </div>
-                            <button class="flex-none flex items-center justify-center w-12 h-12 text-gray-900 border border-gray-200" type="button" aria-label="like">
-                                <svg width="20" height="20" fill="currentColor">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-                                </svg>
-                            </button>
                         </div>
-                        <p class="text-sm text-gray-500">
+                        @*<p class="text-sm text-gray-500">
                             Free shipping on all continental US orders.
-                        </p>
-                    </form>
+                        </p>*@
+                    </div>
                 </div>
 
             }

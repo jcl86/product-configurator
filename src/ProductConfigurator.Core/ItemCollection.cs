@@ -27,11 +27,19 @@ namespace ProductConfigurator.Core
             return items.Any(x => x.Item.IsClassicEdition);
         }
 
-        public Step RemoveLast()
+        public bool CanLastBeRemoved() => items.Any();
+
+        public Step? RemoveLast()
         {
+            if (!items.Any())
+            {
+                return null;
+            }
+
             var item = items.Last();
             items.Remove(item);
             return item.Step;
+
         }
     }
 }

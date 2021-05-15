@@ -7,7 +7,7 @@
         Fiber,
         ClassicEdition,
         NewEdition,
-        Piano,
+        Keyboard,
         Buttons,
     }
 }

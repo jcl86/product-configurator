@@ -1,5 +1,5 @@
-﻿<div class="bg-blue-100 min-h-full rounded-lg flex justify-center">
-    <div class="max-w-4xl bg-white w-full rounded-lg shadow">
+﻿<div class="min-h-full flex justify-center">
+    <div class="max-w-4xl bg-white w-full rounded-sm shadow">
         <div class="p-4 border-b">
             <h2 class="text-2xl">
                 This is your selection for
@@ -44,6 +44,18 @@
             <span class="font-semibold">TOTAL:</span>
             <span class="flex justify-end">@ItemCollection.Total() €</span>
         </div>
+
+        <div class="p-4 border-b flex justify-end">
+            @if (ItemCollection.CanLastBeRemoved())
+            {
+                <button class="uppercase px-10 py-2 bg-lumasuite text-white font-semibold cursor-pointer rounded outline-none focus:outline-none"
+                        type="button"
+                        @onclick="RemoveLast">
+                    UPS
+                </button>
+            }
+        </div>
+
     </div>
 </div>
 
@@ -53,4 +65,16 @@
 
     [CascadingParameter]
     public ItemCollection ItemCollection { get; set; }
+
+    [Parameter]
+    public EventCallback<Step> GoBackToStep { get; set; }
+
+    private async Task RemoveLast()
+    {
+        var lastStep = ItemCollection.RemoveLast();
+        if (lastStep.HasValue)
+        {
+            await GoBackToStep.InvokeAsync(lastStep.Value);
+        }
+    }
 }
