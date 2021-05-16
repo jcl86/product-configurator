@@ -9,7 +9,7 @@
             {
                 <div class="flex flex-col md:flex-row p-1">
                     <div class="md:flex-none md:w-52 md:relative">
-                        <img src="@item.Images.First()" alt="@item.Name"
+                        <img src="@item.Images(Step.InstrumentType).First()" alt="@item.Name"
                              class="md:absolute md:inset-0 w-full h-full object-cover" />
                     </div>
                     <div class="flex-auto p-2 md:py-4 md:px-8">

@@ -1,12 +1,9 @@
 ﻿<div class="min-h-full flex justify-center">
     <div class="max-w-4xl bg-white w-full rounded-sm shadow">
         <div class="p-4 border-b">
-            <h2 class="text-2xl">
-                This is your selection for
-            </h2>
-            <p class="text-sm text-gray-500">
+            <h2 class="text-xl text-lumasuite">
                 @Title
-            </p>
+            </h2>
         </div>
         <div>
             @foreach (var group in ItemCollection.Basket)
@@ -55,7 +52,6 @@
                 </button>
             }
         </div>
-
     </div>
 </div>
 
@@ -72,9 +68,9 @@
     private async Task RemoveLast()
     {
         var lastStep = ItemCollection.RemoveLast();
-        if (lastStep.HasValue)
+        if (lastStep != null)
         {
-            await GoBackToStep.InvokeAsync(lastStep.Value);
+            await GoBackToStep.InvokeAsync(lastStep);
         }
     }
 }

@@ -29,7 +29,7 @@ namespace ProductConfigurator.Core
 
         public bool CanLastBeRemoved() => items.Any();
 
-        public Step? RemoveLast()
+        public Step RemoveLast()
         {
             if (!items.Any())
             {

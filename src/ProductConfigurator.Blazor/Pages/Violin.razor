@@ -2,7 +2,7 @@
 
 <Title>
     <TitleText>
-        Violin
+        Choose @currentStep.ToString()
     </TitleText>
     <SubtitleText>
         Product configurator
@@ -16,19 +16,19 @@
 
             <Choice Items="ViolinFactory.Materials"
                     OnChoiceMade="MaterialChoosen"
-                    Step="Step.Material" />
+                    Step="ViolinStepsFactory.Material" />
 
             <Choice Items="ViolinFactory.Finish"
                     OnChoiceMade="DesignChoosen"
-                    Step="Step.Finish" />
+                    Step="ViolinStepsFactory.Finish" />
 
             <Choice Items="ViolinFactory.Colors"
                     OnChoiceMade="ColorChoosen"
-                    Step="Step.Color" />
+                    Step="ViolinStepsFactory.Color" />
 
             <Choice Items="ViolinFactory.Designs"
                     OnChoiceMade="ExtraColorChoosen"
-                    Step="Step.Design" />
+                    Step="ViolinStepsFactory.Design" />
 
         </CascadingValue>
     </div>
@@ -37,7 +37,7 @@
         <CascadingValue Value="itemCollection">
             <Basket>
                 <Title>
-                    Violin
+                    This is your selection for your violin case
                 </Title>
             </Basket>
         </CascadingValue>
@@ -45,7 +45,7 @@
 
 </div>
 
-@if (currentStep == Step.End)
+@if (currentStep == ViolinStepsFactory.End)
 {
     <p>
         Congratulations! You succeded to configure your case @($"{itemCollection.TotalWithoutVat():C}")
@@ -55,7 +55,7 @@
 
 
 @code {
-    private Step currentStep = Step.Material;
+    private Step currentStep = ViolinStepsFactory.Material;
 
     private ItemCollection itemCollection;
 
@@ -70,27 +70,27 @@
 
         if (item.IsCarbon)
         {
-            currentStep = Step.Design;
+            currentStep = ViolinStepsFactory.Design;
         }
-        else currentStep = Step.Color;
+        else currentStep = ViolinStepsFactory.Color;
     }
 
     private void DesignChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
-        currentStep = Step.Color;
+        currentStep = ViolinStepsFactory.Color;
     }
 
     private void ColorChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
-        currentStep = Step.Design;
+        currentStep = ViolinStepsFactory.Design;
     }
 
     private void ExtraColorChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
-        currentStep = Step.End;
+        currentStep = ViolinStepsFactory.End;
     }
 
     private void OnEnd()

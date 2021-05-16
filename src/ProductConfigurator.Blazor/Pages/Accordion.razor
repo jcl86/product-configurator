@@ -18,39 +18,35 @@
 
             <Choice Items="AccordionFactory.AccordionType"
                     OnChoiceMade="AccordionTypeChoosen"
-                    Step="Step.AccordionType" />
+                    Step="AccordionStepsFactory.AccordionType" />
 
             <Choice Items="AccordionFactory.CaseType"
                     OnChoiceMade="CaseTypeChoosen"
-                    Step="Step.CaseType" />
+                    Step="AccordionStepsFactory.CaseType" />
 
             <Choice Items="AccordionFactory.Materials"
                     OnChoiceMade="MaterialChoosen"
-                    Step="Step.Material" />
+                    Step="AccordionStepsFactory.Material" />
 
             <Choice Items="AccordionFactory.Finish"
                     OnChoiceMade="FinishChoosen"
-                    Step="Step.Finish" />
-
-            <Choice Items="AccordionFactory.Finish"
-                    OnChoiceMade="FinishChoosen"
-                    Step="Step.Finish" />
+                    Step="AccordionStepsFactory.Finish" />
 
             <Choice Items="AccordionFactory.Caps"
                     OnChoiceMade="CapsChoosen"
-                    Step="Step.Caps" />
+                    Step="AccordionStepsFactory.Caps" />
 
             <Choice Items="AccordionFactory.Colors"
                     OnChoiceMade="ColorChoosen"
-                    Step="Step.Color" />
+                    Step="AccordionStepsFactory.Color" />
 
             <Choice Items="AccordionFactory.Designs"
                     OnChoiceMade="DesignChoosen"
-                    Step="Step.Design" />
+                    Step="AccordionStepsFactory.Design" />
 
             <Choice Items="AccordionFactory.Accesories"
                     OnChoiceMade="OnEnd"
-                    Step="Step.Accesories" />
+                    Step="AccordionStepsFactory.Accesories" />
 
         </CascadingValue>
     </div>
@@ -58,14 +54,14 @@
         <CascadingValue Value="itemCollection">
             <Basket GoBackToStep="GoBack">
                 <Title>
-                    Accordion
+                    This is your selection for your accordion case
                 </Title>
             </Basket>
         </CascadingValue>
     </div>
 </div>
 
-@if (currentStep == Step.End)
+@if (currentStep == AccordionStepsFactory.End)
 {
     <p>
         Congratulations! You succeded to configure your case @($"{itemCollection.TotalWithoutVat():C}")
@@ -75,7 +71,7 @@
 
 
 @code {
-    private Step currentStep = Step.AccordionType;
+    private Step currentStep = AccordionStepsFactory.AccordionType;
 
     private ItemCollection itemCollection;
 
@@ -90,16 +86,16 @@
 
         if (item.IsPiano)
         {
-            itemCollection.Add(AccordionFactory.NewEdition, Step.CaseType);
-            currentStep = Step.Material;
+            itemCollection.Add(AccordionFactory.NewEdition, AccordionStepsFactory.CaseType);
+            currentStep = AccordionStepsFactory.Material;
         }
-        else currentStep = Step.CaseType;
+        else currentStep = AccordionStepsFactory.CaseType;
     }
 
     private void CaseTypeChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
-        currentStep = Step.Material;
+        currentStep = AccordionStepsFactory.Material;
     }
 
     private void MaterialChoosen(Item item)
@@ -108,21 +104,21 @@
 
         if (item.IsCarbon)
         {
-            currentStep = Step.Finish;
+            currentStep = AccordionStepsFactory.Finish;
         }
-        else currentStep = Step.Color;
+        else currentStep = AccordionStepsFactory.Color;
     }
 
     private void FinishChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
-        currentStep = Step.Design;
+        currentStep = AccordionStepsFactory.Design;
     }
 
     private void ColorChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
-        currentStep = Step.Design;
+        currentStep = AccordionStepsFactory.Design;
     }
 
     private void DesignChoosen(Item item)
@@ -131,15 +127,15 @@
 
         if (itemCollection.WasClasicEditionChoosen())
         {
-            currentStep = Step.Caps;
+            currentStep = AccordionStepsFactory.Caps;
         }
-        else currentStep = Step.Accesories;
+        else currentStep = AccordionStepsFactory.Accesories;
     }
 
     private void CapsChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
-        currentStep = Step.Accesories;
+        currentStep = AccordionStepsFactory.Accesories;
     }
 
     private void OnEnd(Item item)
