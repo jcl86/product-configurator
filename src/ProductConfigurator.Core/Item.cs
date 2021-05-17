@@ -6,14 +6,34 @@ namespace ProductConfigurator.Core
     public class Item
     {
         private readonly string[] images;
-        public IEnumerable<string> Images(InstrumentType type)
+        public string Image(InstrumentType type)
         {
             if (!images.Any())
             {
-                return new string[] { Constants.DefaultImage };
+                return Constants.DefaultImage;
             }
-            return images.Select(x => $"img/{type.ToString().ToLower()}/{x}");
+            return images.Select(x => $"img/{type.ToString().ToLower()}/{x}").ElementAt(currentImageIndex);
         }
+
+        public bool IsFirst() => currentImageIndex == 0;        
+        public void NextImage()
+        {
+            if (!IsLast())
+            {
+            currentImageIndex++;
+            }
+        }
+
+        public bool IsLast() => currentImageIndex >= images.Count() - 1;
+        public void PreviousImage()
+        {
+            if (!IsFirst())
+            {
+                currentImageIndex--;
+            }
+        }
+
+        private int currentImageIndex;
 
         public string Name { get; }
         public string Description { get; }
@@ -29,6 +49,7 @@ namespace ProductConfigurator.Core
             Price = price;
             Type = type;
             this.images = images;
+            currentImageIndex = 0;
         }
 
         public static Item Create(string name, string description, decimal price,

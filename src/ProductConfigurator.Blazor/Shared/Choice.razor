@@ -8,9 +8,21 @@
             @foreach (var item in Items)
             {
                 <div class="flex flex-col md:flex-row p-1">
-                    <div class="md:flex-none md:w-52 md:relative">
-                        <img src="@item.Images(Step.InstrumentType).First()" alt="@item.Name"
-                             class="md:absolute md:inset-0 w-full h-full object-cover" />
+                    <div class="md:flex-none md:w-52 ms:h-52 md:relative">
+                        <img src="@item.Image(Step.InstrumentType)" alt="@item.Name"
+                             class="md:absolute md:inset-0 w-full h-full object-contain" />
+                        
+                        <button @onclick="() => item.PreviousImage()"
+                                class="@(item.IsFirst() ? "hidden" : "") md:absolute md:bottom-0 md:left-0 tracking-widest uppercase px-4 py-2 bg-lumasuite text-white cursor-pointer rounded outline-none focus:outline-none"
+                                type="button">
+                            Prev
+                        </button>
+
+                        <button @onclick="() => item.NextImage()"
+                                class="@(item.IsLast() ? "hidden" : "") md:absolute md:bottom-0 md:right-0 tracking-widest uppercase px-4 py-2 bg-lumasuite text-white cursor-pointer rounded outline-none focus:outline-none"
+                                type="button">
+                            Next
+                        </button>
                     </div>
                     <div class="flex-auto p-2 md:py-4 md:px-8">
                         <div class="flex flex-wrap items-baseline">
@@ -54,6 +66,8 @@
 
 @code {
 
+    private int imageIndex = 0;
+
     [Parameter]
     public IEnumerable<Item> Items { get; set; }
 
@@ -65,4 +79,5 @@
 
     [Parameter]
     public EventCallback<Item> OnChoiceMade { get; set; }
+
 }
