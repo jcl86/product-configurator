@@ -19,7 +19,7 @@ jobs:
           dotnet-version: '5.0.x'
       - name: Build
         run: |
-          dotnet restore src/ProductConfigurator.Blazor/ProductConfigurator.Blazor.csproj
+          dotnet restore
           dotnet build src/ProductConfigurator.Blazor/ProductConfigurator.Blazor.csproj -c $BUILD_CONFIG
       - name: Test
         run: dotnet test src/ProductConfigurator.UnitTests/ProductConfigurator.UnitTests.csproj -c $BUILD_CONFIG
