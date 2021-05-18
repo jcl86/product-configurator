@@ -43,7 +43,7 @@ jobs:
           dotnet-version: '5.0.x'
       - name: Build
         run: |
-          dotnet restore src/ProductConfigurator.Blazor/ProductConfigurator.Blazor.csproj
+          dotnet restore
           dotnet build src/ProductConfigurator.Blazor/ProductConfigurator.Blazor.csproj -c $BUILD_CONFIG
       - name: Publish
         run: dotnet publish -c $BUILD_CONFIG --no-build -o release
