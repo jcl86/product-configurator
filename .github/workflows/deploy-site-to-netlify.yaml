@@ -22,7 +22,7 @@ jobs:
           dotnet restore
           dotnet build src/ProductConfigurator.Blazor/ProductConfigurator.Blazor.csproj -c $BUILD_CONFIG
       - name: Test
-        run: dotnet test src/ProductConfigurator.UnitTests/ProductConfigurator.UnitTests.csproj -c $BUILD_CONFIG
+        run: dotnet test test/ProductConfigurator.UnitTests/ProductConfigurator.UnitTests.csproj -c $BUILD_CONFIG
 
   continuous-deployment:
 
