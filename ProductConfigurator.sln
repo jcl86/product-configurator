@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1543FBCA-7431-44FB-ACDC-93BD1AD6B545}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductConfigurator.Core", "src\Productconfigurator.Core\ProductConfigurator.Core.csproj", "{36BFB299-5C2A-4C0D-BDA2-BFEF967C39DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductConfigurator.Core", "src\ProductConfigurator.Core\ProductConfigurator.Core.csproj", "{36BFB299-5C2A-4C0D-BDA2-BFEF967C39DE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{25BA0F94-6A86-4C2A-A476-24F80369860E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductConfigurator.UnitTests", "test\Productconfigurator.UnitTests\ProductConfigurator.UnitTests.csproj", "{65BD506D-DC66-4CC1-B10A-6C8C27938FAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductConfigurator.UnitTests", "test\ProductConfigurator.UnitTests\ProductConfigurator.UnitTests.csproj", "{65BD506D-DC66-4CC1-B10A-6C8C27938FAB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductConfigurator.Blazor", "src\ProductConfigurator.Blazor\ProductConfigurator.Blazor.csproj", "{6F9CB977-61BB-42B2-816C-2DE699356A23}"
 EndProject

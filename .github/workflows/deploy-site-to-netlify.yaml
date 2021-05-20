@@ -19,10 +19,10 @@ jobs:
           dotnet-version: '5.0.x'
       - name: Build
         run: |
-          dotnet restore src/ProductConfigurator.Blazor/ProductConfigurator.Blazor.csproj
+          dotnet restore
           dotnet build src/ProductConfigurator.Blazor/ProductConfigurator.Blazor.csproj -c $BUILD_CONFIG
       - name: Test
-        run: dotnet test src/ProductConfigurator.UnitTests/ProductConfigurator.UnitTests.csproj -c $BUILD_CONFIG
+        run: dotnet test test/ProductConfigurator.UnitTests/ProductConfigurator.UnitTests.csproj -c $BUILD_CONFIG
 
   continuous-deployment:
 
@@ -43,10 +43,10 @@ jobs:
           dotnet-version: '5.0.x'
       - name: Build
         run: |
-          dotnet restore src/ProductConfigurator.Blazor/ProductConfigurator.Blazor.csproj
+          dotnet restore
           dotnet build src/ProductConfigurator.Blazor/ProductConfigurator.Blazor.csproj -c $BUILD_CONFIG
       - name: Publish
-        run: dotnet publish -c $BUILD_CONFIG --no-build -o release
+        run: dotnet publish src/ProductConfigurator.Blazor/ProductConfigurator.Blazor.csproj -c $BUILD_CONFIG --no-build -o release
         
       - name: Publish website to Netlify
         uses: netlify/actions/cli@master
