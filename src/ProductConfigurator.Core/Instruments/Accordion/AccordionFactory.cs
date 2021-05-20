@@ -2,14 +2,13 @@
 
 namespace ProductConfigurator.Core
 {
-
     public static class AccordionFactory
     {              
         public static Item Button => Item.Create("Button accordion", 
             "I have a button accordion.", 
             0m, 
             ItemType.Buttons,
-            "buttons.jpg");
+            "button.jpg");
         public static Item Keyboard => Item.Create("Keyboard accordion", 
             "I have a keyboard accordion.", 
             0m, 
@@ -31,7 +30,7 @@ namespace ProductConfigurator.Core
             "The accessory for carrying the accordion in two parts.", 
             314m,
             ItemType.None,
-            "caps.jpg");
+            "caps.jpg", "intermediate-caps.jpg");
         public static Item WithoutCaps => Item.Create("Without caps", 
             "I don't divide the accordion.", 
             0m,
@@ -53,7 +52,7 @@ namespace ProductConfigurator.Core
             "Small squares carbon look pattern.", 
             0m,
             ItemType.None,
-            "plain.jpg");
+            "plain.png");
         public static Item Twill => Item.Create("Twill", 
             "Herringbone carbon look pattern.",
             0m,
@@ -62,13 +61,16 @@ namespace ProductConfigurator.Core
 
         public static Item Milk => Item.Create("Milk", 
             "A smooth design for a sleek  look.", 
-            100m); //RAL orange:2002, marine blue:5013, yellow:1021, pink: 4003
+            100m, ItemType.None,
+            "milk-navy.png", "milk-orange.png", "milk-rosy.png", "milk-tile.png"); //RAL orange:2002, marine blue:5013, yellow:1021, pink: 4003
         public static Item Diagonalink => Item.Create("Diagonalink", 
             "An elegant twist on the DUPLO collection.", 
-            120m);//yellow, black, blue, rosie
+            120m, ItemType.None,
+            "diagonalink-classic.png", "diagonalink-lemon.png", "diagonalink-navy.png", "diagonalink-rosy.png");//yellow, black, blue, rosie
         public static Item Duplo => Item.Create("Duplo", 
             "A Bolder Version of the MILK collection for a a more exaggerated statement.", 
-            100m);//blue, yellow, red, pink, nude, classic
+            100m, ItemType.None,
+            "duplo-classic.png", "duplo-red.png", "duplo-rosy.png", "duplo-yellow.png");//blue, yellow, red, pink, nude, classic
         public static Item Natural => Item.Create("Natural", 
             "Fresh Handmade style.", 
             0m);
@@ -78,10 +80,13 @@ namespace ProductConfigurator.Core
             ItemType.None,
             "black-matte.jpg");
         public static Item BlackGlossy => Item.Create("Black glossy", 
-            "Glossy black finish.", 0m);
+            "Glossy black finish.", 0m,
+            ItemType.None,
+            "bright-black.jpg");
         public static Item White => Item.Create("White", 
             "This bright white paint is special. It is used on windmills to slow the deterioration caused by the continuous wear of the wind.", 
-            0m);
+            0m, ItemType.None,
+            "white.jpg");
 
         public static IEnumerable<Item> AccordionType => new List<Item>() { Button, Keyboard };
         public static IEnumerable<Item> CaseType => new List<Item>() { ClassicEdition, NewEdition };
@@ -99,7 +104,10 @@ namespace ProductConfigurator.Core
             "One more adaptable cushion.", 
             10m, ItemType.None,
             "extra-cushion.png");
-        public static Item InnerPocket => Item.Create("Inner pocket", "Detachable pocket for music scores and accordion straps.", 20m);
+        public static Item InnerPocket => Item.Create("Inner pocket", 
+            "Detachable pocket for music scores and accordion straps.",
+            20m, ItemType.None,
+            "extra-pockets.jpg");
         public static Item Wheels => Item.Create("Wheels", 
             "Industrial stainless steel small wheels to free you while waiting in a queue. You can place the case on the floor, and advance without having to bend down, only pushing gently the case.", 
             99m,

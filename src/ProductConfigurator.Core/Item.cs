@@ -5,6 +5,8 @@ namespace ProductConfigurator.Core
 {
     public class Item
     {
+        public bool HasMoreThanOneImage => images.Count() > 1;
+        public int Images => images.Count();
         private readonly string[] images;
         public string Image(InstrumentType type)
         {
@@ -20,7 +22,7 @@ namespace ProductConfigurator.Core
         {
             if (!IsLast())
             {
-            currentImageIndex++;
+                currentImageIndex++;
             }
         }
 
@@ -34,6 +36,7 @@ namespace ProductConfigurator.Core
         }
 
         private int currentImageIndex;
+        public bool IsIndex(int index) => currentImageIndex == index;
 
         public string Name { get; }
         public string Description { get; }

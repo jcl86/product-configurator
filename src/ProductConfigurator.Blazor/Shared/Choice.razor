@@ -8,16 +8,18 @@
             @foreach (var item in Items)
             {
                 <div class="flex flex-col md:flex-row p-1">
-                    <div class="md:flex-none md:w-52 ms:h-52 md:relative">
-                        <img src="@item.Image(Step.InstrumentType)" alt="@item.Name"
-                             class="md:absolute md:inset-0 w-full h-full object-contain" />
+                    <div class="">
+                        <div class="mx-auto md:flex-none w-52 h-52 md:relative">
+                            <img src="@item.Image(Step.InstrumentType)" alt="@item.Name"
+                                 class="md:absolute md:inset-0 w-full h-full object-contain" />
+                        </div>
 
-                        <div class="md:absolute md:inset-x-0 md:bottom-0 mb-3 flex justify-around">
+                        <div class="mb-3 flex justify-around">
 
                             <button @onclick="() => item.PreviousImage()"
-                                    class="@(item.IsFirst() ? "hidden" : "")
+                                    class="@(item.IsFirst() ? "opacity-25" : "opacity-75")
                                   tracking-widest uppercase p-2 bg-lumasuite text-white cursor-pointer
-                                rounded-full outline-none focus:outline-none opacity-75 hover:opacity-100"
+                                rounded-full outline-none focus:outline-none hover:@(item.IsFirst() ? "opacity-25" : "opacity-100")"
                                     type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -29,15 +31,17 @@
                                 <span class="flex items-center justify-between space-x-1">
                                     @foreach (var i in Enumerable.Range(0, item.Images))
                                     {
-                                        <span class="bg-lumasuite w-4 h-4 rounded-full"></span>
+                                        <span class="bg-lumasuite rounded-full @(item.IsIndex(i) ? 
+                                                                                         "opacity-100 w-3 h-3" : 
+                                                                                         "opacity-75 w-2 h-2")"></span>
                                     }
                                 </span>
                             }
 
                             <button @onclick="() => item.NextImage()"
-                                    class="@(item.IsLast() ? "hidden" : "")
+                                    class="@(item.IsLast() ? "opacity-25" : "opacity-75")
                                  tracking-widest uppercase p-2 bg-lumasuite text-white cursor-pointer
-                                rounded-full outline-none focus:outline-none opacity-75 hover:opacity-100"
+                                rounded-full outline-none focus:outline-none opacity-75 hover:@(item.IsLast() ? "opacity-25" : "opacity-100")"
                                     type="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -45,6 +49,7 @@
                             </button>
                         </div>
                     </div>
+
                     <div class="flex-auto p-2 md:py-4 md:px-8">
                         <div class="flex flex-wrap items-baseline">
                             <h1 class="w-full flex-none text-lg md:text-3xl text-black md:mb-1.5">
