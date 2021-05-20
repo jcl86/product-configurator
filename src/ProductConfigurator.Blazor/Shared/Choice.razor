@@ -11,18 +11,39 @@
                     <div class="md:flex-none md:w-52 ms:h-52 md:relative">
                         <img src="@item.Image(Step.InstrumentType)" alt="@item.Name"
                              class="md:absolute md:inset-0 w-full h-full object-contain" />
-                        
-                        <button @onclick="() => item.PreviousImage()"
-                                class="@(item.IsFirst() ? "hidden" : "") md:absolute md:bottom-0 md:left-0 tracking-widest uppercase px-4 py-2 bg-lumasuite text-white cursor-pointer rounded outline-none focus:outline-none"
-                                type="button">
-                            Prev
-                        </button>
 
-                        <button @onclick="() => item.NextImage()"
-                                class="@(item.IsLast() ? "hidden" : "") md:absolute md:bottom-0 md:right-0 tracking-widest uppercase px-4 py-2 bg-lumasuite text-white cursor-pointer rounded outline-none focus:outline-none"
-                                type="button">
-                            Next
-                        </button>
+                        <div class="md:absolute md:inset-x-0 md:bottom-0 mb-3 flex justify-around">
+
+                            <button @onclick="() => item.PreviousImage()"
+                                    class="@(item.IsFirst() ? "hidden" : "")
+                                  tracking-widest uppercase p-2 bg-lumasuite text-white cursor-pointer
+                                rounded-full outline-none focus:outline-none opacity-75 hover:opacity-100"
+                                    type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+
+                            @if (item.HasMoreThanOneImage)
+                            {
+                                <span class="flex items-center justify-between space-x-1">
+                                    @foreach (var i in Enumerable.Range(0, item.Images))
+                                    {
+                                        <span class="bg-lumasuite w-4 h-4 rounded-full"></span>
+                                    }
+                                </span>
+                            }
+
+                            <button @onclick="() => item.NextImage()"
+                                    class="@(item.IsLast() ? "hidden" : "")
+                                 tracking-widest uppercase p-2 bg-lumasuite text-white cursor-pointer
+                                rounded-full outline-none focus:outline-none opacity-75 hover:opacity-100"
+                                    type="button">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                     <div class="flex-auto p-2 md:py-4 md:px-8">
                         <div class="flex flex-wrap items-baseline">
@@ -54,8 +75,8 @@
                             </div>
                         </div>
                         @*<p class="text-sm text-gray-500">
-                            Free shipping on all continental US orders.
-                        </p>*@
+                                Free shipping on all continental US orders.
+                            </p>*@
                     </div>
                 </div>
 

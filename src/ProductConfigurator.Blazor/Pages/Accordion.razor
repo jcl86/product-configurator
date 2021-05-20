@@ -87,9 +87,8 @@
         if (item.IsPiano)
         {
             itemCollection.Add(AccordionFactory.NewEdition, AccordionStepsFactory.CaseType);
-            currentStep = AccordionStepsFactory.Material;
         }
-        else currentStep = AccordionStepsFactory.CaseType;
+        currentStep = AccordionStepsFactory.Material;
     }
 
     private void CaseTypeChoosen(Item item)
