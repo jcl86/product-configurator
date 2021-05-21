@@ -73,7 +73,7 @@ namespace ProductConfigurator.Core
             "duplo-classic.png", "duplo-red.png", "duplo-rosy.png", "duplo-yellow.png");//blue, yellow, red, pink, nude, classic
         public static Item Natural => Item.Create("Natural", 
             "Fresh Handmade style.", 
-            0m);
+            0m, ItemType.None, "natural.jpg");
 
         public static Item BlackMatte => Item.Create("Black matte", 
             "Matte black finish.", 0m,
