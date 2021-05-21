@@ -113,5 +113,31 @@ namespace ProductConfigurator.Core
         public static IEnumerable<Item> Colors => new List<Item>() { BlackMatte, BlackGlossy, White };
         public static IEnumerable<Item> Designs => new List<Item>() { Milk, Diagonalink, Duplo, Natural };
         public static IEnumerable<Item> Accessories => new List<Item>() { Bag };
+
+        public static IEnumerable<Item> DuploDesigns => new List<Item>() 
+        { 
+            DuploViolinFactory.Blue,
+            DuploViolinFactory.Classic,
+            DuploViolinFactory.Lemon,
+            DuploViolinFactory.Pink,
+            DuploViolinFactory.Red,
+            DuploViolinFactory.Rosy,
+        };
+
+        public static IEnumerable<Item> MilkDesigns => new List<Item>()
+        {
+            MilkViolinFactory.Navy,
+            MilkViolinFactory.Orange,
+            MilkViolinFactory.Rosy,
+            MilkViolinFactory.Tile
+        };
+
+        public static IEnumerable<Item> DiagonalinkDesigns => new List<Item>()
+        {
+            MilkViolinFactory.Navy,
+            MilkViolinFactory.Orange,
+            MilkViolinFactory.Rosy,
+            MilkViolinFactory.Tile
+        };
     }
 }
