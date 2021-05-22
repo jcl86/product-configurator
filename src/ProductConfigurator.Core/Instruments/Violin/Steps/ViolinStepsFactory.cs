@@ -6,6 +6,7 @@
         public static Step Finish => new Step(ViolinSteps.Finish, ViolinSteps.Finish.ToString());
         public static Step Color => new Step(ViolinSteps.Color, ViolinSteps.Color.ToString());
         public static Step Design => new Step(ViolinSteps.Design, ViolinSteps.Design.ToString());
+        public static Step DesignColor => new Step(ViolinSteps.DesignColor, "Design color");
         public static Step Accesories => new Step(ViolinSteps.Accesories, ViolinSteps.Accesories.ToString());
         public static Step End => new Step(ViolinSteps.End, ViolinSteps.End.ToString());
     }

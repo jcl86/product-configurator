@@ -1,21 +1,26 @@
-﻿<div class="min-h-full flex justify-center">
+﻿@inject NavigationManager navigationManager
+
+<div class="min-h-full flex justify-center">
     <div class="max-w-4xl bg-white w-full rounded-sm shadow">
-        <div class="p-4 border-b">
-            <h2 class="text-xl text-lumasuite">
+        <div class="shadow-sm px-4 py-2 border-b tracking-wide rounded-sm">
+            <h2 class="text-sm font-light">
                 @Title
             </h2>
         </div>
         <div>
             @foreach (var group in ItemCollection.Basket)
             {
-                <a class="md:grid md:grid-cols-3 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
-                    <span class="text-gray-600 cursor-pointer">
-                        @group.Step
+                <a @onclick="() => selectedItem = group"
+                   class="flex justify-between items-center hover:bg-gray-50 p-4 border-b shadow-sm cursor-pointer">
+                    <span class="flex flex-col">
+                        <span class="text-xs text-lumasuite font-semibold">
+                            @group.Step
+                        </span>
+                        <span class="text-sm">
+                            @string.Join(", ", group.Items.Select(x => x.Name))
+                        </span>
                     </span>
                     <span>
-                        @string.Join(", ", group.Items.Select(x => x.Name))
-                    </span>
-                    <span class="flex justify-end">
                         @if (group.Price > 0)
                         {
                             <span>@group.Price €</span>
@@ -24,33 +29,115 @@
                 </a>
             }
         </div>
-        <div class="md:grid md:grid-cols-3 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
-            <span class="text-gray-600 cursor-pointer"></span>
-            <span class="font-semibold"></span>
-            <span class="flex justify-end">@ItemCollection.TotalWithoutVat() €</span>
-        </div>
+        @if (ItemCollection.TotalWithoutVat() > 0)
+        {
+            <div class="flex justify-end items-center">
+                <div class="py-2 px-4 rounded-full text-gray-700">
+                    <span class="text-xs mr-2 font-semibold"></span>
+                    <span class="text-xl">@ItemCollection.TotalWithoutVatText()</span>
+                </div>
+            </div>
 
-        <div class="md:grid md:grid-cols-3 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
-            <span class="text-gray-600 cursor-pointer"></span>
-            <span class="font-semibold">VAT:</span>
-            <span class="flex justify-end">@ItemCollection.Vat() €</span>
-        </div>
+            <div class="flex justify-end items-center">
+                <div class="py-2 px-4 rounded-full text-gray-700">
+                    <span class="text-xs mr-2 font-semibold">VAT:</span>
+                    <span class="text-xl">@ItemCollection.VatText()</span>
+                </div>
+            </div>
 
-        <div class="md:grid md:grid-cols-3 hover:bg-gray-50 md:space-y-0 space-y-1 p-4 border-b">
-            <span class="text-gray-600 cursor-pointer"></span>
-            <span class="font-semibold">TOTAL:</span>
-            <span class="flex justify-end">@ItemCollection.Total() €</span>
-        </div>
+            <div class="flex justify-end items-center">
+                <div class="py-2 px-4 rounded-full text-gray-700">
+                    <span class="text-xs mr-2 font-semibold">TOTAL:</span>
+                    <span class="text-xl">@ItemCollection.TotalText()</span>
+                </div>
+            </div>
+        }
 
-        <div class="p-4 border-b flex justify-end">
-            @if (ItemCollection.CanLastBeRemoved())
-            {
-                <button class="uppercase px-10 py-2 bg-lumasuite text-white font-semibold cursor-pointer rounded outline-none focus:outline-none"
+        <div class="p-4 flex justify-between">
+
+            <button class="flex items-center uppercase px-4 py-2 bg-lumasuite text-white text-lg
+                    @(ItemCollection.CanLastBeRemoved()? "cursor-pointer" : "cursor-not-allowed opacity-25")
+                        rounded outline-none focus:outline-none"
+                    type="button"
+                    disabled="@ItemCollection.CanLastBeRemoved()"
+                    @onclick="RemoveLast">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z">
+                    </path>
+                </svg>
+                <span class="ml-2 hidden md:block">
+                    Undo Last step
+                </span>
+            </button>
+
+        </div>
+    </div>
+</div>
+
+<div class="@(selectedItem is null ? "hidden" : "") fixed z-10 inset-0 overflow-y-auto"
+     aria-labelledby="modal-title"
+     role="dialog"
+     aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <!--
+          Background overlay, show/hide based on modal state.
+
+          Entering: "ease-out duration-300"
+            From: "opacity-0"
+            To: "opacity-100"
+          Leaving: "ease-in duration-200"
+            From: "opacity-100"
+            To: "opacity-0"
+        -->
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+
+        <!-- This element is to trick the browser into centering the modal contents. -->
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+        <!--
+          Modal panel, show/hide based on modal state.
+
+          Entering: "ease-out duration-300"
+            From: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            To: "opacity-100 translate-y-0 sm:scale-100"
+          Leaving: "ease-in duration-200"
+            From: "opacity-100 translate-y-0 sm:scale-100"
+            To: "opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        -->
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-gray-100 sm:mx-0 sm:h-10 sm:w-10">
+                        <svg class="w-6 h-6 text-lumasuite" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z">
+                            </path>
+                        </svg>
+                    </div>
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        @if (selectedItem != null)
+                        {
+                            @foreach (var item in selectedItem.Items)
+                            {
+                                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                                    @item.Name
+                                </h3>
+                                <div class="mt-2">
+                                    <p class="text-sm text-gray-500">
+                                        @item.Description
+                                    </p>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button @onclick="() => selectedItem = null"
                         type="button"
-                        @onclick="RemoveLast">
-                    UPS
+                        class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    Close
                 </button>
-            }
+            </div>
         </div>
     </div>
 </div>
@@ -65,6 +152,9 @@
     [Parameter]
     public EventCallback<Step> GoBackToStep { get; set; }
 
+    [Parameter]
+    public EventCallback GoToOrderNow { get; set; }
+
     private async Task RemoveLast()
     {
         var lastStep = ItemCollection.RemoveLast();
@@ -73,4 +163,11 @@
             await GoBackToStep.InvokeAsync(lastStep);
         }
     }
+
+    private async Task OrderNow()
+    {
+        await GoToOrderNow.InvokeAsync();
+    }
+
+    private BasketGroupItem selectedItem;
 }

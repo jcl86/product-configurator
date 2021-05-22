@@ -9,6 +9,7 @@
         public static Step Caps => new Step(AccordionSteps.Caps, AccordionSteps.Caps.ToString());
         public static Step Color => new Step(AccordionSteps.Color, AccordionSteps.Color.ToString());
         public static Step Design => new Step(AccordionSteps.Design, AccordionSteps.Design.ToString());
+        public static Step DesignColor => new Step(AccordionSteps.DesignColor, "Design color");
         public static Step Accesories => new Step(AccordionSteps.Accesories, AccordionSteps.Accesories.ToString());
         public static Step End => new Step(AccordionSteps.End, AccordionSteps.End.ToString());
     }

@@ -11,7 +11,7 @@
 
 
 
-<div class="flex flex-col md:flex-row">
+<div class="flex flex-col md:flex-row mb-4">
 
     <div class="w-full md:w-2/3">
         <CascadingValue Value="currentStep">
@@ -44,6 +44,27 @@
                     OnChoiceMade="DesignChoosen"
                     Step="AccordionStepsFactory.Design" />
 
+            @if (itemCollection.Includes(ItemType.Duplo))
+            {
+                <Choice Items="AccordionFactory.DuploDesigns"
+                        OnChoiceMade="DesignDuploChoosen"
+                        Step="AccordionStepsFactory.DesignColor" />
+            }
+
+            @if (itemCollection.Includes(ItemType.Milk))
+            {
+                <Choice Items="AccordionFactory.MilkDesigns"
+                        OnChoiceMade="DesignMilkChoosen"
+                        Step="AccordionStepsFactory.DesignColor" />
+            }
+
+            @if (itemCollection.Includes(ItemType.Diagonalink))
+            {
+                <Choice Items="AccordionFactory.DiagonalinkDesigns"
+                        OnChoiceMade="DesignDiagonalinkChoosen"
+                        Step="AccordionStepsFactory.DesignColor" />
+            }
+
             <Choice Items="AccordionFactory.Accesories"
                     OnChoiceMade="OnEnd"
                     Step="AccordionStepsFactory.Accesories" />
@@ -54,7 +75,7 @@
         <CascadingValue Value="itemCollection">
             <Basket GoBackToStep="GoBack">
                 <Title>
-                    This is your selection for your accordion case
+                    Selection for your case
                 </Title>
             </Basket>
         </CascadingValue>
@@ -121,6 +142,46 @@
     }
 
     private void DesignChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+
+        if (item.IsSpecialDesign)
+        {
+            currentStep = AccordionStepsFactory.DesignColor;
+        }
+        else
+        {
+            if (itemCollection.WasClasicEditionChoosen())
+            {
+                currentStep = AccordionStepsFactory.Caps;
+            }
+            else currentStep = AccordionStepsFactory.Accesories;
+        }
+    }
+
+    private void DesignDuploChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+
+        if (itemCollection.WasClasicEditionChoosen())
+        {
+            currentStep = AccordionStepsFactory.Caps;
+        }
+        else currentStep = AccordionStepsFactory.Accesories;
+    }
+
+    private void DesignMilkChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+
+        if (itemCollection.WasClasicEditionChoosen())
+        {
+            currentStep = AccordionStepsFactory.Caps;
+        }
+        else currentStep = AccordionStepsFactory.Accesories;
+    }
+
+    private void DesignDiagonalinkChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
 

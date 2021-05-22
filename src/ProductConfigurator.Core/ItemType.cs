@@ -9,5 +9,8 @@
         NewEdition,
         Keyboard,
         Buttons,
+        Duplo,
+        Milk,
+        Diagonalink
     }
 }

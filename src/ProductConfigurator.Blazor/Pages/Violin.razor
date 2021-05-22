@@ -9,7 +9,7 @@
     </SubtitleText>
 </Title>
 
-<div class="flex flex-col md:flex-row space-x-2">
+<div class="flex flex-col md:flex-row space-x-2 mb-4">
 
     <div class="w-full md:w-2/3">
         <CascadingValue Value="currentStep">
@@ -19,7 +19,7 @@
                     Step="ViolinStepsFactory.Material" />
 
             <Choice Items="ViolinFactory.Finish"
-                    OnChoiceMade="DesignChoosen"
+                    OnChoiceMade="FinishChoosen"
                     Step="ViolinStepsFactory.Finish" />
 
             <Choice Items="ViolinFactory.Colors"
@@ -27,8 +27,29 @@
                     Step="ViolinStepsFactory.Color" />
 
             <Choice Items="ViolinFactory.Designs"
-                    OnChoiceMade="ExtraColorChoosen"
+                    OnChoiceMade="DesignChoosen"
                     Step="ViolinStepsFactory.Design" />
+
+            @if (itemCollection.Includes(ItemType.Duplo))
+            {
+                <Choice Items="ViolinFactory.DuploDesigns"
+                        OnChoiceMade="DesignDuploChoosen"
+                        Step="ViolinStepsFactory.DesignColor" />
+            }
+
+            @if (itemCollection.Includes(ItemType.Milk))
+            {
+                <Choice Items="ViolinFactory.MilkDesigns"
+                        OnChoiceMade="DesignMilkChoosen"
+                        Step="ViolinStepsFactory.DesignColor" />
+            }
+
+            @if (itemCollection.Includes(ItemType.Diagonalink))
+            {
+                <Choice Items="ViolinFactory.DiagonalinkDesigns"
+                        OnChoiceMade="DesignDiagonalinkChoosen"
+                        Step="ViolinStepsFactory.DesignColor" />
+            }
 
         </CascadingValue>
     </div>
@@ -37,7 +58,7 @@
         <CascadingValue Value="itemCollection">
             <Basket>
                 <Title>
-                    This is your selection for your violin case
+                    Selection for your case
                 </Title>
             </Basket>
         </CascadingValue>
@@ -75,7 +96,7 @@
         else currentStep = ViolinStepsFactory.Color;
     }
 
-    private void DesignChoosen(Item item)
+    private void FinishChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
         currentStep = ViolinStepsFactory.Color;
@@ -87,7 +108,30 @@
         currentStep = ViolinStepsFactory.Design;
     }
 
-    private void ExtraColorChoosen(Item item)
+    private void DesignChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+
+        if (item.IsSpecialDesign)
+        {
+            currentStep = ViolinStepsFactory.DesignColor;
+        }
+        else currentStep = ViolinStepsFactory.End;
+    }
+
+    private void DesignMilkChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+        currentStep = ViolinStepsFactory.End;
+    }
+
+    private void DesignDuploChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+        currentStep = ViolinStepsFactory.End;
+    }
+
+    private void DesignDiagonalinkChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
         currentStep = ViolinStepsFactory.End;

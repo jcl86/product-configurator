@@ -1,12 +1,10 @@
 ﻿namespace ProductConfigurator.Core
 {
-    public enum ViolinSteps
+    public enum CelloSteps
     {
         Material,
-        Finish,
-        Color,
         Design,
-        Accesories,
+        DesignColor,
         End
     }
 }

@@ -5,11 +5,15 @@
         Choose @currentStep.ToString()
     </TitleText>
     <SubtitleText>
-        Technological craftsmanship in a natural linen cello case that protects your instrument and your back forever.
+        Cello
     </SubtitleText>
 </Title>
 
-<div class="flex flex-col md:flex-row">
+<CascadingValue Value="currentStep">
+    <ProgressSteps Steps="CelloStepsFactory.Steps" />
+</CascadingValue>
+
+<div class="flex flex-col md:flex-row mb-4">
 
     <div class="w-full md:w-2/3">
         <CascadingValue Value="currentStep">
@@ -18,31 +22,68 @@
                     OnChoiceMade="MaterialChoosen"
                     Step="CelloStepsFactory.Material" />
 
-
-            <Choice Items="CelloFactory.Colors"
-                    OnChoiceMade="ColorChoosen"
+            <Choice Items="CelloFactory.Designs"
+                    OnChoiceMade="DesignChoosen"
                     Step="CelloStepsFactory.Design" />
 
+            @if (itemCollection.Includes(ItemType.Duplo))
+            {
+                <Choice Items="CelloFactory.DuploDesigns"
+                        OnChoiceMade="DesignDuploChoosen"
+                        Step="CelloStepsFactory.DesignColor" />
+            }
+
+            @if (itemCollection.Includes(ItemType.Milk))
+            {
+                <Choice Items="CelloFactory.MilkDesigns"
+                        OnChoiceMade="DesignMilkChoosen"
+                        Step="CelloStepsFactory.DesignColor" />
+            }
+
+            @if (itemCollection.Includes(ItemType.Diagonalink))
+            {
+                <Choice Items="CelloFactory.DiagonalinkDesigns"
+                        OnChoiceMade="DesignDiagonalinkChoosen"
+                        Step="CelloStepsFactory.DesignColor" />
+            }
+
         </CascadingValue>
+
+        @if (currentStep == CelloStepsFactory.End)
+        {
+            <div class="p-8">
+
+                <p class="tracking-wider text-lg text-gray-700 mb-8">
+                    Congratulations! You succeded to configure your case
+                </p>
+
+                <button class="flex items-center uppercase px-4 py-2 bg-lumasuite text-white text-lg
+                    cursor-pointer rounded outline-none focus:outline-none"
+                        type="button"
+                        @onclick="OrderNow">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z">
+                        </path>
+                    </svg>
+                    <span class="ml-2 hidden md:block">
+                        Order Now
+                    </span>
+                </button>
+            </div>
+        }
     </div>
     <div class="w-full md:w-1/3">
         <CascadingValue Value="itemCollection">
             <Basket GoBackToStep="GoBack">
                 <Title>
-                    This is your selection for your cello case
+                    Selection for your case
                 </Title>
             </Basket>
         </CascadingValue>
+
     </div>
 </div>
 
-@if (currentStep == CelloStepsFactory.End)
-{
-    <p>
-        Congratulations! You succeded to configure your case @($"{itemCollection.TotalWithoutVat():C}")
-    </p>
-    <a @onclick="OnEnd" class="btn btn-primary">Go for it!</a>
-}
 
 @code {
     private Step currentStep = CelloStepsFactory.Material;
@@ -60,14 +101,29 @@
         currentStep = CelloStepsFactory.Design;
     }
 
-    private void ColorChoosen(Item item)
+    private void DesignChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+        currentStep = CelloStepsFactory.DesignColor;
+    }
+
+    private void DesignMilkChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+        currentStep = CelloStepsFactory.End;
+    }
+    private void DesignDuploChoosen(Item item)
+    {
+        itemCollection.Add(item, currentStep);
+        currentStep = CelloStepsFactory.End;
+    }
+    private void DesignDiagonalinkChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
         currentStep = CelloStepsFactory.End;
     }
 
-
-    private void OnEnd()
+    private void OrderNow()
     {
 
     }

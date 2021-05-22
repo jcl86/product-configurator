@@ -1,10 +1,15 @@
 ﻿namespace ProductConfigurator.Core
 {
-    public enum CelloSteps
+    public enum AccordionSteps
     {
+        AccordionType,
+        CaseType,
         Material,
+        Finish,
+        Caps,
         Color,
         Design,
+        DesignColor,
         Accesories,
         End
     }

@@ -45,7 +45,7 @@ namespace ProductConfigurator.Core
             Name = "Milk",
             Description = "A smooth design for a sleek  look.",
             Price = 100m,
-            Type = ItemType.None,
+            Type = ItemType.Milk,
             Images = new ItemImages(Type, "milk-navy.png", "milk-orange.png", "milk-rosy.png", "milk-tile.png")
         };
 
@@ -54,7 +54,7 @@ namespace ProductConfigurator.Core
             Name = "Diagonalink",
             Description = "An elegant twist on the DUPLO collection.",
             Price = 120m,
-            Type = ItemType.None,
+            Type = ItemType.Diagonalink,
             Images = new ItemImages(Type, "diagonalink-blue.png", "diagonalink-grey.png", "diagonalink-lemon.png",
                 "diagonalink-rosy.png")
         };
@@ -64,7 +64,7 @@ namespace ProductConfigurator.Core
             Name = "Duplo",
             Description = "A Bolder Version of the MILK collection for a a more exaggerated statement.",
             Price = 100m,
-            Type = ItemType.None,
+            Type = ItemType.Duplo,
             Images = new ItemImages(Type, "duplo-blue.png", "duplo-classic.png", "duplo-lemon.png", "duplo-pink.png",
                 "duplo-red.png", "duplo-rosy.png")
         };

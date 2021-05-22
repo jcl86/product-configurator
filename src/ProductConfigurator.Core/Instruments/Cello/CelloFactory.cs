@@ -12,15 +12,6 @@ namespace ProductConfigurator.Core
             Description = "Technological craftsmanship in a natural linen cello case that protects your instrument and your back forever."
         };
 
-        public static Item s => new Item()
-        {
-            Name = "",
-            Description = "",
-            Price = 0m,
-            Type = ,
-            Images = new ItemImages(Type, "")
-        };
-
         public static Item Linen => new Item()
         {
             Name = "Natural linen",
@@ -34,6 +25,7 @@ namespace ProductConfigurator.Core
             Name = "Milk",
             Description = "A smooth design for a sleek  look.",
             Price = 100m,
+            Type = ItemType.Milk,
             Images = new ItemImages(Type, "milk-navy.png", "milk-orange.png", "milk-pink.png", "milk-tile.png")
         };
 
@@ -42,6 +34,7 @@ namespace ProductConfigurator.Core
             Name = "Duplo",
             Description = "A Bolder Version of the MILK collection for a a more exaggerated statement.",
             Price = 100m,
+            Type = ItemType.Duplo,
             Images = new ItemImages(Type, "duplo-blue.png", "duplo-classic.png", "duplo-lemon.png", "duplo-red.png", 
             "duplo-rosie.png", "duplo-rosy.png")
         };
@@ -51,6 +44,7 @@ namespace ProductConfigurator.Core
             Name = "Diagonalink",
             Description = "An elegant twist on the DUPLO collection.",
             Price = 120m,
+            Type = ItemType.Diagonalink,
             Images = new ItemImages(Type, "diagonalink-grey.png", "diagonalink-navy.png", 
             "diagonalink-rosy.png", "diagonalink-yellow.png")
         };
@@ -62,7 +56,7 @@ namespace ProductConfigurator.Core
             Images = new ItemImages(Type)
         };
         public static IEnumerable<Item> Materials => new List<Item>() { Linen }; 
-        public static IEnumerable<Item> Colors => new List<Item>() { Milk, Duplo, Diagonalink, Natural }; 
+        public static IEnumerable<Item> Designs => new List<Item>() { Milk, Duplo, Diagonalink, Natural }; 
         public static IEnumerable<Item> DuploDesigns => new List<Item>()
         { 
             DuploCelloFactory.Blue,

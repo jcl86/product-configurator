@@ -57,5 +57,8 @@
         }
 
         public static bool operator !=(Step left, Step right) => !(left == right);
+
+
+        public bool WasCompleted(Step step) => step.id < id;
     }
 }
