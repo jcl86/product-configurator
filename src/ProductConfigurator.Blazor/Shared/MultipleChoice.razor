@@ -2,6 +2,22 @@
 {
     <div class="min-h-full mb-8 md:mr-8 md:mb-0">
         <div class="grid grid-cols-1 gap-4">
+            <div class="flex items-center justify-end md:justify-between rounded-sm">
+                <span class="hidden md:block text-sm tracking-wide">
+                    Optional multiple choice
+                </span>
+                <button @onclick="() => OnSkip.InvokeAsync()"
+                        class="flex items-center tracking-widest uppercase px-4 py-2 bg-lumasuite text-white cursor-pointer 
+                        rounded outline-none focus:outline-none"
+                        type="button">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4.555 5.168A1 1 0 003 6v8a1 1 0 001.555.832L10 11.202V14a1 1 0 001.555.832l6-4a1 1 0 000-1.664l-6-4A1 1 0 0010 6v2.798l-5.445-3.63z">
+                        </path>
+                    </svg>
+                    <span class="ml-2">Skip to the next step</span>
+                </button>
+            </div>
+
             @foreach (var item in Items)
             {
                 <div class="bg-white rounded-sm shadow flex flex-col md:flex-row p-1">
@@ -23,7 +39,6 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                                     </svg>
                                 </button>
-
 
                                 <span class="flex items-center justify-between space-x-1">
                                     @foreach (var i in item.Images.ImageIndexCollection)
@@ -99,5 +114,8 @@
 
     [Parameter]
     public EventCallback<Item> OnChoiceMade { get; set; }
+
+    [Parameter]
+    public EventCallback OnSkip { get; set; }
 
 }

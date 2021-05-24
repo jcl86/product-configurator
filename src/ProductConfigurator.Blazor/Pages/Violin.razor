@@ -9,6 +9,10 @@
     </SubtitleText>
 </Title>
 
+<CascadingValue Value="currentStep">
+    <ProgressSteps Steps="AccordionStepsFactory.Steps" />
+</CascadingValue>
+
 <div class="flex flex-col md:flex-row space-x-2 mb-4">
 
     <div class="w-full md:w-2/3">
@@ -52,11 +56,19 @@
             }
 
         </CascadingValue>
+
+        @if (currentStep == ViolinStepsFactory.End)
+        {
+            <div class="p-8">
+
+                <LastStep />
+            </div>
+        }
     </div>
 
     <div class="w-full md:w-1/3">
         <CascadingValue Value="itemCollection">
-            <Basket>
+            <Basket GoBackToStep="GoBack">
                 <Title>
                     Selection for your case
                 </Title>
@@ -65,14 +77,6 @@
     </div>
 
 </div>
-
-@if (currentStep == ViolinStepsFactory.End)
-{
-    <p>
-        Congratulations! You succeded to configure your case @($"{itemCollection.TotalWithoutVat():C}")
-    </p>
-    <a @onclick="OnEnd" class="btn btn-primary">Go for it!</a>
-}
 
 
 @code {
@@ -140,5 +144,10 @@
     private void OnEnd()
     {
 
+    }
+
+    private void GoBack(Step step)
+    {
+        currentStep = step;
     }
 }

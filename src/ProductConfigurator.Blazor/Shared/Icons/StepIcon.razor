@@ -1,0 +1,23 @@
+﻿@if (Step.IsColor())
+{
+    <ColorIcon Style="@Style" />
+}
+else
+{
+    @if (Step.IsDesign())
+    {
+        <DesignIcon Style="@Style" />
+    }
+    else
+    {
+        <PuzzleIcon Style="@Style" />
+    }
+}
+
+@code {
+    [Parameter]
+    public Step Step { get; set; }
+
+    [Parameter]
+    public string Style { get; set; } = "w-6 h-6";
+}
