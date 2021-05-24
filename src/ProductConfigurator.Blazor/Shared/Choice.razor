@@ -4,7 +4,7 @@
         <div class="grid grid-cols-1 gap-4">
             @foreach (var item in Items)
             {
-                <a class="bg-white hover:opacity-75 cursor-pointer rounded-sm shadow flex flex-col md:flex-row p-1">
+                <div class="bg-white rounded-sm shadow flex flex-col md:flex-row p-1">
                     <div class="">
                         <div class="mx-auto md:flex-none w-52 h-52 md:relative">
                             <img src="@item.Images.ToString()" alt="@item.Name"
@@ -83,7 +83,7 @@
                                 Free shipping on all continental US orders.
                             </p>*@
                     </div>
-                </a>
+                </div>
 
             }
         </div>
