@@ -4,12 +4,37 @@ namespace ProductConfigurator.Core
 {
     public static class CelloStepsFactory
     {
-        public static Step Material => new Step(CelloSteps.Material, CelloSteps.Material.ToString());
-        public static Step Design => new Step(CelloSteps.Design, CelloSteps.Design.ToString());
-        public static Step DesignColor => new Step(CelloSteps.DesignColor, "Design color");
-        public static Step End => new Step(CelloSteps.End, CelloSteps.End.ToString());
+        private static Product Product => ProductFactory.Cello;
 
-        public static List<Step> Steps => new List<Step>()
+        public static Step Material => new Step()
+        {
+            Id = 1,
+            Name = Steps.Material,
+            Product = Product
+        };
+
+        public static Step Design => new Step()
+        {
+            Id = 2,
+            Name = Steps.Design,
+            Product = Product
+        };
+
+        public static Step DesignColor => new Step()
+        {
+            Id = 3,
+            Name = Steps.DesignColor,
+            Product = Product
+        };
+      
+        public static Step End => new Step()
+        {
+            Id = 4,
+            Name = Steps.End,
+            Product = Product
+        };
+
+        public static List<Step> StepList => new List<Step>()
         {
             Material,
             Design,

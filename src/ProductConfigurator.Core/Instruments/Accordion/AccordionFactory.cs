@@ -143,13 +143,12 @@ namespace ProductConfigurator.Core
         public static IEnumerable<Item> Colors => new List<Item>() { BlackMatte, BlackGlossy, White };
         public static IEnumerable<Item> Designs => new List<Item>() { Milk, Diagonalink, Duplo, Natural };
 
-
         public static Item ExtraHandle => new Item()
         {
-            Name = "Extra handle for the right hand manual.",
-            Description = "",
+            Name = "Extra handle",
+            Description = "Extra handle for the right hand manual.",
             Price = 10m,
-            Images = new ItemImages(Type)
+            Images = new ItemImages(Type, "extra-handle.png")
         };
 
         public static Item ExtraCushion => new Item()
@@ -165,7 +164,7 @@ namespace ProductConfigurator.Core
             Name = "Inner pocket",
             Description = "Detachable pocket for music scores and accordion straps.",
             Price = 20m,
-            Images = new ItemImages(Type, "extra-pockets.jpg")
+            Images = new ItemImages(Type, "inner-pocket.jpg")
         };
         public static Item Wheels => new Item()
         {
@@ -180,7 +179,7 @@ namespace ProductConfigurator.Core
             Name = "Waistbelt",
             Description = "Ergonomic fully adaptable fastening for releasing 5 kg of the accordion weight from your shoulders.",
             Price = 48m,
-            Images = new ItemImages(Type, "waistbelt.jpg")
+            Images = new ItemImages(Type, "waistbelt-1.jpg", "waistbelt-2.jpg")
         };
 
         public static IEnumerable<Item> Accesories => new List<Item>() { ExtraHandle, ExtraCushion, InnerPocket, Wheels, Waistbelt };

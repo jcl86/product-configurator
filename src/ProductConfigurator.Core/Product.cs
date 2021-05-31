@@ -1,12 +1,9 @@
 ﻿namespace ProductConfigurator.Core
 {
-    public class Step
+    public class Product
     {
         public int Id { get; init; }
         public string Name { get; init; }
-        public Product Product { get; init; }
-
-        public override string ToString() => Name;
 
         public override bool Equals(object obj)
         {
@@ -19,14 +16,14 @@
             if (GetType() != obj.GetType())
                 return false;
 
-            var item = (Step)obj;
+            var item = (Product)obj;
 
-            return item.Id == Id && item.Product == Product;
+            return item.Id == Id;
         }
 
         public override int GetHashCode() => Id.GetHashCode();
 
-        public static bool operator ==(Step left, Step right)
+        public static bool operator ==(Product left, Product right)
         {
             if (Equals(left, null))
                 return Equals(right, null) ? true : false;
@@ -34,12 +31,6 @@
                 return left.Equals(right);
         }
 
-        public static bool operator !=(Step left, Step right) => !(left == right);
-
-
-        public bool WasCompleted(Step step) => step.Id < Id;
-
-        public bool IsDesign() => Name.ToLower().Equals("design");
-        public bool IsColor() => Name.ToLower().Contains("color");
+        public static bool operator !=(Product left, Product right) => !(left == right);
     }
 }

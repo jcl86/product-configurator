@@ -10,9 +10,9 @@
                     @step.ToString()
                 </span>
                 <div class="flex-1">
-                    <div class="w-10 h-10 
-                         @(CurrentStep == step ? 
-                           "ring-4 ring-gray-500 bg-gray-100 text-gray-500" 
+                    <div class="w-10 h-10
+                         @(CurrentStep == step ?
+                           "ring-4 ring-gray-500 bg-gray-100 text-gray-500"
                            : CurrentStep.WasCompleted(step) ? "bg-lumasuite text-white" : "bg-gray-300 text-white"
                           )
                          mx-auto rounded-full text-lg  flex items-center">
@@ -36,7 +36,7 @@
                 End
             </span>
             <div class="flex-1">
-                <div class="w-10 h-10  @(CurrentStep == CelloStepsFactory.End ? 
+                <div class="w-10 h-10  @(CurrentStep == CelloStepsFactory.End ?
                            "ring-4 ring-gray-500 bg-gray-100 text-gray-500" : "bg-gray-300 text-white")
                      mx-auto rounded-full text-lg text-white flex items-center">
                     <ProductConfigurator.Blazor.Shared.Icons.CreditCardIcon Style="w-6 h-6 m-auto" />

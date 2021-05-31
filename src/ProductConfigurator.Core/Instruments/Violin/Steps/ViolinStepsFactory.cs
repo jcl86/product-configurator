@@ -1,13 +1,64 @@
-﻿namespace ProductConfigurator.Core
+﻿using System.Collections.Generic;
+
+namespace ProductConfigurator.Core
 {
     public static class ViolinStepsFactory
     {
-        public static Step Material => new Step(ViolinSteps.Material, ViolinSteps.Material.ToString());
-        public static Step Finish => new Step(ViolinSteps.Finish, ViolinSteps.Finish.ToString());
-        public static Step Color => new Step(ViolinSteps.Color, ViolinSteps.Color.ToString());
-        public static Step Design => new Step(ViolinSteps.Design, ViolinSteps.Design.ToString());
-        public static Step DesignColor => new Step(ViolinSteps.DesignColor, "Design color");
-        public static Step Accesories => new Step(ViolinSteps.Accesories, ViolinSteps.Accesories.ToString());
-        public static Step End => new Step(ViolinSteps.End, ViolinSteps.End.ToString());
+        private static Product Product => ProductFactory.Violin;
+
+        public static Step Material => new Step()
+        {
+            Id = 1,
+            Name = Steps.Material,
+            Product = Product
+        };
+
+        public static Step Finish => new Step()
+        {
+            Id = 2,
+            Name = Steps.Finish,
+            Product = Product
+        };
+
+        public static Step Color => new Step()
+        {
+            Id = 3,
+            Name = Steps.Color,
+            Product = Product
+        };
+        public static Step Design => new Step()
+        {
+            Id = 4,
+            Name = Steps.Design,
+            Product = Product
+        };
+        public static Step DesignColor => new Step()
+        {
+            Id = 5,
+            Name = Steps.DesignColor,
+            Product = Product
+        };
+        public static Step Accesories => new Step()
+        {
+            Id = 6,
+            Name = Steps.Accesories,
+            Product = Product
+        };
+        public static Step End => new Step()
+        {
+            Id = 7,
+            Name = Steps.End,
+            Product = Product
+        };
+
+        public static List<Step> StepList => new List<Step>()
+        {
+            Material,
+            Finish,
+            Color,
+            Design,
+            DesignColor,
+            Accesories
+        };
     }
 }
