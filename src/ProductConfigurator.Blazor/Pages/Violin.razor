@@ -2,7 +2,14 @@
 
 <Title>
     <TitleText>
-        Choose @currentStep.ToString()
+        @if (currentStep.IsEnd())
+        {
+            <span>Product Configured!</span>
+        }
+        else
+        {
+            <span>Choose @currentStep.ToString()</span>
+        }
     </TitleText>
     <SubtitleText>
         Product configurator
@@ -10,7 +17,7 @@
 </Title>
 
 <CascadingValue Value="currentStep">
-    <ProgressSteps Steps="AccordionStepsFactory.StepList" />
+    <ProgressSteps Steps="ViolinStepsFactory.StepList" />
 </CascadingValue>
 
 <div class="flex flex-col md:flex-row space-x-2 mb-4">
@@ -95,7 +102,7 @@
 
         if (item.IsCarbon)
         {
-            currentStep = ViolinStepsFactory.Design;
+            currentStep = ViolinStepsFactory.Finish;
         }
         else currentStep = ViolinStepsFactory.Color;
     }

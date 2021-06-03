@@ -2,7 +2,14 @@
 
 <Title>
     <TitleText>
-        Choose @currentStep.ToString()
+        @if (currentStep.IsEnd())
+        {
+            <span>Product Configured!</span>
+        }
+        else
+        {
+            <span>Choose @currentStep.ToString()</span>
+        }
     </TitleText>
     <SubtitleText>
         Accordion

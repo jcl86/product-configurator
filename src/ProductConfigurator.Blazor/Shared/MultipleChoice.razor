@@ -81,7 +81,7 @@
                         </div>
                         <div class="flex space-x-3 mb-3 text-sm font-semibold uppercase">
                             <div class="flex-auto flex space-x-3">
-                                <button @onclick="() => OnChoiceMade.InvokeAsync(item)"
+                                <button @onclick="() => ItemSelected(item)"
                                         class="tracking-widest uppercase px-4 py-2 bg-lumasuite text-white cursor-pointer rounded outline-none focus:outline-none"
                                         type="button">
                                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -117,5 +117,10 @@
 
     [Parameter]
     public EventCallback OnSkip { get; set; }
+
+    private async Task ItemSelected(Item item)
+    {
+        await OnChoiceMade.InvokeAsync(item);
+    }
 
 }

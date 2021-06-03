@@ -30,3 +30,11 @@ html, body {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+.hover-trigger .hover-target {
+    display: none;
+}
+
+.hover-trigger:hover .hover-target {
+    display: block;
+}

@@ -38,15 +38,10 @@ namespace ProductConfigurator.Core
             Name = Steps.DesignColor,
             Product = Product
         };
-        public static Step Accesories => new Step()
-        {
-            Id = 6,
-            Name = Steps.Accesories,
-            Product = Product
-        };
+
         public static Step End => new Step()
         {
-            Id = 7,
+            Id = 6,
             Name = Steps.End,
             Product = Product
         };
@@ -57,8 +52,7 @@ namespace ProductConfigurator.Core
             Finish,
             Color,
             Design,
-            DesignColor,
-            Accesories
+            DesignColor
         };
     }
 }

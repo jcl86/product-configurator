@@ -46,12 +46,14 @@
                             }
                         </div>
                     </div>
-
-                    <div class="flex-auto p-2 md:py-4 md:px-8">
-                        <div class="flex flex-wrap items-baseline">
-                            <h1 class="w-full flex-none text-lg md:text-3xl text-black md:mb-1.5">
+                    
+                    <a class="flex flex-col justify-between w-full p-2 md:py-4 md:px-8 rounded hover:bg-gray-100
+                            md:ml-4 outline-none focus:outline-none hover-trigger cursor-pointer"
+                       @onclick="() => OnChoiceMade.InvokeAsync(item)">
+                        <div class="flex flex-col items-start">
+                            <div class="text-lg md:text-3xl text-black md:mb-1.5">
                                 @item.Name
-                            </h1>
+                            </div>
                             @if (item.Price > 0)
                             {
                                 <div class="text-xs font-semibold md:text-lg leading-6 text-black">
@@ -59,30 +61,23 @@
                                 </div>
                             }
                             @*<div class="text-sm text-gray-500 ml-3">
-                                    In stock
-                                </div>*@
+                In stock
+            </div>*@
                         </div>
                         <div class="flex items-baseline mt-2 py-4 border-t border-gray-200">
                             <div class="text-sm font-light text-gray-500">
                                 @item.Description
                             </div>
                         </div>
-                        <div class="flex space-x-3 mb-3 text-sm font-semibold uppercase">
-                            <div class="flex-auto flex space-x-3">
-                                <button @onclick="() => OnChoiceMade.InvokeAsync(item)"
-                                        class="tracking-widest uppercase px-4 py-2 bg-lumasuite text-white cursor-pointer rounded outline-none focus:outline-none"
-                                        type="button">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
-                                        </path>
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                        @*<p class="text-sm text-gray-500">
-                                Free shipping on all continental US orders.
-                            </p>*@
-                    </div>
+
+                        <div class="flex-1"></div>
+                        <p class="text-right uppercase text-sm text-gray-500 tracking-widest hover-target">
+                            Add item to basket
+                        </p>
+                        <p class="md:hidden uppercase text-right text-sm text-gray-500 tracking-widest">
+                            Add item to basket
+                        </p>
+                    </a>
                 </div>
 
             }

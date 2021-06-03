@@ -7,7 +7,7 @@
 
         public override bool Equals(object obj)
         {
-            if (obj == null || !(obj is Step))
+            if (obj == null || !(obj is Product))
                 return false;
 
             if (ReferenceEquals(this, obj))

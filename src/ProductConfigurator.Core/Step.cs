@@ -41,5 +41,6 @@
 
         public bool IsDesign() => Name.ToLower().Equals("design");
         public bool IsColor() => Name.ToLower().Contains("color");
+        public bool IsEnd() => Name.Equals(Steps.End);
     }
 }
