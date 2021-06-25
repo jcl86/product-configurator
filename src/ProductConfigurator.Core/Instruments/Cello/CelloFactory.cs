@@ -53,7 +53,7 @@ namespace ProductConfigurator.Core
         {
             Name = "Natural",
             Description = "New fresh Handmade style",
-            Images = new ItemImages(Type)
+            Images = new ItemImages(Type, "case-front.jpg")
         };
         public static IEnumerable<Item> Materials => new List<Item>() { Linen }; 
         public static IEnumerable<Item> Designs => new List<Item>() { Milk, Duplo, Diagonalink, Natural }; 

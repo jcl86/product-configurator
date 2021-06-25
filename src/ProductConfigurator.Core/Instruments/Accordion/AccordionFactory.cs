@@ -164,7 +164,7 @@ namespace ProductConfigurator.Core
             Name = "Inner pocket",
             Description = "Detachable pocket for music scores and accordion straps.",
             Price = 20m,
-            Images = new ItemImages(Type, "inner-pocket.jpg")
+            Images = new ItemImages(Type, "inner-pocket.png")
         };
         public static Item Wheels => new Item()
         {
