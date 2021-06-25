@@ -148,7 +148,7 @@ namespace ProductConfigurator.Core
             Name = "Extra handle",
             Description = "Extra handle for the right hand manual.",
             Price = 10m,
-            Images = new ItemImages(Type, "extra-handle.png")
+            Images = new ItemImages(Type, "extra-handle.jpg")
         };
 
         public static Item ExtraCushion => new Item()
@@ -156,7 +156,7 @@ namespace ProductConfigurator.Core
             Name = "Extra cushion",
             Description = "One more adaptable cushion.",
             Price = 10m,
-            Images = new ItemImages(Type, "extra-cushion.png")
+            Images = new ItemImages(Type, "extra-cushion.jpg")
         };
 
         public static Item InnerPocket => new Item()
