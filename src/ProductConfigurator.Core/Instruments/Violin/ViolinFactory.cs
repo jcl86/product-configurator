@@ -83,14 +83,14 @@ namespace ProductConfigurator.Core
             Name = "Black matte",
             Description = "Matte black finish",
             Price = 0m,
-            Images = new ItemImages(Type, "bright-black.jpg")
+            Images = new ItemImages(Type, "black-matte.jpg")
         };
         public static Item BlackGlossy => new Item()
         {
             Name = "Blackglossy",
             Description = "Glossy black finish.",
             Price = 0m,
-            Images = new ItemImages(Type, "black-matte.jpg")
+            Images = new ItemImages(Type, "bright-black.jpg")
         };
         public static Item White => new Item()
         {
@@ -105,7 +105,7 @@ namespace ProductConfigurator.Core
             Name = "Detachable bag",
             Description = "Textile bag for music scores and clothes.",
             Price = 0m,
-            Images = new ItemImages(Type)
+            Images = new ItemImages(Type, "bag.jpg")
         };
 
         public static IEnumerable<Item> Materials => new List<Item>() { Carbon, Glass };
@@ -134,10 +134,10 @@ namespace ProductConfigurator.Core
 
         public static IEnumerable<Item> DiagonalinkDesigns => new List<Item>()
         {
-            MilkViolinFactory.Navy,
-            MilkViolinFactory.Orange,
-            MilkViolinFactory.Rosy,
-            MilkViolinFactory.Tile
+            DiagonalinkViolinFactory.Navy,
+            DiagonalinkViolinFactory.Orange,
+            DiagonalinkViolinFactory.Rosy,
+            DiagonalinkViolinFactory.Tile
         };
     }
 }
