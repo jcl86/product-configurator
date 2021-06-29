@@ -24,12 +24,12 @@ namespace ProductConfigurator.Blazor
                     $"Total: {collection.TotalText()}";
         }
 
-        private string RenderBasketGroup(BasketGroupItem item)
+        private static string RenderBasketGroup(BasketGroupItem item)
         {
             string row = $"" +
-                $"{item.Step.Name}\t\t" +
-                $"{string.Join(", ", item.Items.Select(x => x.Name))}\t\t" +
-                $"{item.Price:C}" +
+                $"{item.Step.Name}" +
+                $"{string.Join(", ", item.Items.Select(x => x.Name))}" +
+                $"{item.PriceText()}" +
                 $"\n";
             return row;
         }

@@ -17,14 +17,11 @@
                             @group.Step
                         </span>
                         <span class="text-sm">
-                            @string.Join(", ", group.Items.Select(x => x.Name))
+                            @group.ItemsText()
                         </span>
                     </span>
                     <span class="whitespace-nowrap">
-                        @if (group.Price > 0)
-                        {
-                            <span>@group.Price €</span>
-                        }
+                        @group.PriceText()
                     </span>
                 </a>
             }
