@@ -6,10 +6,10 @@
             {
                 <div class="bg-white rounded-sm shadow flex flex-col md:flex-row p-1">
                     <div class="">
-                        <div class="mx-auto md:flex-none w-52 h-52 md:relative">
+                        <a class="block cursor-pointer hover:opacity-75 mx-auto md:flex-none w-52 h-52 md:relative">
                             <img src="@item.Images.ToString()" alt="@item.Name"
                                  class="md:absolute md:inset-0 w-full h-full object-contain" />
-                        </div>
+                        </a>
 
                         <div class="mb-3 flex justify-around">
                             @if (item.Images.HasMoreThanOneImage)
@@ -23,7 +23,6 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                                     </svg>
                                 </button>
-
 
                                 <span class="flex items-center justify-between space-x-1">
                                     @foreach (var i in item.Images.ImageIndexCollection)
