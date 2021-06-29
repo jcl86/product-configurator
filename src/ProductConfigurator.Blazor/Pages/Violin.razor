@@ -20,7 +20,7 @@
     <ProgressSteps Steps="ViolinStepsFactory.StepList" />
 </CascadingValue>
 
-<div class="flex flex-col md:flex-row space-x-2 mb-4">
+<div class="flex flex-col md:flex-row md:space-x-8 mb-4">
 
     <div class="w-full md:w-2/3">
         <CascadingValue Value="currentStep">
@@ -66,10 +66,9 @@
 
         @if (currentStep == ViolinStepsFactory.End)
         {
-            <div class="p-8">
-
+            <CascadingValue Value="itemCollection">
                 <LastStep />
-            </div>
+            </CascadingValue>
         }
     </div>
 

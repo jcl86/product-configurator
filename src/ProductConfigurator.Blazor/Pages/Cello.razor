@@ -20,7 +20,7 @@
     <ProgressSteps Steps="CelloStepsFactory.StepList" />
 </CascadingValue>
 
-<div class="flex flex-col md:flex-row mb-4">
+<div class="flex flex-col md:flex-row md:space-x-8 mb-4">
     <div class="w-full md:w-2/3">
         <CascadingValue Value="currentStep">
 
@@ -57,9 +57,9 @@
 
         @if (currentStep == CelloStepsFactory.End)
         {
-            <div class="p-8">
+            <CascadingValue Value="itemCollection">
                 <LastStep />
-            </div>
+            </CascadingValue>
         }
     </div>
     <div class="w-full md:w-1/3">

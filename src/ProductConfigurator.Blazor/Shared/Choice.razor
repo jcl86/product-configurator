@@ -6,7 +6,8 @@
             {
                 <div class="bg-white rounded-sm shadow flex flex-col md:flex-row p-1">
                     <div class="">
-                        <a class="block cursor-pointer hover:opacity-75 mx-auto md:flex-none w-52 h-52 md:relative">
+                        <a class="block cursor-pointer hover:opacity-75 mx-auto md:flex-none w-52 h-52 md:relative"
+                            @onclick="() => OnChoiceMade.InvokeAsync(item)">
                             <img src="@item.Images.ToString()" alt="@item.Name"
                                  class="md:absolute md:inset-0 w-full h-full object-contain" />
                         </a>
