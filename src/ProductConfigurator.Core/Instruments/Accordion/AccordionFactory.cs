@@ -51,7 +51,7 @@ namespace ProductConfigurator.Core
         {
             Name = "Without caps",
             Description = "I don't divide the accordion.",
-            Images = new ItemImages(Type, "no-caps.jpg")
+            Images = new ItemImages(Type, "classic-edition.jpg")
         };
 
         public static Item Carbon => new Item()
@@ -112,7 +112,7 @@ namespace ProductConfigurator.Core
         {
             Name = "Natural",
             Description = "Fresh Handmade style.",
-            Images = new ItemImages(Type, "natural.jpg")
+            Images = new ItemImages(Type, "natural.jpg", "white.jpg")
         };
 
         public static Item BlackMatte => new Item()

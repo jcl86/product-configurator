@@ -3,7 +3,7 @@
     public enum InstrumentType
     {
         Accordion,
-        Violin,
-        Cello
+        Cello,
+        Violin
     }
 }

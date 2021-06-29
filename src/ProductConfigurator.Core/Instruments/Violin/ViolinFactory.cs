@@ -75,7 +75,7 @@ namespace ProductConfigurator.Core
             Description = "New fresh Handmade style.",
             Price = 0m,
             Type = ItemType.None,
-            Images = new ItemImages(Type, "natural.jpg")
+            Images = new ItemImages(Type, "natural.jpg","glass.jpg")
         };
 
         public static Item BlackMatte => new Item()
@@ -83,14 +83,14 @@ namespace ProductConfigurator.Core
             Name = "Black matte",
             Description = "Matte black finish",
             Price = 0m,
-            Images = new ItemImages(Type)
+            Images = new ItemImages(Type, "bright-black.jpg")
         };
         public static Item BlackGlossy => new Item()
         {
             Name = "Blackglossy",
             Description = "Glossy black finish.",
             Price = 0m,
-            Images = new ItemImages(Type, "bright-black.jpg")
+            Images = new ItemImages(Type, "black-matte.jpg")
         };
         public static Item White => new Item()
         {
