@@ -66,7 +66,7 @@
 
     private async Task HandleValidSubmit()
     {
-        string body = new HtmlBasketRenderer(ItemCollection).Render();
+        string body = new PlainBasketRenderer(ItemCollection).Render();
         await jsRuntime.InvokeAsync<object>("blazorExtensions.SendLocalEmail",
         new object[] { "info@lumasuite.com", "Order from desing-your-lumasuite-case", body });
     }
