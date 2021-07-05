@@ -83,7 +83,7 @@ namespace ProductConfigurator.Core
             Name = "Black matte",
             Description = "Matte black finish",
             Price = 0m,
-            Images = new ItemImages(Type, "black-matte.jpg")
+            Images = new ItemImages(Type, "black-matte.png")
         };
         public static Item BlackGlossy => new Item()
         {

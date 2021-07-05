@@ -94,7 +94,11 @@
     private void DesignChoosen(Item item)
     {
         itemCollection.Add(item, currentStep);
-        currentStep = CelloStepsFactory.DesignColor;
+        if (item.IsSpecialDesign)
+        {
+            currentStep = CelloStepsFactory.DesignColor;
+        }
+        else currentStep = CelloStepsFactory.End;
     }
 
     private void DesignMilkChoosen(Item item)
