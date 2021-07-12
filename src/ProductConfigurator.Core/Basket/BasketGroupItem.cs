@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
 namespace ProductConfigurator.Core
@@ -22,7 +23,7 @@ namespace ProductConfigurator.Core
             {
                 return "";
             }
-            return $"{Price:C}";
+            return Price.ToString("C", new CultureInfo("es-ES")); ;
         }
 
         public string ItemsText() => string.Join(", ", Items.Select(x => x.Name));
