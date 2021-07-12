@@ -26,10 +26,14 @@
         top: 0.5rem;
     }
 
-.hover-trigger .hover-target {
-    display: none;
-}
 
-.hover-trigger:hover .hover-target {
-    display: block;
+
+@media (min-width: 768px) {
+
+    .hover-trigger .hover-target {
+        display: none;
+    }
+    .hover-trigger:hover .hover-target {
+        display: block;
+    }
 }

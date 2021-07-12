@@ -1,11 +1,13 @@
-﻿namespace ProductConfigurator.Core
+﻿using System.Globalization;
+
+namespace ProductConfigurator.Core
 {
     public class Item
     {
         public string Name { get; init; }
         public string Description { get; init; }
         public decimal Price { get; init; }
-        public string PriceText => $"{Price:C}";
+        public string PriceText => Price.ToString("C", new CultureInfo("es-ES"));
 
         public int Maximun { get; init; }
 
