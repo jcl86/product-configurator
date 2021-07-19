@@ -1,0 +1,81 @@
+name: Deploy Api to Azure
+
+on:
+  push:
+    branches: [ main ]
+    
+env:
+  AZURE_WEBAPP_PACKAGE_PATH: '.' 
+  BUILD_CONFIG: Release
+
+jobs:
+
+  continuous-integration:
+    name: Continuous integration
+    runs-on: ubuntu-latest
+    services:
+      sql-server:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        env:
+          ACCEPT_EULA: Y
+          MSSQL_SA_PASSWORD: Password12!
+        ports:
+          - 5433:1433
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: |
+        dotnet build -c $BUILD_CONFIG --no-restore
+
+    - name: Run unit tests
+      run: |
+        dotnet test --no-restore --verbosity normal test/ProductConfigurator.UnitTests/ProductConfigurator.UnitTests.csproj
+
+    - name: Run functional tests
+      run: dotnet test --no-restore --verbosity normal test/ProductConfigurator.FunctionalTests/ProductConfigurator.FunctionalTests.csproj -c $BUILD_CONFIG
+
+  continuous-deployment:
+    needs: [continuous-integration]
+    name: Continuous deployment
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build -c $BUILD_CONFIG --no-restore
+
+    - name: Build and Publish
+      run: |
+        dotnet build -c $BUILD_CONFIG --no-restore
+        dotnet publish -c $BUILD_CONFIG -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/app' 
+
+    - name: Variable Substitution
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/app/appsettings.json'
+      env:
+        ConnectionStrings.SqLite : "${{ secrets.CONNECTIONSTRING }}"
+        ConnectionStrings.MailchimpApiKey : "${{ secrets.MAILCHIMP_API_KEY }}"
+
+    - name: Deploy to Azure AppService
+      uses: Azure/webapps-deploy@v2
+      with:
+        app-name: my-product-configurator
+        publish-profile: ${{ secrets.PUBLISH_PROFILE  }}
+        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/app'

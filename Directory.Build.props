@@ -1,0 +1,8 @@
+<Project>
+  <Import Project="build/dependencies.props"/>
+  <PropertyGroup Label="Default Metadata">
+    <Authors>$(Authors)</Authors>
+    <Company>$(Company)</Company>
+  </PropertyGroup>
+  
+</Project>
