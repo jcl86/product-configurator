@@ -23,7 +23,7 @@ namespace ProductConfigurator.Core
             {
                 return "";
             }
-            return Price.ToString("C", new CultureInfo("es-ES")); ;
+            return Price.ToString("C", new CultureInfo("es-ES"));
         }
 
         public string ItemsText() => string.Join(", ", Items.Select(x => x.Name));
