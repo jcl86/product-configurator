@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace ProductConfigurator.Host.Controllers
+namespace ProductConfigurator.Api
 {
     [ApiController]
     [Route("api/lumasuite/orders")]

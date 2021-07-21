@@ -1,4 +1,4 @@
-﻿namespace ProductConfigurator.Host.Controllers
+﻿namespace ProductConfigurator.Shared
 {
     public class CreateOrder
     {

@@ -3,7 +3,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
-namespace ProductConfigurator.Host
+namespace ProductConfigurator.Api
 {
     public class MailchimpClient
     {

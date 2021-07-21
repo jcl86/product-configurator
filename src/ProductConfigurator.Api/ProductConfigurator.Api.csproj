@@ -12,6 +12,7 @@
     <PackageReference Include="Hellang.Middleware.ProblemDetails" />
     <PackageReference Include="Serilog.AspNetCore" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="IdentityModel" />
   </ItemGroup>
   
   <ItemGroup>

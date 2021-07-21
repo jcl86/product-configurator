@@ -1,4 +1,4 @@
-﻿namespace ProductConfigurator.Host
+﻿namespace ProductConfigurator.Api
 {
     public class PingRequest
     {

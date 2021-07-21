@@ -1,11 +1,10 @@
 {
   "AllowedOrigins": [
-    "https://design-your-lumasuite-case.netlify.app/"
+    "https://localhost:6001"
   ],
   "ConnectionStrings": {
     "SqLite" : "",
     "MailchimpApiKey": ""
   },
-  "ApiSecret": "",
-  "AllowedHosts": "*"
+  "ApiSecret": "my-super-api-secret"
 }

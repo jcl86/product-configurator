@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace ProductConfigurator.Host.Controllers
+namespace ProductConfigurator.Api
 {
     [ApiController]
     [Route("api/mail")]
@@ -14,7 +14,7 @@ namespace ProductConfigurator.Host.Controllers
             this.mailchimpClient = mailchimpClient;
         }
 
-        [HttpGet]
+        [HttpGet, Route("ping")]
         public async Task<ActionResult<string>> Ping()
         {
             var result = await mailchimpClient.Ping();

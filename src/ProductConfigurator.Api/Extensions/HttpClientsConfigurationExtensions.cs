@@ -2,15 +2,13 @@
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace ProductConfigurator.Host
+namespace ProductConfigurator.Api
 {
     public static class HttpClientsConfigurationExtensions
     {
         public static IServiceCollection AddMailchimpHttpClient(this IServiceCollection services, 
             IConfiguration configuration)
         {
-            var apiKey = configuration.GetConnectionString("MailchimpApiKey");
-
             AddHttpClient(services, MailchimpClient.BaseUrl);
 
             return services;
