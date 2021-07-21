@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace ProductConfigurator.Host.Controllers
 {
@@ -8,10 +7,11 @@ namespace ProductConfigurator.Host.Controllers
     public class LumasuiteOrdersController : ControllerBase
     {
 
-        [HttpPost]
-        public async Task<IActionResult> PostCreate(CreateOrder dto)
-        {
+        //[HttpPost]
+        //public async Task<IActionResult> PostCreate(CreateOrder dto)
+        //{
             
-        }
+        //}
     }
+
 }

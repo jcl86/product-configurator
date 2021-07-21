@@ -8,32 +8,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace ProductConfigurator.Host
 {
-    public static class HttpClientsConfigurationExtensions
-    {
-        public static IServiceCollection AddCustomHttpClient(this IServiceCollection services, IConfiguration configuration)
-        {
-            var apiKey = configuration.GetConnectionString("MailchimpApiKey");
-
-            AddMailchimpHttpClient(services, apiKey);
-
-            return services;
-        }
-
-        private static void AddMailchimpHttpClient(this IServiceCollection services, string apikey)
-        {
-            services.AddHttpClient<MailchimpClient>(client =>
-            {
-                client.BaseAddress = new Uri(settings.Authority);
-                client.DefaultRequestHeaders.Add("Accept", "application/json");
-            });
-        }
-    }
 
     public class Startup
     {

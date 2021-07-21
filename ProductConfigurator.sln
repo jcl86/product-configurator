@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductConfigurator.Host", "src\ProductConfigurator.Host\ProductConfigurator.Host.csproj", "{2D8BCF5C-31BB-4286-AFCE-BD8EC7CB2FB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductConfigurator.Host", "src\ProductConfigurator.Host\ProductConfigurator.Host.csproj", "{2D8BCF5C-31BB-4286-AFCE-BD8EC7CB2FB7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipelines", "pipelines", "{1E7738F3-BCEF-476F-86CC-FA2EF9CE669B}"
 	ProjectSection(SolutionItems) = preProject
@@ -29,7 +29,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipelines", "pipelines", "{
 		.github\workflows\deploy-to-azure.yml = .github\workflows\deploy-to-azure.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductConfigurator.FunctionalTests", "test\ProductConfigurator.FunctionalTests\ProductConfigurator.FunctionalTests.csproj", "{5DD31626-8FA1-41F7-B7D0-C02E90ACB5B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductConfigurator.FunctionalTests", "test\ProductConfigurator.FunctionalTests\ProductConfigurator.FunctionalTests.csproj", "{5DD31626-8FA1-41F7-B7D0-C02E90ACB5B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductConfigurator.Shared", "src\ProductConfigurator.Shared\ProductConfigurator.Shared.csproj", "{D4540303-E9F1-44B0-9397-41CE5B4E4E8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductConfigurator.Api", "src\ProductConfigurator.Api\ProductConfigurator.Api.csproj", "{7E69E5F0-57FC-4A8B-916C-0939DF1598FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +105,30 @@ Global
 		{5DD31626-8FA1-41F7-B7D0-C02E90ACB5B5}.Release|x64.Build.0 = Release|Any CPU
 		{5DD31626-8FA1-41F7-B7D0-C02E90ACB5B5}.Release|x86.ActiveCfg = Release|Any CPU
 		{5DD31626-8FA1-41F7-B7D0-C02E90ACB5B5}.Release|x86.Build.0 = Release|Any CPU
+		{D4540303-E9F1-44B0-9397-41CE5B4E4E8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4540303-E9F1-44B0-9397-41CE5B4E4E8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4540303-E9F1-44B0-9397-41CE5B4E4E8D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D4540303-E9F1-44B0-9397-41CE5B4E4E8D}.Debug|x64.Build.0 = Debug|Any CPU
+		{D4540303-E9F1-44B0-9397-41CE5B4E4E8D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D4540303-E9F1-44B0-9397-41CE5B4E4E8D}.Debug|x86.Build.0 = Debug|Any CPU
+		{D4540303-E9F1-44B0-9397-41CE5B4E4E8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4540303-E9F1-44B0-9397-41CE5B4E4E8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4540303-E9F1-44B0-9397-41CE5B4E4E8D}.Release|x64.ActiveCfg = Release|Any CPU
+		{D4540303-E9F1-44B0-9397-41CE5B4E4E8D}.Release|x64.Build.0 = Release|Any CPU
+		{D4540303-E9F1-44B0-9397-41CE5B4E4E8D}.Release|x86.ActiveCfg = Release|Any CPU
+		{D4540303-E9F1-44B0-9397-41CE5B4E4E8D}.Release|x86.Build.0 = Release|Any CPU
+		{7E69E5F0-57FC-4A8B-916C-0939DF1598FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E69E5F0-57FC-4A8B-916C-0939DF1598FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E69E5F0-57FC-4A8B-916C-0939DF1598FB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7E69E5F0-57FC-4A8B-916C-0939DF1598FB}.Debug|x64.Build.0 = Debug|Any CPU
+		{7E69E5F0-57FC-4A8B-916C-0939DF1598FB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{7E69E5F0-57FC-4A8B-916C-0939DF1598FB}.Debug|x86.Build.0 = Debug|Any CPU
+		{7E69E5F0-57FC-4A8B-916C-0939DF1598FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E69E5F0-57FC-4A8B-916C-0939DF1598FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E69E5F0-57FC-4A8B-916C-0939DF1598FB}.Release|x64.ActiveCfg = Release|Any CPU
+		{7E69E5F0-57FC-4A8B-916C-0939DF1598FB}.Release|x64.Build.0 = Release|Any CPU
+		{7E69E5F0-57FC-4A8B-916C-0939DF1598FB}.Release|x86.ActiveCfg = Release|Any CPU
+		{7E69E5F0-57FC-4A8B-916C-0939DF1598FB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -112,6 +140,8 @@ Global
 		{2D8BCF5C-31BB-4286-AFCE-BD8EC7CB2FB7} = {1543FBCA-7431-44FB-ACDC-93BD1AD6B545}
 		{1E7738F3-BCEF-476F-86CC-FA2EF9CE669B} = {09752DC9-7744-4A05-8C56-FF5B6FE1F334}
 		{5DD31626-8FA1-41F7-B7D0-C02E90ACB5B5} = {25BA0F94-6A86-4C2A-A476-24F80369860E}
+		{D4540303-E9F1-44B0-9397-41CE5B4E4E8D} = {1543FBCA-7431-44FB-ACDC-93BD1AD6B545}
+		{7E69E5F0-57FC-4A8B-916C-0939DF1598FB} = {1543FBCA-7431-44FB-ACDC-93BD1AD6B545}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9E61E35A-39DA-40C7-B26A-78B9EBCD4CBF}
