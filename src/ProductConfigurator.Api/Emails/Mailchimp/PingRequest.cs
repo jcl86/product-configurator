@@ -2,6 +2,6 @@
 {
     public class PingRequest
     {
-        public string Api { get; set; }
+        public string Key { get; set; }
     }
 }

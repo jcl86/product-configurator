@@ -11,6 +11,7 @@
     <PackageReference Update="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(AspNetCorePackageVersion)" />
     <PackageReference Update="System.Net.Http.Json" Version="5.0.0" />
     <PackageReference Update="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Update="IdentityModel" Version="5.1.0" />
   </ItemGroup>
 
   <ItemGroup Label="Entity Framework">
