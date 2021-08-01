@@ -8,7 +8,7 @@ namespace ProductConfigurator.Api
 {
     public class MailchimpClient
     {
-        public const string BaseUrl = "https://mandrillapp.com/api/1.0/";
+        public const string BaseUrl = "https://{dc}.api.mailchimp.com/3.0/ping";
 
         private readonly HttpClient client;
         private readonly string apiKey;
