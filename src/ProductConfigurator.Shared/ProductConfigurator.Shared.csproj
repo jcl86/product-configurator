@@ -4,4 +4,14 @@
     <TargetFramework>$(NetStandardVersion)</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Tags\" />
+    <Folder Include="OptionImages\" />
+    <Folder Include="Conditions\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Annotations" />
+  </ItemGroup>
+
 </Project>

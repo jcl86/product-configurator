@@ -5,7 +5,7 @@
     <PackageReference Update="Serilog.Sinks.ApplicationInsights" Version="3.1.0" />
     <PackageReference Update="Hellang.Middleware.ProblemDetails" Version="5.4.0" />
     <PackageReference Update="System.Data.SqlClient" Version="4.8.1" />
-    <PackageReference Update="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Update="System.ComponentModel.Annotations" Version="5.0.0" />
     <PackageReference Update="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
     <PackageReference Update="Microsoft.AspNetCore.Components.WebAssembly" Version="$(AspNetCorePackageVersion)" />
     <PackageReference Update="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(AspNetCorePackageVersion)" />

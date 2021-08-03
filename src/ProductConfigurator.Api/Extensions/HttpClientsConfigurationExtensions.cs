@@ -9,7 +9,9 @@ namespace ProductConfigurator.Api
         public static IServiceCollection AddMailchimpHttpClient(this IServiceCollection services, 
             IConfiguration configuration)
         {
-            AddHttpClient(services, MailchimpClient.BaseUrl);
+            var mailchimpServer = configuration.GetValue<string>("MailchimpServer");
+            string baseUrl = MailchimpClient.BaseUrl(mailchimpServer);
+            AddHttpClient(services, baseUrl);
 
             return services;
         }

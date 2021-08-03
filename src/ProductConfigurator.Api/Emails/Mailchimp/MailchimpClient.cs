@@ -8,7 +8,7 @@ namespace ProductConfigurator.Api
 {
     public class MailchimpClient
     {
-        public const string BaseUrl = "https://{dc}.api.mailchimp.com/3.0/ping";
+        public static string BaseUrl(string dc) => $"https://{dc}.api.mailchimp.com/3.0/";
 
         private readonly HttpClient client;
         private readonly string apiKey;
@@ -21,7 +21,7 @@ namespace ProductConfigurator.Api
 
         public async Task<string> Ping()
         {
-            string url = $"users/ping";
+            string url = $"ping";
             var request = new PingRequest()
             {
                 Key = apiKey
