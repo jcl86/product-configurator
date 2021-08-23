@@ -30,6 +30,7 @@
     <PackageReference Include="coverlet.collector" />
     <PackageReference Include="Acheve.TestHost" />
     <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="NSubstitute" />
     <PackageReference Include="Bogus" />
   </ItemGroup>
 

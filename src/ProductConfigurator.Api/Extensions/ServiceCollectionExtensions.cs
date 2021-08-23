@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using ProductConfigurator.Domain;
 
 namespace ProductConfigurator.Api
 {
@@ -13,8 +15,8 @@ namespace ProductConfigurator.Api
 
         public static IServiceCollection AddCustomConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            //services.Configure<ErrorHandlingConfiguration>(configuration.GetSection("ErrorHandling"));
-            //services.AddScoped(x => x.GetRequiredService<IOptionsSnapshot<ErrorHandlingConfiguration>>().Value);
+            services.Configure<EmailSettings>(configuration.GetSection("EmailSettings"));
+            services.AddScoped(x => x.GetRequiredService<IOptionsSnapshot<EmailSettings>>().Value);
 
             return services;
         }

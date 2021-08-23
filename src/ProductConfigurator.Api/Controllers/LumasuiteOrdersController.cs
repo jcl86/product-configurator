@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProductConfigurator.Domain;
+using ProductConfigurator.Shared;
+using System.Threading.Tasks;
 
 namespace ProductConfigurator.Api
 {
@@ -6,12 +9,19 @@ namespace ProductConfigurator.Api
     [Route("api/lumasuite/orders")]
     public class LumasuiteOrdersController : ControllerBase
     {
+        private readonly EmailSender emailSender;
 
-        //[HttpPost]
-        //public async Task<IActionResult> PostCreate(CreateOrder dto)
-        //{
-            
-        //}
+        public LumasuiteOrdersController(EmailSender emailSender)
+        {
+            this.emailSender = emailSender;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostCreate(OrderRequest dto)
+        {
+            await emailSender.Send(dto);
+            return Ok();
+        }
     }
 
 }

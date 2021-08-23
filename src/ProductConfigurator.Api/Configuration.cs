@@ -18,7 +18,6 @@ namespace ProductConfigurator.Api
                 .AddCustomMvc()
                 //.AddAuthorization(ApiPolicies.Configure)
                 .AddCustomConfiguration(configuration)
-                .AddMailchimpHttpClient(configuration)
                 .AddProblemDetails(environment, configuration)
                 //.AddMemoryCache()
                 .AddCustomApiBehaviour()

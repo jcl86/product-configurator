@@ -1,4 +1,4 @@
-name: Deploy Api to Azure
+name: Deploy api to Azure
 
 on:
   push:
@@ -63,7 +63,7 @@ jobs:
     - name: Build and Publish
       run: |
         dotnet build -c $BUILD_CONFIG --no-restore
-        dotnet publish -c $BUILD_CONFIG -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/app' 
+        dotnet publish src/ProductConfigurator.Host/ProductConfigurator.Host.csproj -c $BUILD_CONFIG -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/app' 
 
     - name: Variable Substitution
       uses: microsoft/variable-substitution@v1
@@ -71,7 +71,10 @@ jobs:
         files: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/app/appsettings.json'
       env:
         ConnectionStrings.SqLite : "${{ secrets.CONNECTIONSTRING }}"
-        ConnectionStrings.MailchimpApiKey : "${{ secrets.MAILCHIMP_API_KEY }}"
+        ConnectionStrings.SendgridApiKey : "${{ secrets.SENDGRID_API_KEY }}"
+        ApiSecret : "${{ secrets.API_SECRET }}"
+        EmailSettings.Sender : "${{ secrets.EMAIL_SENDER }}"
+        EmailSettings.LumasuiteReceiver : "${{ secrets.LUMASUITE_RECEIVER }}"
 
     - name: Deploy to Azure AppService
       uses: Azure/webapps-deploy@v2

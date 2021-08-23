@@ -13,10 +13,12 @@
     <PackageReference Include="Serilog.AspNetCore" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
     <PackageReference Include="IdentityModel" />
+    <PackageReference Include="SendGrid" />
   </ItemGroup>
-  
+
   <ItemGroup>
     <ProjectReference Include="..\ProductConfigurator.Shared\ProductConfigurator.Shared.csproj" />
+    <ProjectReference Include="..\ProductConfigurator.Domain\ProductConfigurator.Domain.csproj" />
   </ItemGroup>
 
 </Project>

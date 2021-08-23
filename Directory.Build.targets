@@ -9,9 +9,11 @@
     <PackageReference Update="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
     <PackageReference Update="Microsoft.AspNetCore.Components.WebAssembly" Version="$(AspNetCorePackageVersion)" />
     <PackageReference Update="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(AspNetCorePackageVersion)" />
+    <PackageReference Update="Microsoft.Extensions.Http" Version="5.0.0" />
     <PackageReference Update="System.Net.Http.Json" Version="5.0.0" />
     <PackageReference Update="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Update="IdentityModel" Version="5.1.0" />
+    <PackageReference Update="SendGrid" Version="9.24.2" />
   </ItemGroup>
 
   <ItemGroup Label="Entity Framework">

@@ -1,4 +1,4 @@
-﻿using ProductConfigurator.Core;
+﻿using ProductConfigurator.Domain;
 using System;
 using System.Linq;
 

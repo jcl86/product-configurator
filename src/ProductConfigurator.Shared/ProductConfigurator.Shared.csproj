@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="Tags\" />
     <Folder Include="OptionImages\" />
-    <Folder Include="Conditions\" />
   </ItemGroup>
 
   <ItemGroup>

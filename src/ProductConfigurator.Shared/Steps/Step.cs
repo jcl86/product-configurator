@@ -9,9 +9,4 @@
         public const int NameMaxLength = 200;
         public string Name { get; set; }
     }
-
-    public class Condition
-    {
-
-    }
 }

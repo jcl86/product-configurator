@@ -3,8 +3,12 @@
     "https://localhost:6001"
   ],
   "ConnectionStrings": {
-    "SqLite" : "",
-    "MailchimpApiKey": ""
+    "SqLite": "",
+    "SendgridApiKey": ""
   },
-  "ApiSecret": "my-super-api-secret"
+  "ApiSecret": "my-super-api-secret",
+  "EmailSettings": {
+    "Sender": "",
+    "LumasuiteReceiver": ""
+  }
 }

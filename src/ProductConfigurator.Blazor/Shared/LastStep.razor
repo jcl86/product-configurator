@@ -1,26 +1,23 @@
 ﻿@inject IJSRuntime jsRuntime
+@inject LumasuiteOrderRepository repository
 
 <p class="tracking-wider text-lg text-gray-700 mb-8">
     Congratulations! You succeded to configure your case
 </p>
 
-<form name="order" method="POST" data-netlify="true">
+<EditForm Model="model" OnValidSubmit="@HandleValidSubmit">
+
+    <DataAnnotationsValidator />
 
     <div class="flex flex-col space-y-6">
-
-        <input type="hidden" name="content" value="@(new PlainBasketRenderer(ItemCollection).Render())">
 
         <div>
             <div class="max-w-sm">
                 <label class="uppercase tracking-wide text-white bg-lumasuite text-xs font-bold mb-2 px-2 py-1 rounded-t">
                     Name
                 </label>
-                <input type="text"
-                       name="name"
-                       value="@model.Name"
-                       placeholder="Name"
-                       class="block w-full border border-gray-400 rounded-b rounded-r py-3 px-4
-                       outline-none focus:border-gray-600" />
+                <InputText @attributes=@Style("block w-full border border-gray-400 rounded-b rounded-r py-3 px-4 outline-none focus:border-gray-600")
+                           @bind-Value="model.Name" placeholder="Name" />
 
             </div>
         </div>
@@ -30,16 +27,19 @@
                 <label class="uppercase tracking-wide text-white bg-lumasuite text-xs font-bold mb-2 px-2 py-1 rounded-t">
                     Email
                 </label>
-                <input type="email"
-                       name="email"
-                       value="@model.Email"
-                       placeholder="Email"
-                       class="block w-full border border-gray-400 rounded-b rounded-r py-3 px-4 outline-none focus:border-gray-600" />
+                <InputText @attributes=@Style("block w-full border border-gray-400 rounded-b rounded-r py-3 px-4 outline-none focus:border-gray-600")
+                           @bind-Value="model.Email" placeholder="Email" />
 
             </div>
         </div>
 
+        <div class="text-red-700 italic mb-4">
+            <ValidationSummary />
+        </div>
+
         <div class="flex justify-between items-center mb-4">
+
+
             <button class="flex items-center uppercase px-4 py-2 bg-lumasuite text-white text-lg
                     cursor-pointer rounded outline-none focus:outline-none"
                     type="submit">
@@ -55,22 +55,24 @@
 
         </div>
     </div>
-</form>
+
+</EditForm>
 
 
 @code {
 
-    private OrderRequest model = new OrderRequest();
+    private ProductConfigurator.Shared.OrderRequest model = new ProductConfigurator.Shared.OrderRequest();
 
     [CascadingParameter]
     public ItemCollection ItemCollection { get; set; }
 
-    //private async Task HandleValidSubmit()
-    //{
-    //    string body = new PlainBasketRenderer(ItemCollection).Render();
-    //    await jsRuntime.InvokeAsync<object>("blazorExtensions.SendLocalEmail",
-    //    new object[] { "info@lumasuite.com", "Order from desing-your-lumasuite-case", body });
-    //}
+    private async Task HandleValidSubmit()
+    {
+        model.Body = new PlainBasketRenderer(ItemCollection).Render();
+        await repository.SendMail(model);
+        //await jsRuntime.InvokeAsync<object>("blazorExtensions.SendLocalEmail",
+        //new object[] { "info@lumasuite.com", "Order from desing-your-lumasuite-case", body });
+        }
 
     public static Dictionary<string, object> Style(string style)
     {

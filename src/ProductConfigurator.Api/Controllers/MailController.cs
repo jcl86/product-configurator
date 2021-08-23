@@ -7,19 +7,11 @@ namespace ProductConfigurator.Api
     [Route("api/mail")]
     public class MailController : ControllerBase
     {
-        private readonly MailchimpClient mailchimpClient;
-
-        public MailController(MailchimpClient mailchimpClient)
-        {
-            this.mailchimpClient = mailchimpClient;
-        }
-
         [HttpGet, Route("ping")]
-        public async Task<ActionResult<string>> Ping()
+        public ActionResult<string> Ping()
         {
-            var result = await mailchimpClient.Ping();
-            return result;
-        }
+            return Ok("Pong");
+        }       
     }
 
 }
