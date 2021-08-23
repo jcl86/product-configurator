@@ -1,0 +1,14 @@
+﻿
+<div class="@(Loading ? "" : "hidden") fixed inset-0 z-50 flex items-center justify-center text-2xl
+         font-semibold text-white bg-lumasuite opacity-50">
+    @Message
+</div>
+
+@code {
+    [Parameter]
+    public bool Loading { get; set; }
+
+    [Parameter]
+    public string Message { get; set; } = "Loading...";
+
+}

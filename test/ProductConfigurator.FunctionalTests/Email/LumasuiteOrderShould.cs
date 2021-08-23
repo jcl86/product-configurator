@@ -16,20 +16,20 @@ namespace ProductConfigurator.FunctionalTests
             Given = fixture ?? throw new ArgumentNullException(nameof(fixture));
         }
 
-        [Fact]
-        public async Task Be_sent()
-        {
+        //[Fact]
+        //public async Task Be_sent()
+        //{
 
-            var emailSender = Given.GetService<EmailSender>();
-            var dto = new OrderRequest()
-            {
-                Body = "bodey",
-                Email = "mail@mail.com",
-                Name = "my name"
-            };
+        //    var emailSender = Given.GetService<EmailSender>();
+        //    var dto = new OrderRequest()
+        //    {
+        //        Body = "bodey",
+        //        Email = "mail@mail.com",
+        //        Name = "my name"
+        //    };
                 
-            await emailSender.Send(dto);
+        //    await emailSender.Send(dto);
 
-        }
+        //}
     }
 }

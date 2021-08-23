@@ -32,12 +32,12 @@ namespace ProductConfigurator.FunctionalTests
             result.Should().Be("Pong");
         }
 
-        [Fact(Skip ="Not send")]
-        public async Task Send_email()
-        {
-            var emailSender = Given.GetService<SendgridEmailSender>();
-            await emailSender.SendPlainBody("jorgeaadlab@gmail.com", "prueba", "prueba body");
+        //[Fact(Skip ="Not send")]
+        //public async Task Send_email()
+        //{
+        //    var emailSender = Given.GetService<SendgridEmailSender>();
+        //    await emailSender.SendPlainBody("jorgeaadlab@gmail.com", "prueba", "prueba body");
 
-        }
+        //}
     }
 }
