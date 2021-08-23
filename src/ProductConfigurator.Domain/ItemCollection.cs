@@ -51,5 +51,7 @@ namespace ProductConfigurator.Domain
             return item.Step;
 
         }
+
+        public string ProductName => items.FirstOrDefault()?.Step?.Product?.Name ?? "";
     }
 }

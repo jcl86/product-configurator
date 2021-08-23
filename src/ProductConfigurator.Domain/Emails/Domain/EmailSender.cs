@@ -17,7 +17,7 @@ namespace ProductConfigurator.Domain
 
         public async Task Send(OrderRequest dto)
         {
-            string subject = $"Order request by {dto.Email} from Product Configurator";
+            string subject = $"{dto.Name ?? ""} ({dto.Email ?? ""}) request in Product Configurator";
             await sendgridEmailSender.SendPlainBody(settings.LumasuiteReceiver, subject, dto.Body);
         }
     }

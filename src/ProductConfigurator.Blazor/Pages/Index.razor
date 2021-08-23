@@ -1,5 +1,5 @@
 ﻿@page "/"
-@inject MailRepository repository
+
 <div class="flex justify-center border-gray-400 my-6">
     <h3 class="tracking-widest text-xl leading-tight sm:leading-normal my-1">
         Choose your instrument
@@ -22,14 +22,3 @@
 
 </div>
 
-<button @onclick="OnClicked">
-    Test
-</button>
-
-@code {
-
-    private async Task OnClicked()
-    {
-        await repository.Ping();
-    }
-}

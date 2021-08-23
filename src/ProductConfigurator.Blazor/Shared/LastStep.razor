@@ -7,22 +7,19 @@
         @Literals.OrderSentTitle
     </p>
     <p class="tracking-wider text-sm text-gray-700 mb-8">
-        @Literals.OrderSentSubtitle
+        @Literals.OrderSentSubtitle("info@lumasuite.com")
     </p>
 }
 else
 {
-
     <p class="tracking-wider text-lg text-gray-700 mb-8">
         Congratulations! You succeded to configure your case
     </p>
 
-
-
     <EditForm Model="model" OnValidSubmit="@HandleValidSubmit">
 
         <DataAnnotationsValidator />
-
+        
         <div class="flex flex-col space-y-6">
 
             <div>
@@ -53,7 +50,6 @@ else
 
             <div class="flex justify-between items-center mb-4">
 
-
                 <button class="flex items-center uppercase px-4 py-2 bg-lumasuite text-white text-lg
                     cursor-pointer rounded outline-none focus:outline-none"
                         type="submit">
@@ -76,6 +72,7 @@ else
 <LoadingSplash Loading="@loading"
                Message="@Literals.SendingOrder" />
 
+
 @code {
 
     private bool loading = false;
@@ -90,6 +87,7 @@ else
     {
         loading = true;
         model.Body = new PlainBasketRenderer(ItemCollection).Render();
+        Console.WriteLine(model.Body);
         await repository.SendMail(model);
         loading = false;
         finished = true;
