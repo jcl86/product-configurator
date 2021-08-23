@@ -17,18 +17,18 @@ namespace ProductConfigurator.FunctionalTests
             Given = fixture ?? throw new ArgumentNullException(nameof(fixture));
         }
 
-        [Fact]
-        public async Task Return_pong_when_ping()
-        {
+        //[Fact]
+        //public async Task Return_pong_when_ping()
+        //{
 
-            var response = await Given.Server
-               .CreateRequest(MailEndpoints.Ping)
-               .GetAsync();
+        //    var response = await Given.Server
+        //       .CreateRequest(MailEndpoints.Ping)
+        //       .GetAsync();
 
-            await response.ShouldBe(StatusCodes.Status200OK);
+        //    await response.ShouldBe(StatusCodes.Status200OK);
 
-            var result = await response.Content.ReadAsStringAsync();
-            result.Should().Be("Pong");
-        }
+        //    var result = await response.Content.ReadAsStringAsync();
+        //    result.Should().Be("Pong");
+        //}
     }
 }
