@@ -87,7 +87,6 @@ else
     {
         loading = true;
         model.Body = new PlainBasketRenderer(ItemCollection).Render();
-        Console.WriteLine(model.Body);
         await repository.SendMail(model);
         loading = false;
         finished = true;
