@@ -22,6 +22,7 @@
     <PackageVersion Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageVersion Include="IdentityModel" Version="6.0.0" />
+    <PackageVersion Include="FluentValidation.AspNetCore" Version="11.2.2" />
   </ItemGroup>
   <ItemGroup Label="Infrastructure">
     <PackageVersion Include="ClosedXML" Version="0.97.0" />
@@ -29,7 +30,7 @@
     <PackageVersion Include="Microsoft.CodeAnalysis" Version="4.2.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="4.2.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.2.0" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(AspNetCorePackageVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(AspNetCorePackageVersion)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(AspNetCorePackageVersion)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(AspNetCorePackageVersion)" />

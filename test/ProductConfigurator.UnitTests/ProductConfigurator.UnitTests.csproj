@@ -19,8 +19,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\ProductConfigurator.Domain\ProductConfigurator.Domain.csproj" />
-  </ItemGroup>
-
 </Project>

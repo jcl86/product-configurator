@@ -36,7 +36,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ProductConfigurator.Api\ProductConfigurator.Api.csproj" />
+    <ProjectReference Include="..\..\src\Application\ProductConfigurator.Core\ProductConfigurator.Core.csproj" />
+    <ProjectReference Include="..\..\src\Application\ProductConfigurator.Shared\ProductConfigurator.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Scenarios\" />
   </ItemGroup>
 
 </Project>

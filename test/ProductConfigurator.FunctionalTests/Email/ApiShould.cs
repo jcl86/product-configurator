@@ -1,11 +1,11 @@
 ﻿using FluentAssertions;
 
 using Microsoft.AspNetCore.Http;
+
 using ProductConfigurator.FunctionalTests.Seedwork.Fixture;
-using ProductConfigurator.Domain;
+using ProductConfigurator.Shared;
 
 using Xunit;
-using ProductConfigurator.Shared;
 
 namespace ProductConfigurator.FunctionalTests;
 

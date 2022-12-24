@@ -1,13 +1,4 @@
-﻿using FluentAssertions;
-
-using Microsoft.AspNetCore.Http;
-
-using ProductConfigurator.Api;
-using ProductConfigurator.FunctionalTests.Seedwork.Fixture;
-using ProductConfigurator.Domain;
-
-using System;
-using System.Threading.Tasks;
+﻿using ProductConfigurator.FunctionalTests.Seedwork.Fixture;
 
 using Xunit;
 

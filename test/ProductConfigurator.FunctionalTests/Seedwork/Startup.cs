@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using ProductConfigurator.Core;
+
 using System.IdentityModel.Tokens.Jwt;
 
 namespace ProductConfigurator.FunctionalTests.Seedwork;
@@ -24,7 +26,7 @@ public class Startup
     {
         //   string migrationsAssembly = typeof(Context).GetTypeInfo().Assembly.GetName().Name;
         string? connectionString = configuration.GetConnectionString("Labnet");
-        Api.Configuration.ConfigureServices(services, environment, configuration)
+        ApiConfiguration.ConfigureServices(services, configuration)
             .AddAuthentication(TestServerDefaults.AuthenticationScheme)
             .AddTestServer(options =>
             {
@@ -57,6 +59,6 @@ public class Startup
 
             //new DataBaseInitializer(context, connectionStrings).Initialize();
         }
-        Api.Configuration.Configure(app, host => host);
+        ApiConfiguration.Configure(app, host => host);
     }
 }
