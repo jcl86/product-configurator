@@ -4,47 +4,46 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
+using ProductConfigurator.Shared;
+
 using System;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace ProductConfigurator.Api
+namespace ProductConfigurator.Api;
+
+public static class Configuration
 {
-    public static class Configuration
+    public static IServiceCollection ConfigureServices(IServiceCollection services, IWebHostEnvironment environment, IConfiguration configuration)
     {
-        public static IServiceCollection ConfigureServices(IServiceCollection services, IWebHostEnvironment environment, IConfiguration configuration)
-        {
-            return services
-                .AddHttpContextAccessor()
-                .AddCustomMvc()
-                //.AddAuthorization(ApiPolicies.Configure)
-                .AddCustomConfiguration(configuration)
-                .AddProblemDetails(environment, configuration)
-                //.AddMemoryCache()
-                .AddCustomApiBehaviour()
-                //.AddCustomRepositories()
-                .AddCustomServices();
-        }
+        return services
+            .AddHttpContextAccessor()
+            .AddCustomMvc()
+            //.AddAuthorization(ApiPolicies.Configure)
+            .AddCustomConfiguration(configuration)
+            .AddProblemDetails(environment, configuration)
+            //.AddMemoryCache()
+            .AddCustomApiBehaviour()
+            //.AddCustomRepositories()
+            .AddCustomServices();
+    }
 
-        public static IApplicationBuilder Configure(IApplicationBuilder app, Func<IApplicationBuilder, IApplicationBuilder> configureHost)
-        {
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+    public static IApplicationBuilder Configure(IApplicationBuilder app, Func<IApplicationBuilder, IApplicationBuilder> configureHost)
+    {
+        JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            return configureHost(app)
-                .UseProblemDetails()
-                .UseRouting()
-                .UseAuthentication()
-                .UseAuthorization()
-                .UseEndpoints(endpoints =>
-                {
-                    endpoints.MapControllerRoute(
-                            name: "default",
-                            pattern: "{controller=Home}/{action=Index}/{id?}");
+        return configureHost(app)
+            .UseProblemDetails()
+            .UseRouting()
+            .UseAuthentication()
+            .UseAuthorization()
+            .UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                        name: "default",
+                        pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                    endpoints.MapGet("/", async context =>
-                    {
-                        await context.Response.WriteAsync($"Welcome to Product configurator API!");
-                    });
-                });
-        }
+                endpoints.MapGet(Endpoints.Health, () => Results.Ok());
+            });
     }
 }

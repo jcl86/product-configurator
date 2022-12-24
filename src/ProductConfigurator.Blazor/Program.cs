@@ -19,7 +19,7 @@ namespace ProductConfigurator.Blazor
             builder.RootComponents.Add<App>("#app");
 
 
-            var types = ProductConfigurator.Shared.AttributeExtensions.GetInjectableServices(
+            var types = ProductConfigurator.Domain.AttributeExtensions.GetInjectableServices(
                 typeof(Program).Assembly
                 );
 

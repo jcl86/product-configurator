@@ -1,4 +1,4 @@
-﻿using ProductConfigurator.Shared;
+﻿using ProductConfigurator.Domain;
 using System.Threading.Tasks;
 
 namespace ProductConfigurator.Domain

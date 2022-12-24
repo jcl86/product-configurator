@@ -10,5 +10,11 @@
   "EmailSettings": {
     "Sender": "",
     "LumasuiteReceiver": ""
+  },
+  "UserSettings": {
+    "DefaultAdministrator": {
+      "Username": "admin@email.com",
+      "Password": "Password1234-"
+    }
   }
 }

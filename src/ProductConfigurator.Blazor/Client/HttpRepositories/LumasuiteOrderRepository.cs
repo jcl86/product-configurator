@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 using System.Threading.Tasks;
-using ProductConfigurator.Shared;
+using ProductConfigurator.Domain;
 
 namespace ProductConfigurator.Blazor
 {

@@ -17,6 +17,7 @@
     <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
     <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
+    <PackageVersion Include="Polly" Version="7.2.3" />
     <PackageVersion Include="Serilog.AspNetCore" Version="6.1.0" />
     <PackageVersion Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.4.0" />
@@ -54,7 +55,5 @@
     <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.5" />
     <PackageVersion Include="NSubstitute" Version="4.4.0" />
     <PackageVersion Include="Bogus" Version="34.0.2" />
-  </ItemGroup>
-  <ItemGroup>
   </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace ProductConfigurator.Shared
+namespace ProductConfigurator.Domain
 {
     public static class AttributeExtensions
     {

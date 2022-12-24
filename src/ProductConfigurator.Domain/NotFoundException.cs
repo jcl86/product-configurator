@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ProductConfigurator.Shared;
+namespace ProductConfigurator.Domain;
 
 public class NotFoundException : Exception
 {

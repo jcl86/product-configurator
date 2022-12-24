@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ProductConfigurator.Shared;
+namespace ProductConfigurator.Domain;
 
 public class CreateStep
 {

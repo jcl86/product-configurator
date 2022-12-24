@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ProductConfigurator.Shared;
+namespace ProductConfigurator.Domain;
 
 public class Option
 {

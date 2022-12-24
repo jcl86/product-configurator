@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using ProductConfigurator.Domain;
-using ProductConfigurator.Shared;
+using ProductConfigurator.Domain;
 using SendGrid;
 using SendGrid.Helpers.Mail;
 using System;

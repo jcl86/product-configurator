@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ProductConfigurator.Shared;
+using ProductConfigurator.Domain;
 using System;
 
 namespace ProductConfigurator.Api

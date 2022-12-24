@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace ProductConfigurator.Shared
+namespace ProductConfigurator.Domain
 {
     public static class MailEndpoints
     {
         public const string Base = "api/mail";
-        public static string Ping = $"{Base}/ping";
     }
 }

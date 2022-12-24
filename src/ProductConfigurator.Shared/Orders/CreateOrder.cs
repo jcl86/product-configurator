@@ -1,4 +1,4 @@
-﻿namespace ProductConfigurator.Shared;
+﻿namespace ProductConfigurator.Domain;
 
 public class CreateOrder
 {

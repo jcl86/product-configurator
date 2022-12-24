@@ -86,7 +86,6 @@ csharp_style_expression_bodied_constructors = false:warning
 csharp_style_expression_bodied_indexers = when_on_single_line:warning
 csharp_style_expression_bodied_lambdas = when_on_single_line:warning
 csharp_style_expression_bodied_local_functions = when_on_single_line:warning
-csharp_style_expression_bodied_methods = when_on_single_line:warning
 csharp_style_expression_bodied_operators = when_on_single_line:warning
 csharp_style_expression_bodied_properties = when_on_single_line:warning
 

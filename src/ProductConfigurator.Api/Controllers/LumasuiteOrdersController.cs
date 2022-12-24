@@ -1,27 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProductConfigurator.Domain;
-using ProductConfigurator.Shared;
 using System.Threading.Tasks;
 
-namespace ProductConfigurator.Api
+namespace ProductConfigurator.Api;
+
+
+[ApiController]
+[Route("api/lumasuite/orders")]
+public class LumasuiteOrdersController : ControllerBase
 {
-    [ApiController]
-    [Route("api/lumasuite/orders")]
-    public class LumasuiteOrdersController : ControllerBase
+    private readonly EmailSender emailSender;
+
+    public LumasuiteOrdersController(EmailSender emailSender)
     {
-        private readonly EmailSender emailSender;
-
-        public LumasuiteOrdersController(EmailSender emailSender)
-        {
-            this.emailSender = emailSender;
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> PostCreate(OrderRequest dto)
-        {
-            await emailSender.Send(dto);
-            return Ok();
-        }
+        this.emailSender = emailSender;
     }
 
+    [HttpPost]
+    public async Task<IActionResult> PostCreate(OrderRequest dto)
+    {
+        await emailSender.Send(dto);
+        return Ok();
+    }
 }

@@ -12,7 +12,7 @@ namespace ProductConfigurator.Api
         {
             services.AddScoped<ISendgridEmailSender,SendgridEmailSender>();
 
-            var types = Shared.AttributeExtensions.GetInjectableServices(
+            var types = Domain.AttributeExtensions.GetInjectableServices(
                 typeof(Configuration).Assembly,
                 typeof(EmailSettings).Assembly
                 );
