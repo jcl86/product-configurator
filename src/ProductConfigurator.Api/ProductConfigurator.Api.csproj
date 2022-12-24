@@ -1,7 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>$(NetVersion)</TargetFramework>
+    <TargetFramework>$(NetTargetVersion)</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,8 +12,8 @@
     <PackageReference Include="Hellang.Middleware.ProblemDetails" />
     <PackageReference Include="Serilog.AspNetCore" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
-    <PackageReference Include="IdentityModel" />
     <PackageReference Include="SendGrid" />
+    <PackageReference Include="IdentityModel" />
   </ItemGroup>
 
   <ItemGroup>

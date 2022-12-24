@@ -1,16 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>$(NetStandardVersion)</TargetFramework>
+    <TargetFramework>$(NetTargetVersion)</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Folder Include="Tags\" />
-    <Folder Include="OptionImages\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="System.ComponentModel.Annotations" />
-  </ItemGroup>
 
 </Project>

@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
-    <TargetFramework>$(NetVersion)</TargetFramework>
-    <LangVersion>9.0</LangVersion>
+    <TargetFramework>$(NetTargetVersion)</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>

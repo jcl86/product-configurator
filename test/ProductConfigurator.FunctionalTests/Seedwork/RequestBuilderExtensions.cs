@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.TestHost;
 using Newtonsoft.Json;
+
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,7 +62,7 @@ namespace ProductConfigurator.FunctionalTests
 
         public static async Task ShouldBe(this HttpResponseMessage response, int statusCode)
         {
-            response.StatusCode.Should().Be(statusCode, await response.Content.ReadAsStringAsync());
+            response.StatusCode.Should().Be((HttpStatusCode)statusCode, await response.Content.ReadAsStringAsync());
         }
     }
 }

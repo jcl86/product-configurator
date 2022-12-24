@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace ProductConfigurator.Shared
+namespace ProductConfigurator.Shared;
+
+public class Tenant
 {
-    public class Tenant
-    {
-        public Guid TenantId { get; set; }
-        public string Username { get; set; }
-    }
+    public Guid TenantId { get; set; }
+    public string Username { get; set; }
 }

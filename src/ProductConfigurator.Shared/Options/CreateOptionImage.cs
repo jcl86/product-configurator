@@ -1,9 +1,6 @@
-﻿namespace ProductConfigurator.Shared
+﻿namespace ProductConfigurator.Shared;
+
+public class CreateOptionImage
 {
-    public class CreateOptionImage
-    {
-        public byte[] Image { get; set; }
-    }
-
-
+    public byte[] Image { get; set; }
 }
