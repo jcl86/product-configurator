@@ -9,10 +9,12 @@ namespace ProductConfigurator.Core.Modules.Administration.Users;
 public class UserRegister
 {
     private readonly UserManager<User> userManager;
+    private readonly UserFinder userFinder;
 
-    public UserRegister(UserManager<User> userManager)
+    public UserRegister(UserManager<User> userManager, UserFinder userFinder)
     {
         this.userManager = userManager;
+        this.userFinder = userFinder;
     }
 
     public async Task<RegisterUserResponse> Register(RegisterUserRequest request)
@@ -31,7 +33,14 @@ public class UserRegister
 
         await userManager.AddToRoleAsync(user, RoleNames.PlainUser);
 
-        return new RegisterUserResponse(user.Id, user.UserName ?? "");
+        User searched = await userFinder.Find(user.Id);
+
+        return new RegisterUserResponse()
+        {
+            Id = searched.Id,
+            Email = searched.Email!,
+            RoleNames = searched.RoleNames
+        };
     }
 
 }

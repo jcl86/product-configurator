@@ -23,7 +23,8 @@ public static class IdentityExtensions
         }
 
         services.AddDbContextPool<ApplicationDbContext>(options =>
-            options.UseSqlServer(connectionString));
+            //options.UseSqlServer(connectionString));
+            options.UseSqlite(connectionString));
 
         services.AddIdentityCore<User>()
             //.AddClaimsPrincipalFactory<CustomClaimsPrincipalFactory>()

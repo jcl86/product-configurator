@@ -6,7 +6,7 @@ namespace ProductConfigurator.FunctionalTests;
 
 public class UserMother
 {
-    public static RegisterUser Register(string password = null)
+    public static RegisterUserRequest Register(string? password = null)
     {
         var faker = new Faker<RegisterUserRequest>()
            .StrictMode(true)

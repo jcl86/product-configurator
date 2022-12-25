@@ -4,6 +4,11 @@ namespace ProductConfigurator.Core.Modules.Administration.Users;
 
 public class Role : IdentityRole<string>
 {
+    private Role()
+    {
+        UserRoles = new List<UserRole>();
+    }
+    
     public Role(string roleName) : base(roleName)
     {
         Id = Guid.NewGuid().ToString();

@@ -16,6 +16,7 @@ else
         Congratulations! You succeded to configure your case
     </p>
 
+    @*
     <EditForm Model="model" OnValidSubmit="@HandleValidSubmit">
 
         <DataAnnotationsValidator />
@@ -67,6 +68,7 @@ else
         </div>
 
     </EditForm>
+    *@
 }
 
 <LoadingSplash Loading="@loading"
@@ -78,7 +80,7 @@ else
     private bool loading = false;
     private bool finished = false;
 
-    private ProductConfigurator.Domain.OrderRequest model = new ProductConfigurator.Domain.OrderRequest();
+    //private ProductConfigurator.Domain.OrderRequest model = new ProductConfigurator.Domain.OrderRequest();
 
     [CascadingParameter]
     public ItemCollection ItemCollection { get; set; }
@@ -86,10 +88,12 @@ else
     private async Task HandleValidSubmit()
     {
         loading = true;
-        model.Body = new PlainBasketRenderer(ItemCollection).Render();
-        await repository.SendMail(model);
+        //model.Body = new PlainBasketRenderer(ItemCollection).Render();
+        //await repository.SendMail(model);
         loading = false;
         finished = true;
+
+        //old
         //await jsRuntime.InvokeAsync<object>("blazorExtensions.SendLocalEmail",
         //new object[] { "info@lumasuite.com", "Order from desing-your-lumasuite-case", body });
     }

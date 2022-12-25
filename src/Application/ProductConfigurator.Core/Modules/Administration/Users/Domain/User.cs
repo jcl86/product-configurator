@@ -1,8 +1,4 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using System.Runtime.CompilerServices;
-using static SuperErp.Management.Model.Endpoints;
-using SuperErp.Management.Model;
-using System.Globalization;
 
 namespace ProductConfigurator.Core.Modules.Administration.Users;
 
@@ -16,12 +12,15 @@ public class User : IdentityUser
         .Select(x => x.Role?.Name)
         .Where(x => x is not null)
         .Select(x => x!).ToList() ?? new List<string>();
-    
-    public User(EmailAddress emailAddress)
+
+    private User() 
+    {
+        UserRoles = new List<UserRole>();
+        Claims = new List<IdentityUserClaim<string>>();
+    }
+    public User(EmailAddress emailAddress) : this()
     {
         UserName = emailAddress.ToString();
         Email = emailAddress.ToString();
-        UserRoles = new List<UserRole>();
-        Claims = new List<IdentityUserClaim<string>>();
     }
 }

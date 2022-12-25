@@ -2,12 +2,17 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
+
+using ProductConfigurator.Core;
+using ProductConfigurator.Core.Database;
+
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,17 +31,14 @@ namespace ProductConfigurator.Host
 
         public void ConfigureServices(IServiceCollection services)
         {
-            Api.Configuration
-                .ConfigureServices(services, environment, configuration)
+            ApiConfiguration
+                .ConfigureServices(services, configuration)
                 .AddCustomAuthentication(configuration, environment);
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Product Configurator", Version = "v1" });
-            });
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Product Configurator", Version = "v1" }));
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context, ApplicationInitializer initializer)
         {
             if (env.IsDevelopment())
             {
@@ -45,10 +47,19 @@ namespace ProductConfigurator.Host
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Product Configurator v1"));
             }
 
-            var allowedOrigins = configuration.GetSection("AllowedOrigins").Get<IEnumerable<string>>();
-            Serilog.Log.Logger.Information("Origins: " + string.Join(", ", allowedOrigins));
+            context.Database.Migrate();
+            initializer.SeedUsers().Wait();
+            
+            IEnumerable<string>? allowedOrigins = configuration.GetSection("AllowedOrigins").Get<IEnumerable<string>>();
 
-            Api.Configuration.Configure(app, host =>
+            if (allowedOrigins is null || !allowedOrigins.Any())
+            {
+                throw new Exception("Allowed origins are not configured in appsettings.json");
+            }
+            
+            Serilog.Log.Logger.Information("Origins: " + string.Join(", ", allowedOrigins));
+            
+            ApiConfiguration.Configure(app, host =>
             {
                 return host
                     .UseCors(policy =>

@@ -1,4 +1,4 @@
-﻿namespace SuperErp.Management.Model;
+﻿namespace ProductConfigurator.Shared;
 
 public static partial class Endpoints
 {

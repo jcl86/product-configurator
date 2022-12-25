@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SuperErp.Management.Model;
 using ProductConfigurator.Shared.Modules.Administration.Account;
 using ProductConfigurator.Core.Modules.Administration.Users;
+using ProductConfigurator.Shared;
 
 namespace ProductConfigurator.Core.Modules.Administration.Account.Infrastructure;
 
@@ -38,7 +38,6 @@ public class AccountController : ControllerBase
         await passwordChanger.Change(User, model.CurrentPassword, model.NewPassword);
         return NoContent();
     }
-
 
     [HttpGet("error1")]
     public IActionResult Error1()

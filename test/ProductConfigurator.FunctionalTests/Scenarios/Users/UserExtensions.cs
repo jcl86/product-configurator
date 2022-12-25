@@ -1,26 +1,27 @@
-﻿using SuperErp.Management.Model;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.TestHost;
 using ProductConfigurator.FunctionalTests.Seedwork.Fixture;
 using ProductConfigurator.Core.Modules.Administration.Users;
+using ProductConfigurator.Shared.Modules.Administration.Users;
+using ProductConfigurator.Shared;
+using FluentAssertions;
 
-namespace ProductConfigurator.FunctionalTests
+namespace ProductConfigurator.FunctionalTests;
+public static class UserExtensions
 {
-    public static class UserExtensions
+    public static async Task<RegisterUserResponse> UserInDatabase(this ServerFixture given, string? password = null)
     {
-        public static async Task<User> UserInDatabase(this ServerFixture given, string? password = null)
-        {
-            var model = UserMother.Register(password);
+        RegisterUserRequest request = UserMother.Register(password);
 
-            var response = await given.Server
-              .CreateRequest(Endpoints.Users.Register)
-              .WithIdentity(Identities.SuperAdministrator)
-              .WithJsonBody(model)
-              .PostAsync();
+        HttpResponseMessage response = await given.Server
+          .CreateRequest(Endpoints.Users.Register)
+          .WithIdentity(Identities.SuperAdministrator)
+          .WithJsonBody(request)
+          .PostAsync();
 
-            await response.ShouldBe(StatusCodes.Status200OK);
-            var user = await response.ReadJsonResponse<Model.User>();
-            return user;
-        }
+        await response.ShouldBe(StatusCodes.Status200OK);
+        RegisterUserResponse? model = await response.ReadJsonResponse<RegisterUserResponse>();
+        model.Should().NotBeNull();
+        return model!;
     }
 }

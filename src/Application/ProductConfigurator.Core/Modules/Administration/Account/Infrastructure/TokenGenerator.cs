@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 using ProductConfigurator.Core.Modules.Administration.Users;
+using ProductConfigurator.Shared;
 
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -11,6 +12,7 @@ using System.Text;
 
 namespace ProductConfigurator.Core.Modules.Administration.Account.Infrastructure;
 
+[Service]
 public class TokenGenerator
 {
     public const string ApiSecretConfigurationName = "ApiSecret";

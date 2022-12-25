@@ -2,12 +2,12 @@
 
 namespace ProductConfigurator.FunctionalTests;
 
-public class Given
-{
-    private readonly ServerFixture serverFixture;
+//public class Given
+//{
+//    private readonly ServerFixture serverFixture;
 
-    public Given(ServerFixture serverFixture)
-    {
-        this.serverFixture = serverFixture;
-    }
-}
+//    public Given(ServerFixture serverFixture)
+//    {
+//        this.serverFixture = serverFixture;
+//    }
+//}

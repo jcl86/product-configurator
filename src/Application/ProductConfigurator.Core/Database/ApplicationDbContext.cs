@@ -7,7 +7,9 @@ using ProductConfigurator.Core.Modules.Administration.Users;
 using System.Reflection;
 
 namespace ProductConfigurator.Core.Database;
-public class ApplicationDbContext : IdentityDbContext<User>
+public class ApplicationDbContext : IdentityDbContext<User, Role,
+    string, IdentityUserClaim<string>, UserRole, IdentityUserLogin<string>,
+    IdentityRoleClaim<string>, IdentityUserToken<string>>
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 

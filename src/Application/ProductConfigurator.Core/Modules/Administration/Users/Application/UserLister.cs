@@ -24,7 +24,14 @@ public class UserLister
                 .ThenInclude(x => x.Role)
             .ToListAsync();
 
-        IEnumerable<ListUserResponse.UserItem> result = users.Select(x => new ListUserResponse.UserItem(id: x.Id, email: x.Email ?? "", roles: x.RoleNames));
-        return new ListUserResponse(result);
+        return new ListUserResponse()
+        {
+            Users = users.Select(x => new ListUserResponse.UserItem()
+            {
+                Id = x.Id,
+                Email = x.Email!,
+                Roles = x.RoleNames
+            })
+        };
     }
 }

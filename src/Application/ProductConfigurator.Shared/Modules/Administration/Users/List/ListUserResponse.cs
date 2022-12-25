@@ -6,23 +6,12 @@ namespace ProductConfigurator.Shared.Modules.Administration.Users;
 
 public class ListUserResponse
 {
-    public IEnumerable<UserItem> Users { get; init; }
-    public ListUserResponse(IEnumerable<UserItem> users)
-    {
-        Users = users;
-    }
-
+    public required IEnumerable<UserItem> Users { get; set; }
+    
     public class UserItem
     {
-        public string Id { get; init; }
-        public string Email { get; init; }
-        public IEnumerable<string> Roles { get; init; }
-
-        public UserItem(string id, string email, IEnumerable<string> roles)
-        {
-            Id = id;
-            Email = email;
-            Roles = roles;
-        }
+        public required string Id { get; set; }
+        public required string Email { get; set; }
+        public required IEnumerable<string> Roles { get; set; }
     }
 }

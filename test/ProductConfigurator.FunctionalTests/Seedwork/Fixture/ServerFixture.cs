@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Logging;
 
 using Polly;
 
+using ProductConfigurator.Core.Database;
 using ProductConfigurator.FunctionalTests.Seedwork;
 
 using System.IO;
@@ -15,74 +17,90 @@ using Xunit;
 
 namespace ProductConfigurator.FunctionalTests.Seedwork.Fixture;
 
-public class ServerFixture : IAsyncLifetime
+public class ServerFixture : IDisposable
 {
-    private IWebHost? host;
+    private readonly IWebHost host;
 
     public TestServer Server => host.GetTestServer();
 
-    public T GetService<T>() => (T)Server.Services.GetService(typeof(T));
+    public T GetService<T>() where T : class
+    {
+        object? service = Server.Services.GetService(typeof(T));
+        if (service is not T parsedService)
+        {
+            throw new InvalidOperationException($"Service {typeof(T).Name} was not found in the service collection.");
+        }
+        return parsedService;
+    }
 
-    public ServerFixture() { }
+    public ServerFixture() 
+    {
+        host = new WebHostBuilder()
+           .UseTestServer()
+           .UseStartup<Startup>()
+           .UseEnvironment("Development")
+           .UseContentRoot(Directory.GetCurrentDirectory())
+           .ConfigureAppConfiguration(app =>
+           {
+               app.AddJsonFile("FunctionalTestsSettings.json", optional: true);
+               app.AddUserSecrets(typeof(ServerFixture).Assembly, optional: true);
+               app.AddEnvironmentVariables();
+           }).Build();
+
+        MigrateDbContext();
+
+        host.Start();
+    }
 
     public void Dispose()
     {
         Server.Dispose();
         host?.Dispose();
     }
-
-    public async Task InitializeAsync()
+    
+    public void MigrateDbContext()
     {
-        host = new WebHostBuilder()
-                  .UseTestServer()
-                  .UseStartup<Startup>()
-                  .UseEnvironment("Development")
-                  .UseContentRoot(Directory.GetCurrentDirectory())
-                  .ConfigureAppConfiguration(app =>
-                  {
-                      app.AddJsonFile("FunctionalTestsSettings.json", optional: true);
-                      app.AddUserSecrets(typeof(ServerFixture).Assembly, optional: true);
-                      app.AddEnvironmentVariables();
-                  }).Build();
+        using IServiceScope scope = host.Services.CreateScope();
 
-        await MigrateDbContext();
+        IServiceProvider services = scope.ServiceProvider;
+        ILogger<ApplicationDbContext> logger = services.GetRequiredService<ILogger<ApplicationDbContext>>();
+        ApplicationDbContext? context = services.GetService<ApplicationDbContext>();
 
-        await host.StartAsync();
-    }
+        if (context is null)
+        {
+            throw new InvalidOperationException("ApplicationDbContext was not found in the service collection.");
+        }
 
-    public async Task MigrateDbContext()
-    {
-        //using (IServiceScope scope = host.Services.CreateScope())
-        //{
-        //    var services = scope.ServiceProvider;
-        //    var logger = services.GetRequiredService<ILogger<ApplicationDbContext>>();
-        //    var context = services.GetService<ApplicationDbContext>();
+        try
+        {
+            logger.LogInformation($"Migrating database associated with context");
+            
+            Polly.Retry.RetryPolicy retry = Policy.Handle<Exception>().WaitAndRetry(new[]
+            {
+                        TimeSpan.FromSeconds(5),
+                        TimeSpan.FromSeconds(10),
+                        TimeSpan.FromSeconds(15),
+                    });
 
-        //    try
-        //    {
-        //        logger.LogInformation($"Migrating database associated with context");
-        //        var retry = Policy.Handle<Exception>().WaitAndRetry(new[]
-        //        {
-        //                TimeSpan.FromSeconds(5),
-        //                TimeSpan.FromSeconds(10),
-        //                TimeSpan.FromSeconds(15),
-        //            });
+            retry.Execute(() =>
+            {
+                context.Database.EnsureDeleted();
+                context.Database.Migrate();
+            });
+            logger.LogInformation($"Migrated database associated with context");
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, $"An error occurred while migrating the database used on context");
+        }
 
-        //        retry.Execute(() =>
-        //        {
-        //            context.Database.EnsureDeleted();
-        //            context.Database.Migrate();
-        //        });
-        //        logger.LogInformation($"Migrated database associated with context");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        logger.LogError(ex, $"An error occurred while migrating the database used on context");
-        //    }
-
-        //    var applicationInitializer = services.GetService<ApplicationInitializer>();
-        //    await applicationInitializer.SeedUsers();
-        //}
+        ApplicationInitializer? applicationInitializer = services.GetService<ApplicationInitializer>();
+        if (applicationInitializer is null)
+        {
+            throw new Exception("ApplicationInitializer was not found in the service collection.");
+        }
+        
+        applicationInitializer.SeedUsers().Wait();
     }
 
     public Task DisposeAsync()

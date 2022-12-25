@@ -3,6 +3,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+using ProductConfigurator.FunctionalTests.Seedwork.Fixture;
+using ProductConfigurator.Shared;
 using ProductConfigurator.Shared.Modules.Administration.Account;
 
 namespace ProductConfigurator.FunctionalTests;
@@ -11,9 +13,9 @@ public static class LoginExtensions
 {
     public static async Task SuccessToLogin(this ServerFixture given, string email, string password)
     {
-        var response = await given
+        HttpResponseMessage response = await given
          .Server
-         .CreateRequest(Model.Endpoints.Accounts.Login)
+         .CreateRequest(Endpoints.Accounts.Login)
          .WithJsonBody(new LoginRequest()
          {
              Email = email,
@@ -22,16 +24,17 @@ public static class LoginExtensions
          .PostAsync();
 
         await response.ShouldBe(StatusCodes.Status200OK);
-        var result = await response.ReadJsonResponse<LoginSuccessResponse>();
-        result.Username.Should().Be(email);
-        result.Token.Should().NotBeEmpty();
+        LoginSuccessResponse? result = await response.ReadJsonResponse<LoginSuccessResponse>();
+        result.Should().NotBeNull();
+        result!.Email.Should().Be(email);
+        result!.Token.Should().NotBeEmpty();
     }
 
     public static async Task FailToLogin(this ServerFixture given, string email, string password)
     {
-        var response = await given
+        HttpResponseMessage response = await given
          .Server
-         .CreateRequest(Model.Endpoints.Accounts.Login)
+         .CreateRequest(Endpoints.Accounts.Login)
          .WithJsonBody(new LoginRequest()
          {
              Email = email,
@@ -40,7 +43,8 @@ public static class LoginExtensions
          .PostAsync();
 
         await response.ShouldBe(StatusCodes.Status401Unauthorized);
-        var result = await response.ReadJsonResponse<ProblemDetails>();
-        result.Status.Should().Be(StatusCodes.Status401Unauthorized);
+        ProblemDetails? result = await response.ReadJsonResponse<ProblemDetails>();
+        result.Should().NotBeNull();
+        result!.Status.Should().Be(StatusCodes.Status401Unauthorized);
     }
 }

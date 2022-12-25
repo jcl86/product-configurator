@@ -2,12 +2,7 @@
 
 public class RegisterUserResponse
 {
-    public string Id { get; init; }
-    public string Email { get; init; }
-
-    public RegisterUserResponse(string id, string email)
-    {
-        Id = id;
-        Email = email;
-    }
+    public required string Id { get; set; }
+    public required string Email { get; set; }
+    public required IEnumerable<string> RoleNames { get; set; }
 }

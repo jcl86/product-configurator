@@ -11,7 +11,7 @@
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.2" />
     <PackageVersion Include="Hellang.Middleware.ProblemDetails" Version="6.5.1" />
     <PackageVersion Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(AspNetCorePackageVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Localization" Version="$(AspNetCorePackageVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
@@ -30,9 +30,10 @@
     <PackageVersion Include="Microsoft.CodeAnalysis" Version="4.2.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="4.2.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.2.0" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(AspNetCorePackageVersion)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(AspNetCorePackageVersion)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(AspNetCorePackageVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="$(AspNetCorePackageVersion)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(AspNetCorePackageVersion)" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="$(AspNetCorePackageVersion)" />
     <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(AspNetCorePackageVersion)" />
@@ -40,8 +41,8 @@
   </ItemGroup>
   <ItemGroup Label="Web">
     <PackageVersion Include="Blazored.LocalStorage" Version="4.2.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.1" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(AspNetCorePackageVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(AspNetCorePackageVersion)" />
     <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="$(AspNetCorePackageVersion)" />
     <PackageVersion Include="Microsoft.Extensions.Http" Version="7.0.0" />
     <PackageVersion Include="System.Net.Http.Json" Version="7.0.0" />

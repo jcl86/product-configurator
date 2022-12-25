@@ -1,24 +1,23 @@
-﻿using System.Threading.Tasks;
-using ProductConfigurator.Domain;
+﻿using ProductConfigurator.Shared;
 
-namespace ProductConfigurator.Blazor
+namespace ProductConfigurator.Blazor;
+
+[Service]
+public class MailRepository
 {
-    [Service]
-    public class MailRepository
+    private readonly ApiClient client;
+
+    public MailRepository(ApiClient client)
     {
-        private readonly ApiClient client;
+        this.client = client;
+    }
 
-        public MailRepository(ApiClient client)
-        {
-            this.client = client;
-        }
-
-        public async Task<string> Ping()
-        {
-            var response = await client.Client.GetAsync(MailEndpoints.Ping);
-            response.EnsureSuccessStatusCode();
-            var result = await response.Content.ReadAsStringAsync();
-            return result;
-        }
+    public async Task<string> Ping()
+    {
+        return "";
+        //var response = await client.Client.GetAsync(MailEndpoints.Ping);
+        //response.EnsureSuccessStatusCode();
+        //var result = await response.Content.ReadAsStringAsync();
+        //return result;
     }
 }

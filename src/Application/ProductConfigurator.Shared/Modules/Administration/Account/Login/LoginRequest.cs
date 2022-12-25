@@ -4,13 +4,7 @@ namespace ProductConfigurator.Shared.Modules.Administration.Account;
 
 public class LoginRequest
 {
-    public string Email { get; init; }
-
-    public string Password { get; init; }
+    public required string Email { get; set; }
     
-    public LoginRequest(string email, string password)
-    {
-        Email = email;
-        Password = password;
-    }
+    public required string Password { get; set; }
 }

@@ -9,30 +9,29 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProductConfigurator.Blazor
+namespace ProductConfigurator.Blazor;
+
+public class Program
 {
-    public class Program
+    public static async Task Main(string[] args)
     {
-        public static async Task Main(string[] args)
+        WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
+        builder.RootComponents.Add<App>("#app");
+
+
+        IEnumerable<Type> types = ProductConfigurator.Shared.AttributeExtensions.GetInjectableServices(
+            typeof(Program).Assembly
+        );
+
+        foreach (Type serviceType in types)
         {
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            builder.RootComponents.Add<App>("#app");
-
-
-            var types = ProductConfigurator.Domain.AttributeExtensions.GetInjectableServices(
-                typeof(Program).Assembly
-                );
-
-            foreach (var serviceType in types)
-            {
-                builder.Services.AddScoped(serviceType);
-            }
-
-            builder.Services.AddApiClient(builder.Configuration);
-
-            //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
-            await builder.Build().RunAsync();
+            builder.Services.AddScoped(serviceType);
         }
+
+        builder.Services.AddApiClient(builder.Configuration);
+
+        //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+        await builder.Build().RunAsync();
     }
 }
