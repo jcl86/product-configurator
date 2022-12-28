@@ -29,7 +29,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{6369FA8E-79E5-4E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipelines", "pipelines", "{FAA45DFE-6715-47F3-A2E0-DE2C9C84B9E4}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\ci-cd.yaml = .github\workflows\ci-cd.yaml
 		.github\workflows\development.yaml = .github\workflows\development.yaml
+		.github\workflows\production.yaml = .github\workflows\production.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{0A11150E-8EB7-4C86-99DD-6580E6B903B8}"
@@ -51,6 +53,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductConfigurator.Blazor", "src\Web\ProductConfigurator.Blazor\ProductConfigurator.Blazor.csproj", "{81FA8B77-54E3-486F-ABB4-C57255FC3382}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductConfigurator.EntityFramework", "src\Infrastructure\ProductConfigurator.EntityFramework\ProductConfigurator.EntityFramework.csproj", "{5124021F-0ECE-4812-A733-4DE0781C87A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductConfigurator.Client", "src\Web\ProductConfigurator.Client\ProductConfigurator.Client.csproj", "{C9664856-D77C-4657-9AFB-C7F53C7142AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -170,6 +174,18 @@ Global
 		{5124021F-0ECE-4812-A733-4DE0781C87A8}.Release|x64.Build.0 = Release|Any CPU
 		{5124021F-0ECE-4812-A733-4DE0781C87A8}.Release|x86.ActiveCfg = Release|Any CPU
 		{5124021F-0ECE-4812-A733-4DE0781C87A8}.Release|x86.Build.0 = Release|Any CPU
+		{C9664856-D77C-4657-9AFB-C7F53C7142AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9664856-D77C-4657-9AFB-C7F53C7142AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9664856-D77C-4657-9AFB-C7F53C7142AD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C9664856-D77C-4657-9AFB-C7F53C7142AD}.Debug|x64.Build.0 = Debug|Any CPU
+		{C9664856-D77C-4657-9AFB-C7F53C7142AD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C9664856-D77C-4657-9AFB-C7F53C7142AD}.Debug|x86.Build.0 = Debug|Any CPU
+		{C9664856-D77C-4657-9AFB-C7F53C7142AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9664856-D77C-4657-9AFB-C7F53C7142AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9664856-D77C-4657-9AFB-C7F53C7142AD}.Release|x64.ActiveCfg = Release|Any CPU
+		{C9664856-D77C-4657-9AFB-C7F53C7142AD}.Release|x64.Build.0 = Release|Any CPU
+		{C9664856-D77C-4657-9AFB-C7F53C7142AD}.Release|x86.ActiveCfg = Release|Any CPU
+		{C9664856-D77C-4657-9AFB-C7F53C7142AD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -187,6 +203,7 @@ Global
 		{699AD956-170B-423C-9043-BAE3A6FFBBA1} = {FDE4FB4B-0254-4473-84FF-F9EFDF1331F4}
 		{81FA8B77-54E3-486F-ABB4-C57255FC3382} = {FDE4FB4B-0254-4473-84FF-F9EFDF1331F4}
 		{5124021F-0ECE-4812-A733-4DE0781C87A8} = {0A11150E-8EB7-4C86-99DD-6580E6B903B8}
+		{C9664856-D77C-4657-9AFB-C7F53C7142AD} = {FDE4FB4B-0254-4473-84FF-F9EFDF1331F4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9E61E35A-39DA-40C7-B26A-78B9EBCD4CBF}
