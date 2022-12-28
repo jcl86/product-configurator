@@ -29,12 +29,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{6369FA8E-79E5-4E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipelines", "pipelines", "{FAA45DFE-6715-47F3-A2E0-DE2C9C84B9E4}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\ci-cd.yaml = .github\workflows\ci-cd.yaml
+		.github\workflows\development.yaml = .github\workflows\development.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{0A11150E-8EB7-4C86-99DD-6580E6B903B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductConfigurator.Mailer", "src\Infrastructure\ProductConfigurator.Mailer\ProductConfigurator.Mailer.csproj", "{18D3E975-7E3A-45C7-A683-61559BFE236A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductConfigurator.Mailer", "src\Infrastructure\ProductConfigurator.Mailer\ProductConfigurator.Mailer.csproj", "{18D3E975-7E3A-45C7-A683-61559BFE236A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{5FA75070-9758-4747-A580-54B9B91F785C}"
 EndProject
@@ -50,7 +50,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductConfigurator.Host", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductConfigurator.Blazor", "src\Web\ProductConfigurator.Blazor\ProductConfigurator.Blazor.csproj", "{81FA8B77-54E3-486F-ABB4-C57255FC3382}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProductConfigurator.EntityFramework", "src\Infrastructure\ProductConfigurator.EntityFramework\ProductConfigurator.EntityFramework.csproj", "{5124021F-0ECE-4812-A733-4DE0781C87A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProductConfigurator.EntityFramework", "src\Infrastructure\ProductConfigurator.EntityFramework\ProductConfigurator.EntityFramework.csproj", "{5124021F-0ECE-4812-A733-4DE0781C87A8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
