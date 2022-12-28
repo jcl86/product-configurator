@@ -74,9 +74,6 @@ jobs:
 
     - name: Publish
       run: |
-        echo "App Service name - ${{ inputs.app-service-name }}"
-        echo "Web url - ${{ inputs.web-url }}"
-        echo "Environment - ${{ inputs.environment }}"
         dotnet publish src/Web/ProductConfigurator.Host/ProductConfigurator.Host.csproj -c $BUILD_CONFIG -o '${{ env.PACKAGE_PATH }}/app' 
 
     - name: Variable Substitution
