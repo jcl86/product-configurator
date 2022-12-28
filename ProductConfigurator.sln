@@ -29,9 +29,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{6369FA8E-79E5-4E
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "pipelines", "pipelines", "{FAA45DFE-6715-47F3-A2E0-DE2C9C84B9E4}"
 	ProjectSection(SolutionItems) = preProject
-		.github\workflows\ci-cd.yaml = .github\workflows\ci-cd.yaml
-		.github\workflows\development.yaml = .github\workflows\development.yaml
-		.github\workflows\production.yaml = .github\workflows\production.yaml
+		.github\workflows\ci-cd.yml = .github\workflows\ci-cd.yml
+		.github\workflows\development.yml = .github\workflows\development.yml
+		.github\workflows\production.yml = .github\workflows\production.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{0A11150E-8EB7-4C86-99DD-6580E6B903B8}"

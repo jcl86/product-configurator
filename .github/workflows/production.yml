@@ -5,9 +5,8 @@ on:
     branches: [ dev ]
 
 jobs:
-  call-workflow:
-    name: Production continuous integration
-    uses: ./ci-cd.yml
+  production-workflow:
+    uses: ./.github/workflows/ci-cd.yml
     with:
       web-url: 'https://product-configurator-web.netlify.app'
       app-service-name: 'product-configurator-api'
