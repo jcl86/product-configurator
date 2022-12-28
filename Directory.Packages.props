@@ -1,0 +1,61 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup Label="Api">
+    <PackageVersion Include="AutoMapper" Version="12.0.0" />
+    <PackageVersion Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageVersion Include="Balea" Version="7.0.0" />
+    <PackageVersion Include="Balea.EntityFrameworkCore.Store" Version="7.0.0" />
+    <PackageVersion Include="FluentValidation" Version="11.2.2" />
+    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.2" />
+    <PackageVersion Include="Hellang.Middleware.ProblemDetails" Version="6.5.1" />
+    <PackageVersion Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="$(AspNetCorePackageVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Localization" Version="$(AspNetCorePackageVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="7.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="6.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
+    <PackageVersion Include="Polly" Version="7.2.3" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="6.1.0" />
+    <PackageVersion Include="Serilog.Sinks.ApplicationInsights" Version="4.0.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageVersion Include="IdentityModel" Version="6.0.0" />
+    <PackageVersion Include="FluentValidation.AspNetCore" Version="11.2.2" />
+  </ItemGroup>
+  <ItemGroup Label="Infrastructure">
+    <PackageVersion Include="ClosedXML" Version="0.97.0" />
+    <PackageVersion Include="MailKit" Version="3.4.1" />
+    <PackageVersion Include="Microsoft.CodeAnalysis" Version="4.2.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="4.2.0" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.2.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="$(AspNetCorePackageVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="$(AspNetCorePackageVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(AspNetCorePackageVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="$(AspNetCorePackageVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="$(AspNetCorePackageVersion)" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="$(AspNetCorePackageVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="$(AspNetCorePackageVersion)" />
+    <PackageVersion Include="SendGrid" Version="9.28.1" />
+  </ItemGroup>
+  <ItemGroup Label="Web">
+    <PackageVersion Include="Blazored.LocalStorage" Version="4.2.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly" Version="$(AspNetCorePackageVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="$(AspNetCorePackageVersion)" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="$(AspNetCorePackageVersion)" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="7.0.0" />
+    <PackageVersion Include="System.Net.Http.Json" Version="7.0.0" />
+    <PackageVersion Include="Yarp.ReverseProxy" Version="1.1.1" />
+  </ItemGroup>
+  <ItemGroup Label="Testing">
+    <PackageVersion Include="Acheve.TestHost" Version="3.4.0" />
+    <PackageVersion Include="coverlet.collector" Version="3.2.0" />
+    <PackageVersion Include="FluentAssertions" Version="6.8.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
+    <PackageVersion Include="xunit" Version="2.4.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.5" />
+    <PackageVersion Include="NSubstitute" Version="4.4.0" />
+    <PackageVersion Include="Bogus" Version="34.0.2" />
+  </ItemGroup>
+</Project>

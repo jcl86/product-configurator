@@ -1,0 +1,14 @@
+name: Development
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  production-workflow:
+    uses: ./.github/workflows/ci-cd.yml
+    with:
+      web-url: 'https://product-configurator-web.netlify.app'
+      app-service-name: 'product-configurator-api'
+      environment: Production
+    secrets: inherit

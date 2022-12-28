@@ -1,0 +1,14 @@
+name: Development
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  development-workflow:
+    uses: ./.github/workflows/ci-cd.yml
+    with:
+      web-url: 'https://product-configurator-web-dev.netlify.app'
+      app-service-name: 'product-configurator-api-dev'
+      environment: Development
+    secrets: inherit

@@ -3,12 +3,18 @@
     "https://localhost:6001"
   ],
   "ConnectionStrings": {
-    "SqLite": "",
+    "SqLite": "Data Source=productconfigurator.db",
     "SendgridApiKey": ""
   },
   "ApiSecret": "my-super-api-secret",
   "EmailSettings": {
     "Sender": "",
     "LumasuiteReceiver": ""
+  },
+  "UserSettings": {
+    "DefaultAdministrator": {
+      "Username": "admin@email.com",
+      "Password": "Password1234-"
+    }
   }
 }
