@@ -1,12 +1,13 @@
-﻿namespace ProductConfigurator.FunctionalTests
-{
-    public class Given
-    {
-        private readonly ServerFixture _serverFixture;
+﻿using ProductConfigurator.FunctionalTests.Seedwork.Fixture;
 
-        public Given(ServerFixture serverFixture)
-        {
-            _serverFixture = serverFixture;
-        }
-    }
-}
+namespace ProductConfigurator.FunctionalTests;
+
+//public class Given
+//{
+//    private readonly ServerFixture serverFixture;
+
+//    public Given(ServerFixture serverFixture)
+//    {
+//        this.serverFixture = serverFixture;
+//    }
+//}

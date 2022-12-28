@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>$(NetTargetVersion)</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Hellang.Middleware.ProblemDetails" />
+    <PackageReference Include="Serilog.AspNetCore" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    <PackageReference Include="IdentityModel" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ProductConfigurator.Shared\ProductConfigurator.Shared.csproj" />
+    <ProjectReference Include="..\ProductConfigurator.Domain\ProductConfigurator.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

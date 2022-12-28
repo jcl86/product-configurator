@@ -1,8 +1,14 @@
 <Project>
-  <Import Project="build/dependencies.props"/>
-  <PropertyGroup Label="Default Metadata">
-    <Authors>$(Authors)</Authors>
-    <Company>$(Company)</Company>
+  <Import Project="build/dependencies.props" />
+  <PropertyGroup Label="Default Information">
+    <Authors>jcl86</Authors>
+    <Copyright>jcl86</Copyright>
+    <RepositoryUrl>https://github.com/jcl86/product-configurator</RepositoryUrl>
+    <Version>1.0.0.0</Version>
   </PropertyGroup>
-  
+  <PropertyGroup Label="Common Project Settings">
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>11.0</LangVersion>
+  </PropertyGroup>
 </Project>

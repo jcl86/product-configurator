@@ -1,11 +1,7 @@
 <Project>
-    <PropertyGroup Label="Default project values">
-        <NetVersion>net5.0</NetVersion>
-        <NetStandardVersion>netstandard2.0</NetStandardVersion>
-        <LangVersion>9.0</LangVersion>
-        <Company>Lumasuite S.L.</Company>
-        <Authors>Lumasuite contributors</Authors>
-        <RepositoryUrl>https://github.com/jcl86/product-configurator</RepositoryUrl>
-        <AspNetCorePackageVersion>5.0.8</AspNetCorePackageVersion>
-    </PropertyGroup>
+  <PropertyGroup>
+    <NetTargetVersion>net7.0</NetTargetVersion>
+    <NetStandardVersion>netstandard2.0</NetStandardVersion>
+    <AspNetCorePackageVersion>7.0.1</AspNetCorePackageVersion>
+  </PropertyGroup>
 </Project>
