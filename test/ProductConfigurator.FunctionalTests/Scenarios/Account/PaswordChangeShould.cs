@@ -23,7 +23,7 @@ public class PaswordChangeShould
     public async Task Success()
     {
         string oldPassword = PasswordMother.Valid();
-        RegisterUserResponse user = await Given.UserInDatabase(oldPassword);
+        RegisterUserResponse user = await Given.UserInDatabase(Tenants.Tenant1, oldPassword);
 
         await Given.SuccessToLogin(user.Email!, oldPassword);
 
@@ -49,7 +49,7 @@ public class PaswordChangeShould
     public async Task Fail_when_password_is_wrong()
     {
         string oldPassword = PasswordMother.Valid();
-        RegisterUserResponse user = await Given.UserInDatabase(oldPassword);
+        RegisterUserResponse user = await Given.UserInDatabase(Tenants.Tenant1, oldPassword);
 
         await Given.SuccessToLogin(user.Email!, oldPassword);
 

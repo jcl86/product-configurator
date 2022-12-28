@@ -63,8 +63,8 @@ public class ServerFixture : IDisposable
         using IServiceScope scope = host.Services.CreateScope();
 
         IServiceProvider services = scope.ServiceProvider;
-        ILogger<ApplicationDbContext> logger = services.GetRequiredService<ILogger<ApplicationDbContext>>();
-        ApplicationDbContext? context = services.GetService<ApplicationDbContext>();
+        ILogger<ApplicationContext> logger = services.GetRequiredService<ILogger<ApplicationContext>>();
+        ApplicationContext? context = services.GetService<ApplicationContext>();
 
         if (context is null)
         {

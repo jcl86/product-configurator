@@ -10,7 +10,7 @@ using ProductConfigurator.Core.Database;
 
 namespace ProductConfigurator.Core.Database.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(ApplicationContext))]
     [Migration("20221225210118_Initial")]
     partial class Initial
     {

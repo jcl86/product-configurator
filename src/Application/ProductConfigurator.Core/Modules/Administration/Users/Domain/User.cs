@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
+using ProductConfigurator.Core.MultiTenancy;
+
 namespace ProductConfigurator.Core.Modules.Administration.Users;
 
-public class User : IdentityUser
+public class User : IdentityUser, IHasTenant
 {
     public ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
@@ -13,11 +15,14 @@ public class User : IdentityUser
         .Where(x => x is not null)
         .Select(x => x!).ToList() ?? new List<string>();
 
+    public int? TenantId { get; private set; }
+
     private User() 
     {
         UserRoles = new List<UserRole>();
         Claims = new List<IdentityUserClaim<string>>();
     }
+    
     public User(EmailAddress emailAddress) : this()
     {
         UserName = emailAddress.ToString();

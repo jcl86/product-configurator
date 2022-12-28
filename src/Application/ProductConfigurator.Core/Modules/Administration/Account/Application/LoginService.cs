@@ -15,11 +15,11 @@ public class LoginService
     public const string LoginError = "Incorrect user or password";
     public const string AccountLockedOut = "The account is locked out";
     
-    private readonly ApplicationDbContext context;
+    private readonly ApplicationContext context;
     private readonly UserManager<User> userManager;
     private readonly TokenGenerator tokenGenerator;
 
-    public LoginService(ApplicationDbContext context, 
+    public LoginService(ApplicationContext context, 
         UserManager<User> userManager, 
         TokenGenerator tokenGenerator)
     {
@@ -28,7 +28,7 @@ public class LoginService
         this.tokenGenerator = tokenGenerator;
     }
 
-    public async Task<string> GetAuthenticationToken(LoginRequest model)
+    public async Task<LoginSuccessResponse> GetAuthenticationToken(LoginRequest model)
     {
         User? user = await context.Users
             .Include(x => x.Claims)
@@ -53,6 +53,12 @@ public class LoginService
         }
 
         string token = tokenGenerator.GenerateToken(user);
-        return token;
+
+        return new LoginSuccessResponse()
+        {
+            Email = model.Email,
+            Token = token,
+            TenantId = user.TenantId
+        };
     }
 }

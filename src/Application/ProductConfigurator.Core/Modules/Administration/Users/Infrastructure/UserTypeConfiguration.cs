@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+using ProductConfigurator.Core.MultiTenancy;
+
 namespace ProductConfigurator.Core.Modules.Administration.Users.Infrastructure;
 
 public class UserTypeConfiguration : IEntityTypeConfiguration<User>

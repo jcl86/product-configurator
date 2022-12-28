@@ -27,8 +27,8 @@ public class AccountController : ControllerBase
     [HttpPost("login")]
     public async Task<LoginSuccessResponse> Authenticate(LoginRequest model)
     {
-        string token = await loginService.GetAuthenticationToken(model);
-        return new LoginSuccessResponse(model.Email, token);
+        LoginSuccessResponse result = await loginService.GetAuthenticationToken(model);
+        return result;
     }
 
     [Authorize]

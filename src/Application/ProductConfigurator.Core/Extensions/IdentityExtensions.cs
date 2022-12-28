@@ -21,8 +21,8 @@ public static class IdentityExtensions
         {
             throw new InvalidOperationException("Connection string is not configured");
         }
-
-        services.AddDbContextPool<ApplicationDbContext>(options =>
+        
+        services.AddDbContext<ApplicationContext>(options =>
             //options.UseSqlServer(connectionString));
             options.UseSqlite(connectionString));
 
@@ -30,7 +30,7 @@ public static class IdentityExtensions
             //.AddClaimsPrincipalFactory<CustomClaimsPrincipalFactory>()
             .AddRoles<Role>()
             .AddDefaultTokenProviders()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddEntityFrameworkStores<ApplicationContext>();
 
         services.AddDataProtection();
 

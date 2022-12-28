@@ -1,5 +1,6 @@
 ﻿using IdentityModel;
 
+using ProductConfigurator.Core.Authorization;
 using ProductConfigurator.Core.Modules.Administration.Users;
 using ProductConfigurator.Shared.Modules.Administration.Users;
 
@@ -27,10 +28,10 @@ public static class Identities
         new Claim(JwtClaimTypes.Role, RoleNames.SuperAdministrator)
     };
 
-    public static IEnumerable<Claim> PlainUser => new[]
-   {
+    public static IEnumerable<Claim> FromTenant(int tenantId) => new[]
+    {
         new Claim(JwtClaimTypes.Subject, Guid.NewGuid().ToString()),
-        new Claim(JwtClaimTypes.Name, "anyPlainUser")
+        new Claim(JwtClaimTypes.Name, "anyPlainUser"),
+        new Claim(CustomClaimTypes.TenantId, tenantId.ToString()),
     };
-
 }

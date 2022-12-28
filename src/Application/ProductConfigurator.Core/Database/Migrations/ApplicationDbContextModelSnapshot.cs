@@ -9,7 +9,7 @@ using ProductConfigurator.Core.Database;
 
 namespace ProductConfigurator.Core.Database.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(ApplicationContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

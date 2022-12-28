@@ -7,9 +7,9 @@ namespace ProductConfigurator.Core.Modules.Administration.Users;
 [Service]
 public class UserFinder
 {
-    private readonly ApplicationDbContext context;
+    private readonly ApplicationContext context;
 
-    public UserFinder(ApplicationDbContext context)
+    public UserFinder(ApplicationContext context)
     {
         this.context = context;
     }

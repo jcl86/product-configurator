@@ -36,4 +36,9 @@ public static class RequestBuilderExtensions
         string json = content.Serialize();
         return builder.And(message => message.Content = new StringContent(json, Encoding.UTF8, contentType));
     }
+
+    public static RequestBuilder ForTenant(this RequestBuilder builder, int tenantId)
+    {
+        return builder.And(message => message.Headers.Add("Tenant", tenantId.ToString()));
+    }
 }

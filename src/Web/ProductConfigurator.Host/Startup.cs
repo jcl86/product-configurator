@@ -38,7 +38,7 @@ namespace ProductConfigurator.Host
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Product Configurator", Version = "v1" }));
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationDbContext context, ApplicationInitializer initializer)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationContext context, ApplicationInitializer initializer)
         {
             if (env.IsDevelopment())
             {

@@ -27,7 +27,7 @@ public class LoginShould
     public async Task Success()
     {
         string password = PasswordMother.Valid();
-        RegisterUserResponse user = await Given.UserInDatabase(password);
+        RegisterUserResponse user = await Given.UserInDatabase(Tenants.Tenant1, password);
 
         HttpResponseMessage response = await Given.Server
          .CreateRequest(Endpoints.Accounts.Login)
@@ -49,7 +49,7 @@ public class LoginShould
     public async Task Fail_when_password_is_wrong()
     {
         string password = PasswordMother.Valid();
-        RegisterUserResponse user = await Given.UserInDatabase();
+        RegisterUserResponse user = await Given.UserInDatabase(Tenants.Tenant2);
 
         HttpResponseMessage response = await Given.Server
          .CreateRequest(Endpoints.Accounts.Login)

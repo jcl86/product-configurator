@@ -1,18 +1,29 @@
-﻿namespace ProductConfigurator.Core.MultiTenancy;
+﻿using Microsoft.EntityFrameworkCore;
+
+using ProductConfigurator.Core.Database;
+using ProductConfigurator.Core.Modules.Administration.Tenants;
+
+namespace ProductConfigurator.Core.MultiTenancy;
 
 public class TenantService : ITenantProvider
 {
-    public string? CurrentTenant { get; private set; }
+    public int? CurrentTenantId { get; private set; }
     
-    public static readonly IEnumerable<string> All = new[] { "c1", "c2" };
+    private readonly ApplicationContext context;
 
-    public void SetTenant(string? value)
+    public TenantService(ApplicationContext context)
     {
-        var companyCode = All.FirstOrDefault(t => t.Equals(value?.Trim(), StringComparison.InvariantCultureIgnoreCase));
-        if (companyCode is null)
+        this.context = context;
+    }
+    
+    public async Task SetTenant(int tenantId)
+    {
+        Tenant? tenant = await context.Set<Tenant>().FirstOrDefaultAsync(x => x.Id == tenantId);
+        if (tenant is null)
         {
-            throw new ArgumentException($"Company {value ?? ""} is not supported");
+            throw new InvalidTenantException($"Tenant {tenantId} is not supported");
         }
-        CurrentTenant = companyCode;
+        
+        CurrentTenantId = tenantId;
     }
 }

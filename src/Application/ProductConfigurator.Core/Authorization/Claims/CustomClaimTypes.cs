@@ -2,5 +2,5 @@
 
 public static class CustomClaimTypes
 {
-    public const string TenantCode = nameof(TenantCode);
+    public const string TenantId = "tenant_id";
 }

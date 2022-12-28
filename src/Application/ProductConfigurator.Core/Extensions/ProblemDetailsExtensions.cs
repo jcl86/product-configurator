@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 using ProductConfigurator.Core;
+using ProductConfigurator.Core.MultiTenancy;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +15,7 @@ public static partial class ProblemDetailsExtensions
     {
         return services.AddProblemDetails(configure =>
         {
+            configure.Map<InvalidTenantException>((context, exception) => exception.ToProblemDetails(StatusCodes.Status400BadRequest, context));
             configure.Map<DomainException>((context, exception) => exception.ToProblemDetails(StatusCodes.Status400BadRequest, context));
             configure.Map<NotFoundException>((context, exception) => exception.ToProblemDetails(StatusCodes.Status404NotFound, context));
             configure.Map<ArgumentException>((context, exception) => exception.ToProblemDetails(StatusCodes.Status400BadRequest, context));
