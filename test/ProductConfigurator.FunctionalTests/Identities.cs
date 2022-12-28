@@ -1,4 +1,6 @@
-﻿using ProductConfigurator.Core.Modules.Administration.Users;
+﻿using IdentityModel;
+
+using ProductConfigurator.Core.Modules.Administration.Users;
 using ProductConfigurator.Shared.Modules.Administration.Users;
 
 using System.Security.Claims;
@@ -9,24 +11,26 @@ public static class Identities
 {
     public static IEnumerable<Claim> FromUser(RegisterUserResponse user)
     {
-        IEnumerable<Claim> roles = user.RoleNames.Select(x => new Claim(ClaimTypes.Role, x));
+        IEnumerable<Claim> roles = user.Roles.Select(x => new Claim(ClaimTypes.Role, x));
         return new[]
         {
-            new Claim(ClaimTypes.NameIdentifier, user.Id),
-            new Claim(ClaimTypes.Name, user.Email!),
-            new Claim(ClaimTypes.Email, user.Email!)
+            new Claim(JwtClaimTypes.Subject, user.Id),
+            new Claim(JwtClaimTypes.Name, user.Email!),
+            new Claim(JwtClaimTypes.Email, user.Email!)
         }.Concat(roles);
     }
 
     public static IEnumerable<Claim> SuperAdministrator => new[]
     {
-        new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString()),
-        new Claim(ClaimTypes.Role, RoleNames.SuperAdministrator)
+        new Claim(JwtClaimTypes.Subject, Guid.NewGuid().ToString()),
+        new Claim(JwtClaimTypes.Name, "admin"),
+        new Claim(JwtClaimTypes.Role, RoleNames.SuperAdministrator)
     };
 
     public static IEnumerable<Claim> PlainUser => new[]
    {
-        new Claim(ClaimTypes.NameIdentifier, Guid.NewGuid().ToString())
+        new Claim(JwtClaimTypes.Subject, Guid.NewGuid().ToString()),
+        new Claim(JwtClaimTypes.Name, "anyPlainUser")
     };
 
 }

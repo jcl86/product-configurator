@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using ProductConfigurator.Core;
+using ProductConfigurator.Core.Database;
 
 using System.IdentityModel.Tokens.Jwt;
 
@@ -44,21 +45,7 @@ public class Startup
     }
 
     public void Configure(IApplicationBuilder app)
-    {
-        IServiceScopeFactory? serviceProvider = app.ApplicationServices.GetService<IServiceScopeFactory>();
-        
-        if (serviceProvider is null)
-        {
-            throw new Exception("Service provider could not be obtained in Test Startup.Configure");
-        }
-
-        using (IServiceScope serviceScope = serviceProvider.CreateScope())
-        {
-            //var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationContext>();
-            //var connectionStrings = serviceScope.ServiceProvider.GetRequiredService<IConnectionStrings>();
-
-            //new DataBaseInitializer(context, connectionStrings).Initialize();
-        }
+    {        
         ApiConfiguration.Configure(app, host => host);
     }
 }

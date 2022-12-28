@@ -113,7 +113,8 @@ public class UserShould
             .WithIdentity(Identities.SuperAdministrator)
             .GetAsync();
         await response.ShouldBe(StatusCodes.Status200OK);
-        User? result = await response.ReadJsonResponse<User>();
+        GetUserResponse? result = await response.ReadJsonResponse<GetUserResponse>();
+        result.Should().NotBeNull();
         result.Should().BeEquivalentTo(user);
     }
 

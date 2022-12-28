@@ -30,14 +30,14 @@ public static class AuthenticationExtensions
                 {
                     OnTokenValidated = async context =>
                     {
-                        string? userId = context.Principal?.Identity?.Name;
-                        if (userId is null)
+                        string? userName = context.Principal?.Identity?.Name;
+                        if (userName is null)
                         {
                             throw new Exception("User id was not found in token");
                         }
                         
                         UserManager<User> userManager = context.HttpContext.RequestServices.GetRequiredService<UserManager<User>>();
-                        User? user = await userManager.FindByIdAsync(userId);
+                        User? user = await userManager.FindByNameAsync(userName);
                         if (user is null)
                         {
                             context.Fail("Unauthorized");

@@ -16,7 +16,13 @@ public class UserGetter
     public async Task<GetUserResponse> Get(string userId)
     {
         User user = await finder.Find(userId);
-        return new GetUserResponse(id: user.Id, email: user.Email ?? "", roles: user.RoleNames);
+        return new()
+        {
+            Id = user.Id,
+            Email = user.Email ?? "",
+            Roles = user.RoleNames
+        };
+
     }
 }
 

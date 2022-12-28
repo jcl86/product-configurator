@@ -14,6 +14,11 @@ public static class Policies
         {
             policyBuilder.RequireAuthenticatedUser();
             policyBuilder.RequireRole(RoleNames.SuperAdministrator);
+            //policyBuilder.RequireAssertion(x =>
+            //{
+            //    var user = x.User;
+            //    return true;
+            //});
         });
     }
 }

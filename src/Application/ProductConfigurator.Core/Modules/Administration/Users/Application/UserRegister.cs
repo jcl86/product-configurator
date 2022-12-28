@@ -39,7 +39,7 @@ public class UserRegister
         {
             Id = searched.Id,
             Email = searched.Email!,
-            RoleNames = searched.RoleNames
+            Roles = searched.RoleNames
         };
     }
 

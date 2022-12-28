@@ -6,14 +6,7 @@ namespace ProductConfigurator.Shared.Modules.Administration.Users;
 
 public class GetUserResponse
 {
-    public string Id { get; }
-    public string Email { get; }
-    public IEnumerable<string> Roles { get; }
-    
-    public GetUserResponse(string id, string email, IEnumerable<string> roles)
-    {
-        Id = id;
-        Email = email;
-        Roles = roles;
-    }
+    public required string Id { get; set; }
+    public required string Email { get; set; }
+    public required IEnumerable<string> Roles { get; set; }
 }

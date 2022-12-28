@@ -42,6 +42,9 @@ public class TokenGenerator
             new Claim(JwtClaimTypes.Name, user.UserName ?? ""),
         };
 
+        var roleClaims = user.RoleNames.Select(roleName => new Claim(JwtClaimTypes.Role, roleName));
+        claims.AddRange(roleClaims);
+
         SecurityTokenDescriptor tokenDescriptor = new()
         {
             Subject = new ClaimsIdentity(claims),
