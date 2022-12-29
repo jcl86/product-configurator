@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Humanizer.Configuration;
+
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,23 +11,23 @@ using ProductConfigurator.Core.Modules.Administration.Users;
 
 namespace ProductConfigurator.Core;
 
-public static class IdentityExtensions
+public static class DatabaseExtensions
 {
-    public static IServiceCollection AddCustomAspnetIdentity(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddDatabaseContexts(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<UserSettings>(configuration.GetSection("UserSettings"));
         services.AddScoped(x => x.GetRequiredService<IOptionsSnapshot<UserSettings>>().Value);
 
-        string? connectionString = configuration.GetConnectionString("SqLite");
-        if (connectionString is null)
-        {
-            throw new InvalidOperationException("Connection string is not configured");
-        }
+        AddSqliteContext<ApplicationContext>(services, configuration, "ApplicationDatabase");
+        AddSqliteContext<AdminContext>(services, configuration, "AdminDatabase");
         
-        services.AddDbContext<ApplicationContext>(options =>
-            //options.UseSqlServer(connectionString));
-            options.UseSqlite(connectionString));
+        services.AddCustomAspnetIdentity();
 
+        return services;
+    }
+
+    private static IServiceCollection AddCustomAspnetIdentity(this IServiceCollection services)
+    {
         services.AddIdentityCore<User>()
             //.AddClaimsPrincipalFactory<CustomClaimsPrincipalFactory>()
             .AddRoles<Role>()
@@ -63,5 +65,17 @@ public static class IdentityExtensions
             options.User.RequireUniqueEmail = true;
         });
         return services;
+    }
+
+    private static void AddSqliteContext<TContext>(IServiceCollection services, IConfiguration configuration, string key) where TContext : DbContext
+    {
+        string? connectionString = configuration.GetConnectionString(key);
+        if (connectionString is null)
+        {
+            throw new InvalidOperationException($"Connection string is not configured. Please check if connection has a key {key}");
+        }
+
+        services.AddDbContext<TContext>(options =>
+            options.UseSqlite(connectionString));
     }
 }

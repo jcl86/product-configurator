@@ -22,7 +22,7 @@ public static class ApiConfiguration
     {
         return services
             .AddControllersFromCurrentProject()
-            .AddCustomAspnetIdentity(configuration)
+            .AddDatabaseContexts(configuration)
             .AddCustomServices()
             .ConfigureProblemDetails()
             .AddRouting()
@@ -37,11 +37,11 @@ public static class ApiConfiguration
     {
         JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
         return configureHost(app)
-            .UseMiddleware<MultiTenantMiddleware>()
             .UseProblemDetails()
             .UseRouting()
             .UseAuthentication()
             .UseAuthorization()
+            .UseMiddleware<MultiTenantMiddleware>()
             .UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -10,7 +10,7 @@ namespace ProductConfigurator.Core.Modules.Products.Products;
 public class Product : Entity<int>, IHasTenant
 {
     public string Name { get; private set; }
-    public int? TenantId { get; private set; }
+    public int? TenantId { get; set; }
 
     public Product(int id, string name) : base(id)
     {

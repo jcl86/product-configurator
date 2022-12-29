@@ -34,6 +34,7 @@ public class LoginService
             .Include(x => x.Claims)
             .Include(x => x.UserRoles)
                 .ThenInclude(x => x.Role)
+            .IgnoreQueryFilters()
             .SingleOrDefaultAsync(x => x.Email == model.Email);
 
         if (user is null)

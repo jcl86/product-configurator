@@ -15,7 +15,7 @@ public class User : IdentityUser, IHasTenant
         .Where(x => x is not null)
         .Select(x => x!).ToList() ?? new List<string>();
 
-    public int? TenantId { get; private set; }
+    public int? TenantId { get; set; }
 
     private User() 
     {

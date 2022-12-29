@@ -11,6 +11,14 @@ https://design-your-lumasuite-case.netlify.app/
 
 # Migrations
 
+### AplicationContext
+
 ````
-dotnet ef migrations add Initial --project src/Application/ProductConfigurator.Core/ProductConfigurator.Core.csproj --startup-project src/Web/ProductConfigurator.Host/ProductConfigurator.Host.csproj -o Database/Migrations -v
+dotnet ef migrations add <MigrationName> --project src/Application/ProductConfigurator.Core/ProductConfigurator.Core.csproj --startup-project src/Web/ProductConfigurator.Host/ProductConfigurator.Host.csproj --context ApplicationContext -o Database/Migrations/Application -v
+````
+
+### AdminContext
+
+````
+dotnet ef migrations add <MigrationName> --project src/Application/ProductConfigurator.Core/ProductConfigurator.Core.csproj --startup-project src/Web/ProductConfigurator.Host/ProductConfigurator.Host.csproj --context AdminContext -o Database/Migrations/Admin -v
 ````

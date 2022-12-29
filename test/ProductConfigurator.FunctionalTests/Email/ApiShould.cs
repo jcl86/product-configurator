@@ -20,10 +20,11 @@ public class ApiShould
     }
 
     [Fact]
-    public async Task be_healthy()
+    public async Task be_healthy_for_tenant_1()
     {
         HttpResponseMessage response = await given.Server
            .CreateRequest(Endpoints.Health)
+           .ForTenant(Tenants.Tenant1)
            .GetAsync();
 
         await response.ShouldBe(StatusCodes.Status200OK);
@@ -32,11 +33,17 @@ public class ApiShould
         result.Should().BeEmpty();
     }
 
-    //[Fact(Skip ="Not send")]
-    //public async Task Send_email()
-    //{
-    //    var emailSender = Given.GetService<SendgridEmailSender>();
-    //    await emailSender.SendPlainBody("jorgeaadlab@gmail.com", "prueba", "prueba body");
+    [Fact]
+    public async Task be_healthy_for_tenant_2()
+    {
+        HttpResponseMessage response = await given.Server
+           .CreateRequest(Endpoints.Health)
+           .ForTenant(Tenants.Tenant2)
+           .GetAsync();
 
-    //}
+        await response.ShouldBe(StatusCodes.Status200OK);
+
+        string result = await response.Content.ReadAsStringAsync();
+        result.Should().BeEmpty();
+    }
 }

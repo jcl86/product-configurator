@@ -3,7 +3,8 @@
     "https://localhost:6001"
   ],
   "ConnectionStrings": {
-    "SqLite": "Data Source=productconfigurator.db",
+    "ApplicationDatabase": "Data Source=application.db",
+    "AdminDatabase": "Data Source=admin.db",
     "SendgridApiKey": ""
   },
   "ApiSecret": "my-super-api-secret",

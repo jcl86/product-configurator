@@ -15,7 +15,7 @@ public class MultiTenantMiddleware : IMiddleware
     private readonly string[] requestsToSkip = 
     {
         Endpoints.Accounts.Login ,
-        Endpoints.Accounts.ChangePassword,
+      //  Endpoints.Accounts.ChangePassword,
         Endpoints.Accounts.ResetPassword
     };
 
@@ -31,8 +31,8 @@ public class MultiTenantMiddleware : IMiddleware
     {
         if (context.Request.Path.HasValue && requestsToSkip.Contains(context.Request.Path.Value))
         {
-            await next(context);
             return;
+            await next(context);
         }
         
         if (!context.Request.Headers.TryGetValue("Tenant", out StringValues values))
@@ -54,7 +54,9 @@ public class MultiTenantMiddleware : IMiddleware
 
         if (!UserHasPermissionInTenant(context.User, tenantCode))
         {
-            throw new InvalidTenantException(tenantCode);
+            context.Response.StatusCode = 403;
+            await context.Response.WriteAsync($"User {context.User.GetUserName()} has no permission to access tenant {tenantCode}");
+            return;
         }
             
         await tenantService.SetTenant(parsedTenant);

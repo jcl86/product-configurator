@@ -29,9 +29,9 @@ public class PaswordChangeShould
 
         string newPassword = PasswordMother.Valid();
 
-        HttpResponseMessage response = await Given
-         .Server
+        HttpResponseMessage response = await Given.Server
          .CreateRequest(Endpoints.Accounts.ChangePassword)
+         .ForTenant(Tenants.Tenant1)
          .WithIdentity(Identities.FromUser(user))
          .WithJsonBody(new ChangePasswordRequest()
          {
@@ -55,9 +55,9 @@ public class PaswordChangeShould
 
         string wrongPassword = PasswordMother.Valid();
 
-        HttpResponseMessage response = await Given
-         .Server
+        HttpResponseMessage response = await Given.Server
          .CreateRequest(Endpoints.Accounts.ChangePassword)
+         .ForTenant(Tenants.Tenant1)
          .WithIdentity(Identities.FromUser(user))
          .WithJsonBody(new ChangePasswordRequest()
          {

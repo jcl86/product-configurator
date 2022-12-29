@@ -9,7 +9,10 @@ using Microsoft.Extensions.Logging;
 using Polly;
 
 using ProductConfigurator.Core.Database;
+using ProductConfigurator.Core.Modules.Administration.Tenants;
 using ProductConfigurator.FunctionalTests.Seedwork;
+
+using Serilog.Core;
 
 using System.IO;
 
@@ -47,7 +50,7 @@ public class ServerFixture : IDisposable
                app.AddEnvironmentVariables();
            }).Build();
 
-        MigrateDbContext();
+        MigrateAndSeed();
 
         host.Start();
     }
@@ -58,30 +61,56 @@ public class ServerFixture : IDisposable
         host?.Dispose();
     }
     
-    public void MigrateDbContext()
+    public void MigrateAndSeed()
     {
         using IServiceScope scope = host.Services.CreateScope();
 
         IServiceProvider services = scope.ServiceProvider;
-        ILogger<ApplicationContext> logger = services.GetRequiredService<ILogger<ApplicationContext>>();
-        ApplicationContext? context = services.GetService<ApplicationContext>();
+        ILogger<ServerFixture> logger = services.GetRequiredService<ILogger<ServerFixture>>();
+        ApplicationContext? applicationContext = services.GetService<ApplicationContext>();
+        AdminContext? adminContext = services.GetService<AdminContext>();
 
-        if (context is null)
+        if (applicationContext is null)
         {
-            throw new InvalidOperationException("ApplicationDbContext was not found in the service collection.");
+            throw new InvalidOperationException("ApplicationContext was not found in the service collection.");
+        }
+        
+        MigrateContext(applicationContext, logger);
+
+        if (adminContext is null)
+        {
+            throw new InvalidOperationException("AdminContext was not found in the service collection.");
         }
 
+        MigrateContext(adminContext, logger);
+
+        ApplicationInitializer? applicationInitializer = services.GetService<ApplicationInitializer>();
+        if (applicationInitializer is null)
+        {
+            throw new Exception("ApplicationInitializer was not found in the service collection.");
+        }
+
+        applicationInitializer.Initialize(Tenants.All).Wait();
+    }
+
+    public Task DisposeAsync()
+    {
+        return Task.CompletedTask;
+    }
+
+    private void MigrateContext(DbContext context, ILogger logger)
+    {
         try
         {
             logger.LogInformation($"Migrating database associated with context");
-            
+
             Polly.Retry.RetryPolicy retry = Policy.Handle<Exception>().WaitAndRetry(new[]
             {
                         TimeSpan.FromSeconds(5),
                         TimeSpan.FromSeconds(10),
                         TimeSpan.FromSeconds(15),
                     });
-
+            
             retry.Execute(() =>
             {
                 context.Database.EnsureDeleted();
@@ -91,20 +120,7 @@ public class ServerFixture : IDisposable
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, $"An error occurred while migrating the database used on context");
+            logger.LogError(ex, $"An error occurred while migrating the database {context.GetType().Name}");
         }
-
-        ApplicationInitializer? applicationInitializer = services.GetService<ApplicationInitializer>();
-        if (applicationInitializer is null)
-        {
-            throw new Exception("ApplicationInitializer was not found in the service collection.");
-        }
-        
-        applicationInitializer.SeedUsers().Wait();
-    }
-
-    public Task DisposeAsync()
-    {
-        return Task.CompletedTask;
     }
 }

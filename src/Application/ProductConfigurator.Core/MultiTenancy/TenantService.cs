@@ -9,9 +9,9 @@ public class TenantService : ITenantProvider
 {
     public int? CurrentTenantId { get; private set; }
     
-    private readonly ApplicationContext context;
+    private readonly AdminContext context;
 
-    public TenantService(ApplicationContext context)
+    public TenantService(AdminContext context)
     {
         this.context = context;
     }

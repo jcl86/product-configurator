@@ -11,9 +11,8 @@ public class Tenant : Entity<int>
     public required string Name { get; set; }
     public DateTime CreationDate { get; set; }
 
-    public Tenant(int id, string name, DateTime creationDate) : base(id)
+    public Tenant(int id, DateTime creationDate) : base(id)
     {
-        Name = name;
         CreationDate = creationDate;
     }
 }
