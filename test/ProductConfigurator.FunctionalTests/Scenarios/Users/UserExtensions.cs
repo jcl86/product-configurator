@@ -9,12 +9,13 @@ using FluentAssertions;
 namespace ProductConfigurator.FunctionalTests;
 public static class UserExtensions
 {
-    public static async Task<RegisterUserResponse> UserInDatabase(this ServerFixture given, string? password = null)
+    public static async Task<RegisterUserResponse> UserInDatabase(this ServerFixture given, int tenantId, string? password = null)
     {
         RegisterUserRequest request = UserMother.Register(password);
 
         HttpResponseMessage response = await given.Server
           .CreateRequest(Endpoints.Users.Register)
+          .ForTenant(tenantId)
           .WithIdentity(Identities.SuperAdministrator)
           .WithJsonBody(request)
           .PostAsync();

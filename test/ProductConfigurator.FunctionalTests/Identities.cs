@@ -1,5 +1,6 @@
 ﻿using IdentityModel;
 
+using ProductConfigurator.Core.Authorization;
 using ProductConfigurator.Core.Modules.Administration.Users;
 using ProductConfigurator.Shared.Modules.Administration.Users;
 
@@ -11,12 +12,13 @@ public static class Identities
 {
     public static IEnumerable<Claim> FromUser(RegisterUserResponse user)
     {
-        IEnumerable<Claim> roles = user.Roles.Select(x => new Claim(ClaimTypes.Role, x));
+        IEnumerable<Claim> roles = user.Roles.Select(x => new Claim(JwtClaimTypes.Role, x));
         return new[]
         {
             new Claim(JwtClaimTypes.Subject, user.Id),
             new Claim(JwtClaimTypes.Name, user.Email!),
-            new Claim(JwtClaimTypes.Email, user.Email!)
+            new Claim(JwtClaimTypes.Email, user.Email!),
+            new Claim(CustomClaimTypes.TenantId, user.TenantId!.ToString()),
         }.Concat(roles);
     }
 
@@ -27,10 +29,10 @@ public static class Identities
         new Claim(JwtClaimTypes.Role, RoleNames.SuperAdministrator)
     };
 
-    public static IEnumerable<Claim> PlainUser => new[]
-   {
+    public static IEnumerable<Claim> FromTenant(int tenantId) => new[]
+    {
         new Claim(JwtClaimTypes.Subject, Guid.NewGuid().ToString()),
-        new Claim(JwtClaimTypes.Name, "anyPlainUser")
+        new Claim(JwtClaimTypes.Name, "anyPlainUser"),
+        new Claim(CustomClaimTypes.TenantId, tenantId.ToString()),
     };
-
 }

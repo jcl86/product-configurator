@@ -23,15 +23,15 @@ public class PaswordChangeShould
     public async Task Success()
     {
         string oldPassword = PasswordMother.Valid();
-        RegisterUserResponse user = await Given.UserInDatabase(oldPassword);
+        RegisterUserResponse user = await Given.UserInDatabase(Tenants.Tenant1, oldPassword);
 
         await Given.SuccessToLogin(user.Email!, oldPassword);
 
         string newPassword = PasswordMother.Valid();
 
-        HttpResponseMessage response = await Given
-         .Server
+        HttpResponseMessage response = await Given.Server
          .CreateRequest(Endpoints.Accounts.ChangePassword)
+         .ForTenant(Tenants.Tenant1)
          .WithIdentity(Identities.FromUser(user))
          .WithJsonBody(new ChangePasswordRequest()
          {
@@ -49,15 +49,15 @@ public class PaswordChangeShould
     public async Task Fail_when_password_is_wrong()
     {
         string oldPassword = PasswordMother.Valid();
-        RegisterUserResponse user = await Given.UserInDatabase(oldPassword);
+        RegisterUserResponse user = await Given.UserInDatabase(Tenants.Tenant1, oldPassword);
 
         await Given.SuccessToLogin(user.Email!, oldPassword);
 
         string wrongPassword = PasswordMother.Valid();
 
-        HttpResponseMessage response = await Given
-         .Server
+        HttpResponseMessage response = await Given.Server
          .CreateRequest(Endpoints.Accounts.ChangePassword)
+         .ForTenant(Tenants.Tenant1)
          .WithIdentity(Identities.FromUser(user))
          .WithJsonBody(new ChangePasswordRequest()
          {

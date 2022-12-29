@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using ProductConfigurator.Core.Authorization;
+using ProductConfigurator.Core.MultiTenancy;
 using ProductConfigurator.Shared;
 
 using System.IdentityModel.Tokens.Jwt;
@@ -21,12 +22,13 @@ public static class ApiConfiguration
     {
         return services
             .AddControllersFromCurrentProject()
-            .AddCustomAspnetIdentity(configuration)
+            .AddDatabaseContexts(configuration)
             .AddCustomServices()
             .ConfigureProblemDetails()
             .AddRouting()
             .AddAuthorization(Policies.Configure)
             .CustomizeModelBindingErrorBehaviour()
+            .AddMultitenancyServices()
         //    .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
             .AddFluentValidationAutoValidation();
     }
@@ -39,6 +41,7 @@ public static class ApiConfiguration
             .UseRouting()
             .UseAuthentication()
             .UseAuthorization()
+            .UseMiddleware<MultiTenantMiddleware>()
             .UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

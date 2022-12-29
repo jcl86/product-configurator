@@ -1,44 +1,76 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Primitives;
 
+using ProductConfigurator.Core.Authorization;
+using ProductConfigurator.Shared;
+using ProductConfigurator.Shared.Modules.Administration.Users;
+
+using System.Linq;
 using System.Security.Claims;
 
 namespace ProductConfigurator.Core.MultiTenancy;
 
 public class MultiTenantMiddleware : IMiddleware
 {
-    private readonly TenantService companyService;
-
-    public MultiTenantMiddleware(TenantService companyService)
+    private readonly string[] requestsToSkip = 
     {
-        this.companyService = companyService;
+        Endpoints.Accounts.Login ,
+      //  Endpoints.Accounts.ChangePassword,
+        Endpoints.Accounts.ResetPassword,
+        Endpoints.Health
+    };
+
+    private readonly TenantService tenantService;
+
+    public MultiTenantMiddleware(TenantService tenantService)
+    {
+        this.tenantService = tenantService;
+        requestsToSkip = requestsToSkip.Select(x => $"/{x}").ToArray();
     }
 
     public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
-        if (context.Request.Query.TryGetValue("company", out var values))
+        if (context.Request.Path.HasValue && requestsToSkip.Contains(context.Request.Path.Value))
         {
-            string? companyCode = values.FirstOrDefault();
-
-            if (companyCode is null)
-            {
-                context.Response.StatusCode = 400;
-                await context.Response.WriteAsync("Company code is not specified");
-                return;
-            }
-
-            if (!UserHasPermissionInTenant(context.User, companyCode))
-            {
-                //Here we could raise unauthorize exception, and we would make a centralized management in a single point
-                context.Response.StatusCode = 401;
-                return;
-            }
-            companyService.SetTenant(companyCode);
+            await next(context);
+            return;
         }
+        
+        if (!context.Request.Headers.TryGetValue("Tenant", out StringValues values))
+        {
+            throw new InvalidTenantException();
+        }
+        
+        string? tenantCode = values.FirstOrDefault();
+
+        if (tenantCode is null)
+        {
+            throw new InvalidTenantException();
+        }
+
+        if (!int.TryParse(tenantCode, out int parsedTenant))
+        {
+            throw new InvalidTenantException(tenantCode);
+        }
+
+        if (!UserHasPermissionInTenant(context.User, tenantCode))
+        {
+            context.Response.StatusCode = 403;
+            await context.Response.WriteAsync($"User {context.User.GetUserName()} has no permission to access tenant {tenantCode}");
+            return;
+        }
+            
+        await tenantService.SetTenant(parsedTenant);
+        
         await next(context);
     }
 
-    private static bool UserHasPermissionInTenant(ClaimsPrincipal user, string companyCode)
+    private static bool UserHasPermissionInTenant(ClaimsPrincipal user, string tenantId)
     {
-        return true; //return user.HasClaim(x => x.Type == "companyCode" && x.Value == companyCode);
+        if (user.IsInRole(RoleNames.SuperAdministrator))
+        {
+            return true;
+        }
+        return user.HasClaim(x => x.Type == CustomClaimTypes.TenantId && x.Value == tenantId);
     }
 }

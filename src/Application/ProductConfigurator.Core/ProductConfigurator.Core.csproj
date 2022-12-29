@@ -29,8 +29,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Database\Migrations\" />
     <Folder Include="Modules\Administration\Account\Domain\" />
+    <Folder Include="Modules\Administration\Tenants\Infrastructure\" />
+    <Folder Include="Modules\Payments\" />
   </ItemGroup>
 
 

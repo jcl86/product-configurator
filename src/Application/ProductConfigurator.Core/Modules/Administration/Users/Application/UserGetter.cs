@@ -20,7 +20,8 @@ public class UserGetter
         {
             Id = user.Id,
             Email = user.Email ?? "",
-            Roles = user.RoleNames
+            Roles = user.RoleNames,
+            TenantId = user.TenantId
         };
 
     }

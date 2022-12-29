@@ -3,6 +3,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
+using ProductConfigurator.Core.Authorization;
 using ProductConfigurator.Core.Modules.Administration.Users;
 using ProductConfigurator.Shared;
 
@@ -39,10 +40,15 @@ public class TokenGenerator
         List<Claim> claims = new()
         {
             new Claim(JwtClaimTypes.Subject, user.Id),
-            new Claim(JwtClaimTypes.Name, user.UserName ?? ""),
+            new Claim(JwtClaimTypes.Name, user.UserName ?? "")
         };
+        
+        if (user.TenantId.HasValue)
+        {
+            claims.Add(new Claim(CustomClaimTypes.TenantId, user.TenantId.Value.ToString()));
+        }
 
-        var roleClaims = user.RoleNames.Select(roleName => new Claim(JwtClaimTypes.Role, roleName));
+        IEnumerable<Claim> roleClaims = user.RoleNames.Select(roleName => new Claim(JwtClaimTypes.Role, roleName));
         claims.AddRange(roleClaims);
 
         SecurityTokenDescriptor tokenDescriptor = new()

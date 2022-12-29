@@ -2,20 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProductConfigurator.Core.Database;
 
 #nullable disable
 
-namespace ProductConfigurator.Core.Database.Migrations
+namespace ProductConfigurator.Core.Database.Migrations.Application
 {
-    [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221225210118_Initial")]
-    partial class Initial
+    [DbContext(typeof(ApplicationContext))]
+    partial class ApplicationContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.1");
@@ -177,6 +174,9 @@ namespace ProductConfigurator.Core.Database.Migrations
 
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
+
+                    b.Property<int?>("TenantId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("INTEGER");

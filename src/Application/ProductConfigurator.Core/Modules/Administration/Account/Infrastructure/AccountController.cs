@@ -11,29 +11,16 @@ namespace ProductConfigurator.Core.Modules.Administration.Account.Infrastructure
 [Route(Endpoints.Accounts.Base)]
 public class AccountController : ControllerBase
 {
-    private readonly LoginService loginService;
-    private readonly UserRegister userRegister;
-    private readonly PasswordChanger passwordChanger;
-
-    public AccountController(LoginService loginService,
-        UserRegister userRegister,
-        PasswordChanger passwordChanger)
-    {
-        this.loginService = loginService;
-        this.userRegister = userRegister;
-        this.passwordChanger = passwordChanger;
-    }
-
     [HttpPost("login")]
-    public async Task<LoginSuccessResponse> Authenticate(LoginRequest model)
+    public async Task<LoginSuccessResponse> Authenticate(LoginService loginService, LoginRequest model)
     {
-        string token = await loginService.GetAuthenticationToken(model);
-        return new LoginSuccessResponse(model.Email, token);
+        LoginSuccessResponse result = await loginService.GetAuthenticationToken(model);
+        return result;
     }
 
     [Authorize]
     [HttpPut("change-password")]
-    public async Task<IActionResult> UpdatePassword(ChangePasswordRequest model)
+    public async Task<IActionResult> UpdatePassword(PasswordChanger passwordChanger, ChangePasswordRequest model)
     {
         await passwordChanger.Change(User, model.CurrentPassword, model.NewPassword);
         return NoContent();

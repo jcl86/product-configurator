@@ -9,9 +9,9 @@ namespace ProductConfigurator.Core.Modules.Administration.Users;
 [Service]
 public class UserLister
 {
-    private readonly ApplicationDbContext context;
+    private readonly ApplicationContext context;
 
-    public UserLister(ApplicationDbContext context)
+    public UserLister(ApplicationContext context)
     {
         this.context = context;
     }
@@ -30,7 +30,8 @@ public class UserLister
             {
                 Id = x.Id,
                 Email = x.Email!,
-                Roles = x.RoleNames
+                Roles = x.RoleNames,
+                TenantId = x.TenantId
             })
         };
     }
