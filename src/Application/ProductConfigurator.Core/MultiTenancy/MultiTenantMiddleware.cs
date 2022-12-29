@@ -16,7 +16,8 @@ public class MultiTenantMiddleware : IMiddleware
     {
         Endpoints.Accounts.Login ,
       //  Endpoints.Accounts.ChangePassword,
-        Endpoints.Accounts.ResetPassword
+        Endpoints.Accounts.ResetPassword,
+        Endpoints.Health
     };
 
     private readonly TenantService tenantService;
@@ -31,8 +32,8 @@ public class MultiTenantMiddleware : IMiddleware
     {
         if (context.Request.Path.HasValue && requestsToSkip.Contains(context.Request.Path.Value))
         {
-            return;
             await next(context);
+            return;
         }
         
         if (!context.Request.Headers.TryGetValue("Tenant", out StringValues values))
