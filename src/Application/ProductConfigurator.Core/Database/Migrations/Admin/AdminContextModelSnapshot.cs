@@ -17,7 +17,7 @@ namespace ProductConfigurator.Core.Database.Migrations.Admin
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.1");
 
-            modelBuilder.Entity("ProductConfigurator.Core.Modules.Administration.Tenants.Tenant", b =>
+            modelBuilder.Entity("ProductConfigurator.Core.Modules.Administration.Shops.Shop", b =>
                 {
                     b.Property<int>("Id")
                         .HasColumnType("INTEGER");
@@ -37,7 +37,7 @@ namespace ProductConfigurator.Core.Database.Migrations.Admin
 
                     b.HasKey("Id");
 
-                    b.ToTable("Tenants", (string)null);
+                    b.ToTable("Shops", (string)null);
                 });
 #pragma warning restore 612, 618
         }

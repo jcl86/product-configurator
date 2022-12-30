@@ -30,7 +30,8 @@
 
   <ItemGroup>
     <Folder Include="Modules\Administration\Account\Domain\" />
-    <Folder Include="Modules\Administration\Tenants\Infrastructure\" />
+    <Folder Include="Modules\Products\NewFolder\" />
+    <Folder Include="Modules\Administration\Shops\Infrastructure\" />
     <Folder Include="Modules\Payments\" />
   </ItemGroup>
 

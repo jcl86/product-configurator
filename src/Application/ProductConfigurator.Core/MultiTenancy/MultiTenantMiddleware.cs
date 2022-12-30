@@ -71,6 +71,6 @@ public class MultiTenantMiddleware : IMiddleware
         {
             return true;
         }
-        return user.HasClaim(x => x.Type == CustomClaimTypes.TenantId && x.Value == tenantId);
+        return user.HasClaim(x => x.Type == CustomClaimTypes.ShopId && x.Value == tenantId);
     }
 }

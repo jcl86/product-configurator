@@ -7,10 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace ProductConfigurator.Core.Modules.Products.Products;
-public class Product : Entity<int>, IHasTenant
+public class Product : Entity<int>, IHasShop
 {
     public string Name { get; private set; }
-    public int? TenantId { get; set; }
+    public int? ShopId { get; set; }
 
     public Product(int id, string name) : base(id)
     {

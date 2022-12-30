@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using ProductConfigurator.Core.Database;
-using ProductConfigurator.Core.Modules.Administration.Tenants;
+using ProductConfigurator.Core.Modules.Administration.Shops;
 
 namespace ProductConfigurator.Core.MultiTenancy;
 
-public class TenantService : ITenantProvider
+public class TenantService : IShopProvider
 {
-    public int? CurrentTenantId { get; private set; }
+    public int? CurrentShopId { get; private set; }
     
     private readonly AdminContext context;
 
@@ -18,12 +18,12 @@ public class TenantService : ITenantProvider
     
     public async Task SetTenant(int tenantId)
     {
-        Tenant? tenant = await context.Set<Tenant>().FirstOrDefaultAsync(x => x.Id == tenantId);
-        if (tenant is null)
+        Shop? shop = await context.Set<Shop>().FirstOrDefaultAsync(x => x.Id == tenantId);
+        if (shop is null)
         {
-            throw new InvalidTenantException($"Tenant {tenantId} is not supported");
+            throw new InvalidTenantException($"Tenant id {tenantId} does not match with an existing shop");
         }
         
-        CurrentTenantId = tenantId;
+        CurrentShopId = tenantId;
     }
 }

@@ -8,7 +8,7 @@ public static class MultitenancyExtensions
     {
         services.AddTransient<MultiTenantMiddleware>();
         services.AddScoped<TenantService>();
-        services.AddScoped<ITenantProvider>(provider => provider.GetRequiredService<TenantService>());
+        services.AddScoped<IShopProvider>(provider => provider.GetRequiredService<TenantService>());
         return services;
     }
 }

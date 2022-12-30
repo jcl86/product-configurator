@@ -31,7 +31,7 @@ public class UserLister
                 Id = x.Id,
                 Email = x.Email!,
                 Roles = x.RoleNames,
-                TenantId = x.TenantId
+                TenantId = x.ShopId
             })
         };
     }

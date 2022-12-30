@@ -21,11 +21,11 @@ public class ApplicationContext : IdentityDbContext<User, Role,
     string, IdentityUserClaim<string>, UserRole, IdentityUserLogin<string>,
     IdentityRoleClaim<string>, IdentityUserToken<string>>
 {
-    private readonly int? tenantId;
+    private readonly int? shopId;
     
-    public ApplicationContext(DbContextOptions<ApplicationContext> options, ITenantProvider tenantProvider) : base(options) 
+    public ApplicationContext(DbContextOptions<ApplicationContext> options, IShopProvider tenantProvider) : base(options) 
     {
-        tenantId = tenantProvider.CurrentTenantId;
+        shopId = tenantProvider.CurrentShopId;
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder dbContextOpbuildertions)
@@ -66,16 +66,16 @@ public class ApplicationContext : IdentityDbContext<User, Role,
         //}
     }
 
-    internal Expression<Func<TEntity, bool>> CreateFilter<TEntity>()  where TEntity : IHasTenant
+    internal Expression<Func<TEntity, bool>> CreateFilter<TEntity>()  where TEntity : IHasShop
     {
-        return e => e.TenantId == tenantId;
+        return e => e.ShopId == shopId;
     }
 
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        foreach (EntityEntry<IHasTenant> entry in ChangeTracker.Entries<IHasTenant>())
+        foreach (EntityEntry<IHasShop> entry in ChangeTracker.Entries<IHasShop>())
         {
-            entry.Entity.TenantId = tenantId;
+            entry.Entity.ShopId = shopId;
         }
 
         return await base.SaveChangesAsync(cancellationToken);

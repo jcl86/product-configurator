@@ -43,9 +43,9 @@ public class TokenGenerator
             new Claim(JwtClaimTypes.Name, user.UserName ?? "")
         };
         
-        if (user.TenantId.HasValue)
+        if (user.ShopId.HasValue)
         {
-            claims.Add(new Claim(CustomClaimTypes.TenantId, user.TenantId.Value.ToString()));
+            claims.Add(new Claim(CustomClaimTypes.ShopId, user.ShopId.Value.ToString()));
         }
 
         IEnumerable<Claim> roleClaims = user.RoleNames.Select(roleName => new Claim(JwtClaimTypes.Role, roleName));

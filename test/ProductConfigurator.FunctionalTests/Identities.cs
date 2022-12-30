@@ -18,7 +18,7 @@ public static class Identities
             new Claim(JwtClaimTypes.Subject, user.Id),
             new Claim(JwtClaimTypes.Name, user.Email!),
             new Claim(JwtClaimTypes.Email, user.Email!),
-            new Claim(CustomClaimTypes.TenantId, user.TenantId!.ToString()),
+            new Claim(CustomClaimTypes.ShopId, user.TenantId!.ToString()),
         }.Concat(roles);
     }
 
@@ -33,6 +33,6 @@ public static class Identities
     {
         new Claim(JwtClaimTypes.Subject, Guid.NewGuid().ToString()),
         new Claim(JwtClaimTypes.Name, "anyPlainUser"),
-        new Claim(CustomClaimTypes.TenantId, tenantId.ToString()),
+        new Claim(CustomClaimTypes.ShopId, tenantId.ToString()),
     };
 }

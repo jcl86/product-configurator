@@ -1,4 +1,4 @@
-﻿namespace ProductConfigurator.Shared.Modules.Administration.Users;
+﻿namespace ProductConfigurator.Shared;
 
 public static partial class Constraints
 {

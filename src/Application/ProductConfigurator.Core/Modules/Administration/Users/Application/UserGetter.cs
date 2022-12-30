@@ -21,7 +21,7 @@ public class UserGetter
             Id = user.Id,
             Email = user.Email ?? "",
             Roles = user.RoleNames,
-            TenantId = user.TenantId
+            TenantId = user.ShopId
         };
 
     }

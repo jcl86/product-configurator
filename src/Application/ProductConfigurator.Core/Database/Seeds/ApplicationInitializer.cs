@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-using ProductConfigurator.Core.Modules.Administration.Tenants;
+using ProductConfigurator.Core.Modules.Administration.Shops;
 using ProductConfigurator.Core.Modules.Administration.Users;
 using ProductConfigurator.Shared;
 using ProductConfigurator.Shared.Modules.Administration.Users;
@@ -27,9 +27,9 @@ public class ApplicationInitializer
         this.adminContext = adminContext;
     }
 
-    public async Task Initialize(params Tenant[] tenants)
+    public async Task Initialize(params Shop[] tenants)
     {
-        foreach (Tenant tenant in tenants)
+        foreach (Shop tenant in tenants)
         {
             await CreateTenant(tenant);
         }
@@ -67,9 +67,9 @@ public class ApplicationInitializer
         }
     }
 
-    public async Task CreateTenant(Tenant tenant)
+    public async Task CreateTenant(Shop tenant)
     {
-        Tenant? searched = await adminContext.Set<Tenant>().FirstOrDefaultAsync(x => x.Id == tenant.Id);
+        Shop? searched = await adminContext.Set<Shop>().FirstOrDefaultAsync(x => x.Id == tenant.Id);
         if (searched is null)
         {
             adminContext.Add(tenant);

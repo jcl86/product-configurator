@@ -59,7 +59,7 @@ public class LoginService
         {
             Email = model.Email,
             Token = token,
-            TenantId = user.TenantId
+            ShopId = user.ShopId
         };
     }
 }

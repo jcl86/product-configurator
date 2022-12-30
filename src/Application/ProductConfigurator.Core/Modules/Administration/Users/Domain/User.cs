@@ -4,7 +4,7 @@ using ProductConfigurator.Core.MultiTenancy;
 
 namespace ProductConfigurator.Core.Modules.Administration.Users;
 
-public class User : IdentityUser, IHasTenant
+public class User : IdentityUser, IHasShop
 {
     public ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
@@ -15,7 +15,7 @@ public class User : IdentityUser, IHasTenant
         .Where(x => x is not null)
         .Select(x => x!).ToList() ?? new List<string>();
 
-    public int? TenantId { get; set; }
+    public int? ShopId { get; set; }
 
     private User() 
     {

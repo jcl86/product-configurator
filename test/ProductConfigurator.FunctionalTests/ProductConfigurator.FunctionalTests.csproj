@@ -41,7 +41,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Scenarios\" />
+    <Folder Include="Scenarios\Catalog\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="files\images\pic001.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="files\images\pic002.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="files\images\pic003.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="files\images\pic004.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="files\images\pic005.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

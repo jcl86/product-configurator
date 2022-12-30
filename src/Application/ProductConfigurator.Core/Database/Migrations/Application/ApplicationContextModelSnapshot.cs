@@ -175,7 +175,7 @@ namespace ProductConfigurator.Core.Database.Migrations.Application
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("TenantId")
+                    b.Property<int?>("ShopId")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -210,6 +210,24 @@ namespace ProductConfigurator.Core.Database.Migrations.Application
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("ProductConfigurator.Core.Modules.Products.Products.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ShopId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

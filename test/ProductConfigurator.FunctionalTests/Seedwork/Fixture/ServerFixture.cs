@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using Polly;
 
 using ProductConfigurator.Core.Database;
-using ProductConfigurator.Core.Modules.Administration.Tenants;
+using ProductConfigurator.Core.Modules.Administration.Shops;
 using ProductConfigurator.FunctionalTests.Seedwork;
 
 using Serilog.Core;
